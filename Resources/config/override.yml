@@ -1,0 +1,17 @@
+system:
+  tfk:
+    location_view:
+      full:
+        frontpage:
+          template: tfktelemarkBundle:full:frontpage.html.twig
+          match:
+           Identifier\ContentType: [frontpage]
+        folder:
+          template: tfktelemarkBundle:full:folder.html.twig
+          match:
+           Identifier\ContentType: [folder]
+        article:
+          template: tfktelemarkBundle:full:article.html.twig
+          match:
+           Identifier\ContentType: [article]
+

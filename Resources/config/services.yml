@@ -1,0 +1,4 @@
+services:
+#    tfktelemark.example:
+#        class: tfk\telemarkBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
