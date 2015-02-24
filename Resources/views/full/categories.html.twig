@@ -1,0 +1,21 @@
+{% block content %}
+    {% if (node.parentLocationId == categoryLocation ) or (categories is empty)  %}
+
+      {{  render(controller('tfktelemarkBundle:Categories:articlesFrontpage',{ 'nLocationId':  node.contentInfo.mainLocationId})) }}
+    {% else %}
+        {% for category in categories %}
+
+            <div>
+                <h3><a href="{{ path( "ez_urlalias", {"locationId": category.versionInfo.contentInfo.mainLocationId} ) }}">{{ ez_render_field( category, "name" ) }}</a></h3>
+
+                {% if bHasSubFolders %}
+                    <ul>
+                       {{  render(controller('tfktelemarkBundle:Categories:subCategories',{ 'nLocationId': category.versionInfo.contentInfo.mainLocationId})) }}
+                    </ul>
+                {%  endif %}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+

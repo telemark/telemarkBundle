@@ -1,0 +1,26 @@
+{#
+    Defining page title based on current content name, if available
+    See full/blog_post.html.twig for an example of customization
+#}
+{% if content is defined and title is not defined %}
+    {% set title = ez_content_name( content ) %}
+{% endif %}
+
+<title>{{ title|default( 'Home' ) }}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="author" content="eZ Systems"/>
+<meta name="copyright" content="eZ Systems"/>
+<meta name="description" content="Content Management System"/>
+<meta name="keywords" content="cms, publish, e-commerce, content management, development framework"/>
+<meta name="MSSmartTagsPreventParsing" content="TRUE"/>
+<meta name="generator" content="eZ Platform"/>
+
+<link rel="Home" href="{{ path( ezpublish.rootLocation ) }}" title="{{ 'Home'|trans }}"/>
+<link rel="Index" href="{{ path( ezpublish.rootLocation ) }}" title="{{ 'Home'|trans }}"/>
+<link rel="Top" href="{{ path( ezpublish.rootLocation ) }}" title="{{ 'Home'|trans }}"/>
+<link rel="Shortcut icon" href="{{ asset( "bundles/ezdemo/images/favicon.ico" ) }}" type="image/x-icon"/>
+
+{# adding canonical url for all defined content #}
+{% if content is defined and content.contentInfo.mainLocationId %}
+    <link rel="canonical" href="{{ path( 'ez_urlalias', {'locationId': content.contentInfo.mainLocationId} ) }}" />
+{% endif %}
