@@ -1,4 +1,3 @@
-
         <header role="banner" class="page-header">
           <div class="page-header__content-wrapper js-headroom">
             <div class="constrained">
@@ -105,4 +104,17 @@
                 </ul>
               </div>
             </nav>
+<nav id="menu" role="navigation" class="menu">
+ <div class="constrained">
+    <!-- Top menu area: START -->
+    {% block topMenu %}
+      {{ render(
+        controller(
+          "tfktelemarkBundle:Menu:topMenu",
+          {'currentLocationId': currentLocation is defined ? currentLocation.id : null}
+        )
+      ) }}
+    {% endblock %}
+</div>
+</nav>
         </header>

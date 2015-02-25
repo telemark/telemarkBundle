@@ -2,6 +2,8 @@ services:
 #    tfktelemark.example:
 #        class: tfk\telemarkBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    telemark.criteria_helper:
+        class: %ezdemo.criteria_helper.class%
     telemark.menu.top:
         class: EzSystems\DemoBundle\Menu\Builder
         factory_service: ezdemo.menu.builder

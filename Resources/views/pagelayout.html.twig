@@ -31,17 +31,6 @@
 		{% include 'tfktelemarkBundle::page_header.html.twig' %}
 	{% endblock %}
 	<!-- Header area: END -->
-<nav id="menu" role="navigation" class="menu">
- <div class="constrained">
-		<!-- Top menu area: START -->
-		{% block topMenu %}
-			{{ render(
-				controller(
-					"tfktelemarkBundle:Menu:topMenu",
-					{'currentLocationId': currentLocation is defined ? currentLocation.id : null}
-				)
-			) }}
-		{% endblock %}
 		<!-- Top menu area: END -->
 		{# TODO: implement logic to control path visibility #}
 		<!-- Path area: START -->
@@ -51,8 +40,7 @@
 			{% endblock %}
 		{% endif %}
 		<!-- Path area: END -->
-</div>
-</nav>
+
 <main id="main" role="main" tabindex="-1">
       <div class="content">
           <div class="constrained-content">
@@ -68,18 +56,14 @@
      </div>
 </main>
 	<!-- Footer area: START -->
-<div class="content">
-          <div class="constrained-content">
 {% include 'tfktelemarkBundle::page_footer.html.twig' %}
-		</div>
-     </div>
 	<!-- Footer area: END -->
 </div>
 </div>
 <!-- Complete page area: END -->
 <!-- Footer script area: START -->
 {% block footerScript %}
-	{% include 'eZDemoBundle::page_footer_script.html.twig' %}
+	{% include 'tfktelemarkBundle::page_footer_script.html.twig' %}
 {% endblock %}
 <!-- Footer script area: END -->
 </body>

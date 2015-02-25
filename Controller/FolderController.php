@@ -45,9 +45,9 @@ class FolderController extends Controller
 
         $languages = $this->getConfigResolver()->getParameter( 'languages' );
 
-        $includedContentTypeIdentifiers = $this->container->getParameter( 'telemark.folder.folder_tree.included_content_types' );
+        $includedContentTypeIdentifiers = $this->container->getParameter( 'ezdemo.folder.folder_tree.included_content_types' );
 
-        $subContentCriteria = $this->get( 'telemark.criteria_helper' )->generateSubContentCriterion(
+        $subContentCriteria = $this->get( 'ezdemo.criteria_helper' )->generateSubContentCriterion(
             $location, $includedContentTypeIdentifiers, $languages
         );
 
@@ -102,11 +102,11 @@ class FolderController extends Controller
         // Getting language for the current siteaccess
         $languages = $this->getConfigResolver()->getParameter( 'languages' );
 
-        $excludedContentTypes = $this->container->getParameter( 'telemark.folder.folder_view.excluded_content_types' );
+        $excludedContentTypes = $this->container->getParameter( 'ezdemo.folder.folder_view.excluded_content_types' );
 
         // Using the criteria helper (a demobundle custom service) to generate our query's criteria.
         // This is a good practice in order to have less code in your controller.
-        $criteria = $this->get( 'telemark.criteria_helper' )->generateListFolderCriterion(
+        $criteria = $this->get( 'ezdemo.criteria_helper' )->generateListFolderCriterion(
             $location, $excludedContentTypes, $languages
         );
 
@@ -122,13 +122,13 @@ class FolderController extends Controller
             new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
         );
 
-        $pager->setMaxPerPage( $this->container->getParameter( 'telemark.folder.folder_list.limit' ) );
+        $pager->setMaxPerPage( $this->container->getParameter( 'ezdemo.folder.folder_list.limit' ) );
         $pager->setCurrentPage( $request->get( 'page', 1 ) );
 
-        $includedContentTypeIdentifiers = $this->container->getParameter( 'telemark.folder.folder_tree.included_content_types' );
+        $includedContentTypeIdentifiers = $this->container->getParameter( 'ezdemo.folder.folder_tree.included_content_types' );
 
         // Get sub folder structure
-        $subContentCriteria = $this->get( 'telemark.criteria_helper' )->generateSubContentCriterion(
+        $subContentCriteria = $this->get( 'ezdemo.criteria_helper' )->generateSubContentCriterion(
             $location, $includedContentTypeIdentifiers, $languages
         );
 

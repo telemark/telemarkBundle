@@ -2,30 +2,19 @@
 
 {% block content %}
 <div class="container">
-    <div class="folder subpage" data-id="{{content.contentInfo.id}}">
-        {% if content.fields.show_children["nor-NO"].bool == true %}
-        <div class="folder-menu">
-            {{ render( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }}
-        </div>
-        <div class="folder-body sidebarmenu">
+
             <div class="folder-title">
                 {{ ez_render_field(content, 'name') }}
             </div>
             <div class="folder-intro">
                 {{ ez_render_field(content, 'short_description') }}
             </div>
-            {{ ez_render_field(content, 'description') }}
-        </div>
-        {% else %}
-            <div class="folder-body">
-                <div class="folder-title">
-                    {{ ez_render_field(content, 'name') }}
-                </div>
-                {{ render_esi( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }}
-            </div>
-        {% endif %}
 
-    </div>
+
+{% if content.fields.show_children["nor-NO"].bool == true %}
+            {{ render_esi( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }}
+{% endif %}
 </div>
     </section>
 {% endblock %}
+

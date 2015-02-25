@@ -1,0 +1,32 @@
+<nav id="main-nav">
+    <ul class="menu">
+        <li><a href="/" title="Hoff SA">Hjem</a></li>
+        {% for location in list %}
+            {% if location.hidden == false %}
+                <li data-id="{{location.contentInfo.id}}">
+                    <a href="{{ path(location) }}">{{location.contentInfo.name}}</a>
+                    {% if sublist[location.contentInfo.mainLocationId] is defined %}
+                    <button class="dropdowntoggle"></button>
+                    {% set size = sublist[location.contentInfo.mainLocationId]|length %}
+                    {% if size > 3 %}
+                        {% if size > 6 %}
+                            {% set class = 'tripleLi' %}
+                        {% else %}
+                            {% set class = 'doubleLi' %}
+                        {% endif %}
+                    {% else %}
+                        {% set class = 'singleLi' %}
+                    {% endif %}
+                        <ul class="submenu {{class}}">
+                            {% for sublocation in sublist[location.contentInfo.mainLocationId] %}
+                                {% if sublocation.hidden == false %}
+                                    <li><a href="{{ path(sublocation) }}">{{sublocation.contentInfo.name}}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
