@@ -1,11 +1,38 @@
 {#
-    Article - line view
+    Personprofil - line view
 #}
 
 {# content_size variable is in a relationship with Twitter Bootstrap grid system. #}
 {# When image is not set then maximum page width will be used, which is 8 in this case. #}
 {% set content_size = '8' %}
 
+
+
+<div class="grid__item grid__item--3-9 media item item--horizontal">
+    <div class="media__img">
+        {{ ez_render_field(
+                    content,
+                    'image',
+                    {
+                        'template': 'eZDemoBundle:fields:ezimage_simple.html.twig',
+                        'parameters': {'alias': 'articlethumbnail'}
+                    }
+                ) }}
+    </div>
+    <div class="media__bd">
+        <h2 class="item__header">Terje Riis-Johansen (Sp)</h2>
+            <p class="sidenote"><em>Fylkesordfører<br /></em><a href="mailto:terje.riis-johansen@t-fk.no">terje.riis-johansen@t-fk.no<br /></a><span>35 91 72 32<br/></span><span>975 63 000<br/></span></p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{#
 <div class="content-view-line">
     <article class="class-article row">
 
@@ -58,3 +85,4 @@
 
     </article>
 </div>
+#}
