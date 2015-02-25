@@ -26,3 +26,8 @@ system:
            template: "tfktelemarkBundle:aside_sub:folder.html.twig"
            match:
              Identifier\ContentType: [folder]
+      line:
+        personprofil:
+          template: tfktelemarkBundle:line:personprofil.html.twig
+          match:
+            Identifier\ContentType: [personprofil]
