@@ -33,8 +33,7 @@ class DemoController extends Controller
             $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
             $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
 
-
-            if ($content->fields['hide_from_main_menu']['nor-NO']->bool === false ) {
+            if ($content->getFieldValue('hide_from_main_menu') == '0') {
                 $locationList[] = $currentLocation;
                 $subresults = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
                 foreach ($subresults->locations as $subresult) {

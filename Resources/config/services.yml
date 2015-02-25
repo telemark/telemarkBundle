@@ -12,3 +12,8 @@ services:
         scope: request # needed as we have the request as a dependency here
         tags:
             - { name: knp_menu.menu, alias: top } # The alias is what is used to retrieve the menu
+    telemark.search_helper:
+        class: %ezdemo.search_helper.class%
+        arguments:
+            - @ezpublish.api.service.search
+            - %ezdemo.search.list.limit%
