@@ -1,1 +1,47 @@
-YaY! - Linkbox
+{#
+    linkbox - line view
+#}
+
+{% set imageId = ez_field_value( content, 'image' ) %}
+
+{% if not ez_is_field_empty( content, 'internal_resource' ) %}
+	{% set externalResourceId = ez_field_value( content, 'internal_resource' ) %}
+	{% set this_block_url = url( 'ez_urlalias', {'contentId': externalResourceId} ) %}
+{% else %}
+	{% set this_block_url = ez_field_value( content, 'url' ) %}
+{% endif %}
+
+{% if not ez_is_field_empty( content, 'open_in_new_window' ) %}
+	{% set this_block_target = '_blank' %}	
+{% else %}
+	{% set this_block_target = '_self' %}
+{% endif %}
+
+<div class="grid__item grid__item--3-9 media item item--horizontal">
+
+	<div class="media__img">
+            Her er det bilde: {{ imageId }}!
+    </div>
+
+
+	<div class="media__bd">
+		{% if not ez_is_field_empty( content, 'show_title' ) %}
+        	<a href={{ this_block_url }} target={{ this_block_target }}>
+        		<h2 class="item__header">{{ ez_render_field( content, 'title' ) }}</h2>
+        	</a>
+        {% endif %}
+        {% if not ez_is_field_empty( content, 'description' ) %}
+            <div>
+                {{ ez_render_field( content, 'description' ) }}
+            </div>
+         {% endif %}
+
+         {% if not ez_is_field_empty( content, 'show_url_text' ) %}
+         	{% if not ez_is_field_empty( content, 'url.data_text' ) %}
+            
+              <a href={{ this_block_url }} target={{ this_block_target }}>{{ ez_render_field( content, 'url.data_text' ) }}</a>
+            
+            {% endif %}
+         {% endif %}
+    </div>
+</div>
