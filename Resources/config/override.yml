@@ -31,3 +31,7 @@ system:
           template: tfktelemarkBundle:line:personprofil.html.twig
           match:
             Identifier\ContentType: [personprofil]
+        linkbox:
+          template: tfktelemarkBundle:line:linkbox.html.twig
+          match:
+            Identifier\ContentType: [linkbox]
