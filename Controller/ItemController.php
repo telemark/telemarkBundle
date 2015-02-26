@@ -29,7 +29,8 @@ class ItemController extends Controller {
 
             $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
             $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
-            $itemsList[] = $content;
+            if ($result->hidden == false)
+                $itemsList[] = $content;
         }
         return $this->render('tfktelemarkBundle:parts:folder_loop.html.twig', array( 'items' => $itemsList), $response );
     }

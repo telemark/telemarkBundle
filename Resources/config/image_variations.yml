@@ -167,4 +167,53 @@ system:
                 reference: null
                 filters:
                     - { name: geometry/scalewidthdownonly, params: [370] }
-
+            # responsive bilder fra malverket
+            responsive_12:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [1140] }
+            responsive_09:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [846] }
+            responsive_06:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [560] }
+            responsive_04:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [360] }
+            responsive_03:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [260] }
+            responsive_02:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [162] }
+            responsive_01:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [65] }
+            # Bildestr fra legacy-siten
+            listebilde:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [228] }
+            ingress_smal:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [684] }
+            ingress_bred:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [912] }
+            fulleskjerm:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [1368] }
+            portrett_mini:
+                reference: reference
+                filters:
+                    - { name: geometry/scalewidthdownonly, params: [150] }
