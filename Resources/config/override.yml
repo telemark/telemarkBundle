@@ -35,8 +35,8 @@ system:
           template: tfktelemarkBundle:line:linkbox.html.twig
           match:
             Identifier\ContentType: [linkbox]
-      custom:
+      custom_views:
         image:
-          template: tfktelemarkBundle:custom:related-image.html.twig
+          template: tfktelemarkBundle:custom:image.html.twig
           match:
             Identifier\ContentType: [image]
