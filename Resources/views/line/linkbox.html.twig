@@ -19,13 +19,13 @@
 
 <div class="item item--vertical grid__item grid__item--4-12">
 	<a href={{ this_block_url }} target={{ this_block_target }}>
-        {{ render(
+         {{ render(
             controller( 
                 "ez_content:viewContent", 
                   {
                       "contentId": imageId.destinationContentId,
                       "viewType": "custom",
-                      "params": { "some_variable": "some_value" }
+                      "params": { "img_render_size": "responsive_04" }
                   }
             )
         ) }}
