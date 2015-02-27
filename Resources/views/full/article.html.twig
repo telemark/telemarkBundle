@@ -1,49 +1,54 @@
 {% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
 
 {% block content %}
-<section class="content-view-full">
-    <article class="class-article row">
-        <div class="span8">
-            <div class="attribute-header">
-                <h1>{{ ez_render_field( content, 'title' ) }}</h1>
-            </div>
 
-            <div class="attribute-byline">
-                <span class="date">
-                    {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }}
-                </span>
+{% if not ez_is_field_empty( content, 'do_show_image' ) %}
+    {% if not ez_is_field_empty( content, 'image' ) %}
+        {% set imageId = ez_field_value( content, 'image' ) %}
+    {% endif %}
+{% endif %}
+
+<article class="main__center">
+    <header class="article__header">
+        <h1>{{ ez_render_field( content, 'title' ) }}</h1>
+        <div class="sidenote">
             {% if not ez_is_field_empty( content, 'author' ) %}
-                <span class="author">
-                    {{ ez_render_field(
+                        Av: {{ ez_render_field(
                         content,
                         'author',
                         {
                             'template': 'eZDemoBundle:fields:ezauthor_simple.html.twig'
                         }
                     ) }}
-                </span>
-            {% endif %}
-            </div>
-
-        {% if not ez_is_field_empty( content, 'body' ) %}
-            <div class="attribute-long">
-                {{ ez_render_field( content, 'body' ) }}
-            </div>
-        {% endif %}
-
-            <div class="attribute-tags">
-                {{ ez_render_field(
-                    content,
-                    'tags',
-                    {
-                        'attr': {'class' : 'tags-wrapper'}
-                    }
-                ) }}
-            </div>
-
+                        {% endif %} / Publisert: {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }} / Oppdatert: {{ location.contentInfo.modificationDate|localizeddate( 'short', 'short', app.request.locale ) }}
         </div>
+    </header>
+    {% if imageId %}
+        {{ render(
+            controller( 
+                "ez_content:viewContent", 
+                  {
+                      "contentId": imageId.destinationContentId,
+                      "viewType": "responsive",
+                      "params": { 
+                                    "image_title": ez_field_value(content, 'image_title'),
+                                    "image_text" : ez_field_value(content, 'image_text')
+                                }
+                  }
+            )
+        ) }}
+    {% endif %}
 
-    </article>
-</section>
+
+    {% if not ez_is_field_empty( content, 'intro' ) %}
+        <div class="byline">
+            {{ ez_render_field( content, 'intro' ) }}
+        </div>
+    {% endif %}
+
+    {% if not ez_is_field_empty( content, 'body' ) %}
+        {{ ez_render_field( content, 'body' ) }}
+    {% endif %}
+</article>
 
 {% endblock %}

@@ -2,6 +2,8 @@
     Article - line view
 #}
 
+{% set imageId = ez_field_value( content, 'image' ) %}
+
 {# content_size variable is in a relationship with Twitter Bootstrap grid system. #}
 {# When image is not set then maximum page width will be used, which is 8 in this case. #}
 {% set content_size = '8' %}
@@ -12,13 +14,15 @@
     {% if not ez_is_field_empty( content, 'image' ) %}
         <div class="span2">
             <div class="attribute-image">
-                {{ ez_render_field(
-                    content,
-                    'image',
-                    {
-                        'template': 'eZDemoBundle:fields:ezimage_simple.html.twig',
-                        'parameters': {'alias': 'articlethumbnail'}
-                    }
+                {{ render(
+                    controller( 
+                        "ez_content:viewContent", 
+                            {
+                                "contentId": imageId.destinationContentId,
+                                "viewType": "custom",
+                                "params": { "img_render_size": "responsive_04" }
+                            }
+                    )
                 ) }}
             </div>
         </div>
