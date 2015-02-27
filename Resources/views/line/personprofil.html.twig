@@ -15,11 +15,29 @@
     
     {% if not ez_is_field_empty( content, 'show_compact' ) %}
 
-         {{ render( controller( "ez_content:viewContent", {'contentId': imageId, 'viewType': 'full', 'noLayout': 1} ) ) }}
+        {{ render(
+            controller( 
+                "ez_content:viewContent", 
+                  {
+                      "contentId": imageId.destinationContentId,
+                      "viewType": "custom",
+                      "params": { "img_render_size": "responsive_01" }
+                  }
+            )
+        ) }}
         
     {% else %}
         
-        {{ render( controller( "ez_content:viewContent", {'contentId': imageId, 'viewType': 'full', 'noLayout': 1} ) ) }}
+        {{ render(
+            controller( 
+                "ez_content:viewContent", 
+                  {
+                      "contentId": imageId.destinationContentId,
+                      "viewType": "custom",
+                      "params": { "img_render_size": "responsive_02" }
+                  }
+            )
+        ) }}
          
     {% endif %}
 
