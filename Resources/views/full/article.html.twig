@@ -23,7 +23,7 @@
                         {% endif %} / Publisert: {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }} / Oppdatert: {{ location.contentInfo.modificationDate|localizeddate( 'short', 'short', app.request.locale ) }}
         </div>
     </header>
-    {% if imageId %}
+    {% if imageId is defined %}
         {{ render(
             controller( 
                 "ez_content:viewContent", 
@@ -32,7 +32,8 @@
                       "viewType": "responsive",
                       "params": { 
                                     "image_title": ez_field_value(content, 'image_title'),
-                                    "image_text" : ez_field_value(content, 'image_text')
+                                    "image_text" : ez_field_value(content, 'image_text'),
+                                    "image_class": ""
                                 }
                   }
             )
