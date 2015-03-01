@@ -13,32 +13,23 @@
 {% block content %}
 
 	{% if bannerImageId is defined %}
-		<div class="constrained">
-            <div class="top-image top-image--large">
-            	{{ render(
-            		controller( 
-                		"ez_content:viewContent", 
-                  			{
-                      			"contentId": bannerImageId.destinationContentId,
-                      			"viewType": "responsive",
-                      			"params": { 
-                                    "image_title": "",
-                                    "image_text" : "",
-                                    "image_class": "top-image__img"
-                                }
-                  			}
-            		)
-        		) }}
-                <div class="top-image__text-wrapper">
-                  <div class="top-image__text">
-                    <h2 class="top-image__header">{{ ez_render_field(content, 'banner_title') }}</h2>
-                    <div class="top-image__body">{{ ez_render_field(content, 'banner_text') }}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-	{% endif %}
+    {{  render(
+          controller( 
+            "ez_content:viewContent", 
+                {
+                  "contentId": bannerImageId.destinationContentId,
+                  "viewType": "responsive",
+                  "params": 
+                    { 
+                      "image_title": ez_field_value(content, 'banner_title'),
+                      "image_text" : ez_field_value(content, 'banner_text'),
+                      "image_type" : "banner"
+                    }
+                }
+          )
+        ) 
+    }}
+  {% endif %}
 
 
    <div class="content">
@@ -60,7 +51,7 @@
                               "params": { 
                                             "image_title": ez_field_value(content, 'image_title'),
                                             "image_text" : ez_field_value(content, 'image_text'),
-                                            "image_class" : ""
+                                            "image_type" : "ingress"
                                         }
                           }
                     )
