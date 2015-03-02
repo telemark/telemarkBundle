@@ -1,1 +1,12 @@
-Yo! Look at me... Da Folder
+<div class="content-view-line">
+    <div class="class-folder">
+
+
+        {% if not ez_is_field_empty( content, 'short_description' ) %}
+            <div class="attribute-short">
+                {{ ez_render_field( content, 'short_description' ) }}
+            </div>
+        {% endif %}
+
+    </div>
+</div>

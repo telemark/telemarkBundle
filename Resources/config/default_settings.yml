@@ -1,6 +1,6 @@
 parameters:
     # Number of article displayed per page in the folder view
-    telemark.folder.folder_list.limit: 10
+    telemark.folder.folder_list.limit: 9
     # ContentType identifiers we want to exclude from content list in folder view
     telemark.folder.folder_view.excluded_content_types: [folder, image]
     # ContentType identifiers we want to have in folder's tree

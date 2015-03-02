@@ -14,33 +14,8 @@ use eZ\Publish\API\Repository\Values\Content\Location;
 
 class ItemController extends Controller {
 
-    public function folderAction( $locationId)
-    {
 
-        // Setting HTTP cache for the response to be public and with a TTL of 1 day.
-        $response = new Response;
-        $response->setPublic();
-        $response->setSharedMaxAge( 86400 );
-        // Menu will expire when top location cache expires.
-        $response->headers->set( 'X-Location-Id', $locationId );
-        // Menu might vary depending on user permissions, so make the cache vary on the user hash.
-        $response->setVary( 'X-User-Hash' );
-
-        $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $locationId );
-        $results = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-        $itemsList = array();
-
-        foreach ( $results->locations as $result ) {
-
-            $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
-            $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
-            if ($result->hidden == false)
-                $itemsList[] = $content;
-        }
-        return $this->render('tfktelemarkBundle:parts:folder_loop.html.twig', array( 'items' => $itemsList), $response );
-    }
-
-    public function arkivAction($locationId)
+    public function folderAction($locationId)
     {
 
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
@@ -59,7 +34,7 @@ class ItemController extends Controller {
         $query = new Query();
 
         $query->criterion = new Criterion\LogicalAnd( array(
-                new Criterion\ContentTypeIdentifier( array("article")),
+                new Criterion\ContentTypeIdentifier( array('article','linkbox')),
                 new Criterion\ParentLocationId($locationId),
                 new Criterion\Visibility( Criterion\Visibility::VISIBLE )
             ) );
@@ -75,22 +50,8 @@ class ItemController extends Controller {
         $items->setMaxPerPage( 9 );
         $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
 
-        /*$repository = $this->getRepository();
-        $location = $repository->getLocationService()->loadLocation( $locationId );
-        $serieContent = $repository->getContentService()->loadContent($location->contentInfo->id);
-        $results = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-        $itemsList = array();
-
-        foreach ( $results->locations as $result ) {
-
-            $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
-            $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
-            if ($result->hidden == false)
-                $itemsList[] = $content;
-        }*/
-
         return $this->render(
-            'tfktelemarkBundle:parts:folder_loop_arkiv.html', 
+            'tfktelemarkBundle:full:folder.html.twig', 
             array( 
                 'items' => $items,
                 'location' => $location,

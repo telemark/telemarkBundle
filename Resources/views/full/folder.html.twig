@@ -1,4 +1,4 @@
-{% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
+{% extends "tfktelemarkBundle::pagelayout.html.twig" %}
 
 {% if not ez_is_field_empty( content, 'banner' ) %}
     {% set bannerImageId = ez_field_value( content, 'banner' ) %}
@@ -73,8 +73,42 @@
     </div>
   </div>
 
-  {% if content.fields.show_children["nor-NO"].bool == true %}
-    {{ render_esi( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }}
-  {% endif %}
+
+    {% for item in items %}
+        {{
+            render_esi(
+                controller(
+                    "ez_content:viewLocation",
+                            {
+                                "locationId": item.contentInfo.mainLocationId,
+                                "viewType": "line"
+                            }
+                )
+            )
+        }}
+    {% endfor %}
+
+    {% if items|length() > 0 %}
+        {% for item in items %}
+            {{
+                render_esi(
+                    controller(
+                        "ez_content:viewLocation",
+                                {
+                                    "locationId": item.contentInfo.mainLocationId,
+                                    "viewType": "line"
+                                }
+                    )
+                )
+            }}
+        {% endfor %}
+
+        {% if items.haveToPaginate() %}
+            <div class="pagination-centered">
+                {{ pagerfanta( items, 'twitter_bootstrap_translated', {'routeName': location} ) }}
+            </div>
+        {% endif %}
+    {% endif %}
+
 
 {% endblock %}

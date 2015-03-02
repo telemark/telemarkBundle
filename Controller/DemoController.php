@@ -60,7 +60,7 @@ class DemoController extends Controller
         $response->setVary( 'Cookie' );
 
         return $this->render(
-            "eZDemoBundle::page_header_links.html.twig",
+            "tfktelemarkBundle::page_header_links.html.twig",
             array(),
             $response
         );

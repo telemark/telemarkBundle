@@ -14,7 +14,7 @@
     {% endfor %}
 
     {% if items|length() > 0 %}
-        {% for item in item %}
+        {% for item in items %}
             {{
                 render_esi(
                     controller(
@@ -27,5 +27,11 @@
                 )
             }}
         {% endfor %}
-     {% endif %}
+
+        {% if items.haveToPaginate() %}
+            <div class="pagination-centered">
+                {{ pagerfanta( items, 'twitter_bootstrap_translated', {'routeName': location} ) }}
+            </div>
+        {% endif %}
+    {% endif %}
 </div>

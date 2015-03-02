@@ -102,7 +102,7 @@ class FolderController extends Controller
         // Getting language for the current siteaccess
         $languages = $this->getConfigResolver()->getParameter( 'languages' );
 
-        $excludedContentTypes = $this->container->getParameter( 'ezdemo.folder.folder_view.excluded_content_types' );
+        $excludedContentTypes = $this->container->getParameter( 'folder', 'image' );
 
         // Using the criteria helper (a demobundle custom service) to generate our query's criteria.
         // This is a good practice in order to have less code in your controller.
@@ -122,10 +122,10 @@ class FolderController extends Controller
             new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
         );
 
-        $pager->setMaxPerPage( $this->container->getParameter( 'ezdemo.folder.folder_list.limit' ) );
+        $pager->setMaxPerPage( $this->container->getParameter( 9 ) );
         $pager->setCurrentPage( $request->get( 'page', 1 ) );
 
-        $includedContentTypeIdentifiers = $this->container->getParameter( 'ezdemo.folder.folder_tree.included_content_types' );
+        $includedContentTypeIdentifiers = $this->container->getParameter( 'folder' );
 
         // Get sub folder structure
         $subContentCriteria = $this->get( 'ezdemo.criteria_helper' )->generateSubContentCriterion(

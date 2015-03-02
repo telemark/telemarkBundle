@@ -4,6 +4,7 @@
 
 {% set imageId = ez_field_value( content, 'image' ) %}
 
+
 <div class="item item--vertical grid__item--3-9">
   {% if imageId is defined %}
     <a href={{ path( location ) }} title="Les artikkelen {{ ez_field_value( content, 'title' ) }}" class="item__imglink imglink">    
