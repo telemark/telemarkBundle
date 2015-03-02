@@ -31,7 +31,7 @@ system:
            match:
              Identifier\ContentType: [folder]
       line:
-        artikkel:
+        article:
           template: tfktelemarkBundle:line:article.html.twig
           match:
             Identifier\ContentType: [article]
