@@ -1,21 +1,80 @@
-{% extends "tfktelemarkBundle::pagelayout.html.twig" %}
+{% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
+
+{% if not ez_is_field_empty( content, 'banner' ) %}
+    {% set bannerImageId = ez_field_value( content, 'banner' ) %}
+{% endif %}
+
+{% if not ez_is_field_empty( content, 'do_show_image' ) %}
+    {% if not ez_is_field_empty( content, 'image' ) %}
+        {% set imageId = ez_field_value( content, 'image' ) %}
+    {% endif %}
+{% endif %}
 
 {% block content %}
-<div class="container">
 
-            <div class="folder-title">
-                {{ ez_render_field(content, 'name') }}
-            </div>
-            <div class="folder-intro">
+	{% if bannerImageId is defined %}
+    {{  render(
+          controller( 
+            "ez_content:viewContent", 
+                {
+                  "contentId": bannerImageId.destinationContentId,
+                  "viewType": "responsive",
+                  "params": 
+                    { 
+                      "image_title": ez_field_value(content, 'banner_title'),
+                      "image_text" : ez_field_value(content, 'banner_text'),
+                      "image_type" : "banner"
+                    }
+                }
+          )
+        ) 
+    }}
+  {% endif %}
+
+
+   <div class="content">
+    <div class="constrained-content">
+      <div class="main">
+        <div class="main__center">
+
+        	{% if not ez_is_field_empty( content, 'show_name' ) %}
+        		<h1>{{ ez_render_field(content, 'name') }}</h1>
+        	{% endif %}
+
+        	{% if imageId is defined %}
+                {{ render(
+                    controller( 
+                        "ez_content:viewContent", 
+                          {
+                              "contentId": imageId.destinationContentId,
+                              "viewType": "responsive",
+                              "params": { 
+                                            "image_title": ez_field_value(content, 'image_title'),
+                                            "image_text" : ez_field_value(content, 'image_text'),
+                                            "image_type" : "ingress"
+                                        }
+                          }
+                    )
+                ) }}
+            {% endif %}
+    
+            {% if not ez_is_field_empty( content, 'short_description' ) %}
+              <div class="byline">
                 {{ ez_render_field(content, 'short_description') }}
-            </div>
+              </div>
+            {% endif %}
 
+            {% if not ez_is_field_empty( content, 'description' ) %}
+              {{ ez_render_field(content, 'description') }}
+            {% endif %}
 
-{% if content.fields.show_children["nor-NO"].bool == true %}
-	{% include 'tfktelemarkBundle:parts:folder_loop.html.twig' %}
-            {#{ render( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }#}
-{% endif %}
-</div>
-    </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if content.fields.show_children["nor-NO"].bool == true %}
+    {{ render_esi( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }}
+  {% endif %}
+
 {% endblock %}
-

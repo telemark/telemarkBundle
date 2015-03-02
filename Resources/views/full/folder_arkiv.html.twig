@@ -1,0 +1,18 @@
+{% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
+
+{% block content %}
+<div class="container">
+            <div class="folder-title">
+                {{ ez_render_field(content, 'name') }}
+            </div>
+            <div class="folder-intro">
+                {{ ez_render_field(content, 'short_description') }}
+            </div>
+
+Folder arkiv
+  {% if content.fields.show_children["nor-NO"].bool == true %}
+    {{ render_esi( controller("tfktelemarkBundle:Item:arkiv", {'locationId': content.contentInfo.mainLocationId})) }}
+  {% endif %}
+</div>
+    </section>
+{% endblock %}

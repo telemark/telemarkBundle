@@ -27,11 +27,5 @@
                 )
             }}
         {% endfor %}
-
-        {% if items.haveToPaginate() %}
-            <div class="pagination-centered">
-                {{ pagerfanta( items, 'twitter_bootstrap_translated', {'routeName': location} ) }}
-            </div>
-        {% endif %}
-    {% endif %}
+     {% endif %}
 </div>

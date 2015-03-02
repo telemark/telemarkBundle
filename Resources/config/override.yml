@@ -7,9 +7,14 @@ system:
           match:
            Identifier\ContentType: [frontpage]
         folder:
-          controller: "tfktelemarkBundle:Item:folder"
+          template: "tfktelemarkBundle:full:folder.html.twig"
           match:
             Identifier\ContentType: [folder]
+        folder_aktuelt:
+          #controller: "tfktelemarkBundle:Item:arkiv"
+          template: tfktelemarkBundle:full:folder_arkiv.html.twig
+          match:
+            Id\Content: 58
         article:
           template: tfktelemarkBundle:full:article.html.twig
           match:
@@ -26,6 +31,10 @@ system:
            match:
              Identifier\ContentType: [folder]
       line:
+        artikkel:
+          template: tfktelemarkBundle:line:article.html.twig
+          match:
+            Identifier\ContentType: [article]
         personprofil:
           template: tfktelemarkBundle:line:personprofil.html.twig
           match:
@@ -34,6 +43,18 @@ system:
           template: tfktelemarkBundle:line:linkbox.html.twig
           match:
             Identifier\ContentType: [linkbox]
+        infobox:
+          template: tfktelemarkBundle:line:infobox.html.twig
+          match:
+            Identifier\ContentType: [infobox]
+        tabboks:
+          template: tfktelemarkBundle:line:tabboks.html.twig
+          match:
+            Identifier\ContentType: [tabboks]
+        tabboks_tab:
+          template: tfktelemarkBundle:line:tabboks_tab.html.twig
+          match:
+            Identifier\ContentType: [tabboks_tab]
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
@@ -43,5 +64,10 @@ system:
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
+          match:
+            Identifier\ContentType: [image]
+      responsive:
+        image:
+          template: tfktelemarkBundle:responsive:image.html.twig
           match:
             Identifier\ContentType: [image]
