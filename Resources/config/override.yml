@@ -39,6 +39,14 @@ system:
           template: tfktelemarkBundle:line:infobox.html.twig
           match:
             Identifier\ContentType: [infobox]
+        tabboks:
+          template: tfktelemarkBundle:line:tabboks.html.twig
+          match:
+            Identifier\ContentType: [tabboks]
+        tabboks_tab:
+          template: tfktelemarkBundle:line:tabboks_tab.html.twig
+          match:
+            Identifier\ContentType: [tabboks_tab]
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
