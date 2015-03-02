@@ -171,31 +171,31 @@ system:
             responsive_12:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [1140] }
+                    - { name: geometry/scalewidth, params: [1140] }
             responsive_09:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [846] }
+                    - { name: geometry/scalewidth, params: [846] }
             responsive_06:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [560] }
+                    - { name: geometry/scalewidth, params: [560] }
             responsive_04:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [360] }
+                    - { name: geometry/scalewidth, params: [360] }
             responsive_03:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [260] }
+                    - { name: geometry/scalewidth, params: [260] }
             responsive_02:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [162] }
+                    - { name: geometry/scalewidth, params: [162] }
             responsive_01:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidthdownonly, params: [65] }
+                    - { name: geometry/scalewidth, params: [65] }
             # Bildestr fra legacy-siten
             listebilde:
                 reference: reference
