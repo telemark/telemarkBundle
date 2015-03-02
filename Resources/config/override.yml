@@ -7,8 +7,7 @@ system:
           match:
            Identifier\ContentType: [frontpage]
         folder:
-          #controller: "tfktelemarkBundle:Folder:showFolderList"
-          template: "tfktelemarkBundle:full:folder.html.twig"
+          controller: "tfktelemarkBundle:Item:folder"
           match:
             Identifier\ContentType: [folder]
         article:
@@ -35,18 +34,6 @@ system:
           template: tfktelemarkBundle:line:linkbox.html.twig
           match:
             Identifier\ContentType: [linkbox]
-        infobox:
-          template: tfktelemarkBundle:line:infobox.html.twig
-          match:
-            Identifier\ContentType: [infobox]
-        tabboks:
-          template: tfktelemarkBundle:line:tabboks.html.twig
-          match:
-            Identifier\ContentType: [tabboks]
-        tabboks_tab:
-          template: tfktelemarkBundle:line:tabboks_tab.html.twig
-          match:
-            Identifier\ContentType: [tabboks_tab]
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
@@ -56,10 +43,5 @@ system:
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
-          match:
-            Identifier\ContentType: [image]
-      responsive:
-        image:
-          template: tfktelemarkBundle:responsive:image.html.twig
           match:
             Identifier\ContentType: [image]

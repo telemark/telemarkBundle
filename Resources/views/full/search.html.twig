@@ -1,0 +1,22 @@
+{% extends "tfktelemarkBundle::pagelayout.html.twig" %}
+
+{% block content %}
+<div class="class-search content-view-full constrained">
+
+  <div class="fancy-header">
+    <div class="block-title"><h2>{{ count }} resultater for "{{string}}"</h2></div>
+  </div>
+
+  <div class="result-list">
+    {% if result %}
+      {% for item in result %}
+         {{ render( controller( 'ez_content:viewLocation', {'locationId': item.NodeID, 'viewType': 'line', 'params': { 'type': 'line' }} ) ) }}
+      {% endfor %}
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}
+
+

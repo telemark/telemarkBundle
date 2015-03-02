@@ -90,4 +90,33 @@ class SearchController extends Controller
             $response
         );
     }
+
+    public function searchAction() {
+        $request = Request::createFromGlobals();
+        $searchString = $request->query->get('s');
+
+        $result = $this->getLegacyKernel()->runCallback(
+            function () use( $searchString )
+            {      
+                 return \eZFunctionHandler::execute(
+                    'ezfind', 
+                    'search', 
+                    array(
+                        'query' => $searchString,
+                        'section_id' => 1,
+                        'limit' => 50
+                    )
+                );
+            }
+        );
+
+        return $this->render(
+            "tfktelemarkBundle:full:search.html.twig",
+            array(
+                "result" => $result['SearchResult'],
+                'string' => $searchString,
+                'count' => $result['SearchCount']
+            )
+        );
+    }
 }

@@ -1,3 +1,6 @@
 tfktelemark_homepage:
     path:     /hello/{name}
     defaults: { _controller: tfktelemarkBundle:Default:index }
+tfktelemark_search:
+    pattern:  /search
+    defaults: { _controller: tfktelemarkBundle:Search:search }
