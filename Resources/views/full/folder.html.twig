@@ -68,15 +68,14 @@
               {{ ez_render_field(content, 'description') }}
             {% endif %}
 
-          {% if content.fields.show_children["nor-NO"].bool == true %}
-              {{ render_esi( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }}
-          {% endif %}
-
-
         </div>
       </div>
     </div>
   </div>
+
+  {% if content.fields.show_children["nor-NO"].bool == true %}
+    {{ render_esi( controller("tfktelemarkBundle:Item:folder", {'locationId': content.contentInfo.mainLocationId})) }}
+  {% endif %}
 
 {% endblock %}
 
