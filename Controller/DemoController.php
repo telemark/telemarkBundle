@@ -173,7 +173,7 @@ class DemoController extends Controller
         // We need the author, whatever the view type is.
         $repository = $this->getRepository();
         $author = $repository->getUserService()->loadUser( $location->getContentInfo()->ownerId );
-
+	
         // TODO once the keyword service is available, load the number of keyword for each keyword
 
         // Delegate view rendering to the original ViewController

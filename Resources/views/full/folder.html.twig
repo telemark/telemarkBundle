@@ -30,8 +30,7 @@
         ) 
     }}
   {% endif %}
-
-
+  
    <div class="content">
     <div class="constrained-content">
       <div class="main">
@@ -71,44 +70,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> 
 
-{% if content.fields.show_children["nor-NO"].bool == true %}
-    {% for item in items %}
-        {{
-            render_esi(
-                controller(
-                    "ez_content:viewLocation",
-                            {
-                                "locationId": item.contentInfo.mainLocationId,
-                                "viewType": "line"
-                            }
-                )
-            )
-        }}
-    {% endfor %}
-
-    {% if items|length() > 0 %}
-        {% for item in items %}
-            {{
-                render_esi(
-                    controller(
-                        "ez_content:viewLocation",
-                                {
-                                    "locationId": item.contentInfo.mainLocationId,
-                                    "viewType": "line"
-                                }
-                    )
-                )
-            }}
-        {% endfor %}
-
-        {% if items.haveToPaginate() %}
-            <div class="pagination-centered">
-                {{ pagerfanta( items, 'twitter_bootstrap_translated', {'routeName': location} ) }}
-            </div>
-        {% endif %}
-    {% endif %}
-
-    {% endif %}
+  {% if content.getFieldValue('show_children') %}
+    {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id, 'params' : { 'class' : ['folder', 'article'] }} )) }}
+  {% endif %}
+  
 {% endblock %}

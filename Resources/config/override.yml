@@ -10,8 +10,12 @@ system:
           template: tfktelemarkBundle:full:frontpage.html.twig
           match:
            Identifier\ContentType: [frontpage]
+        arkiv:
+          controller: tfktelemarkBundle:Item:arkiv
+          match:
+            Id\Content: 58
         folder:
-          controller: tfktelemarkBundle:Item:folder
+          template: tfktelemarkBundle:full:folder.html.twig
           match:
             Identifier\ContentType: [folder]
         article:
@@ -47,6 +51,10 @@ system:
           template: tfktelemarkBundle:line:tabboks_tab.html.twig
           match:
             Identifier\ContentType: [tabboks_tab]
+        slide_container:
+          template: tfktelemarkBundle:line:slide_container.html.twig
+          match:
+            Identifier\ContentType: [slide_container]
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
@@ -63,3 +71,17 @@ system:
           template: tfktelemarkBundle:responsive:image.html.twig
           match:
             Identifier\ContentType: [image]
+      embed-inline:
+        slide_container:
+          template: tfktelemarkBundle:line:slide_container.html.twig
+          match:
+            Identifier\ContentType: [slide_container]
+      line:
+        kampanjecontainer:
+          template: tfktelemarkBundle:line:slide_container.html.twig
+          match:
+            Identifier\ContentType: [kampanjecontainer]
+        tabboks:
+          template: tfktelemarkBundle:line:tabboks.html.twig
+          match:
+            Identifier\ContentType: [tabboks]

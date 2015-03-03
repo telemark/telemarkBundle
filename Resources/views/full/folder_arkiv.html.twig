@@ -11,9 +11,27 @@
             </div>
 
 
-  {% if content.fields.show_children["nor-NO"].bool == true %}
-    {{ render_esi( controller("tfktelemarkBundle:Item:arkiv", {'locationId': content.contentInfo.mainLocationId})) }}
-  {% endif %}
+  {% if items|length() > 0 %}
+        {% for item in items %}
+            {{
+                render_esi(
+                    controller(
+                        "ez_content:viewLocation",
+                                {
+                                    "locationId": item.contentInfo.mainLocationId,
+                                    "viewType": "line"
+                                }
+                    )
+                )
+            }}
+        {% endfor %}
+
+        {% if items.haveToPaginate() %}
+            <div class="pagination-centered">
+                {{ pagerfanta( items, 'twitter_bootstrap_translated', {'routeName': location} ) }}
+            </div>
+        {% endif %}
+    {% endif %}
 </div>
     </section>
 {% endblock %}

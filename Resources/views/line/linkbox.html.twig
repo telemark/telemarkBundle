@@ -44,9 +44,9 @@
          {% endif %}
 
          {% if not ez_is_field_empty( content, 'show_url_text' ) %}
-         	{% if not ez_is_field_empty( content, 'url.data_text' ) %}
+         	{% if not ez_is_field_empty( content, 'url' ) %}
             
-              <a href={{ this_block_url }} target={{ this_block_target }}>{{ ez_render_field( content, 'url.data_text' ) }}</a>
+              <a href={{ this_block_url }} target={{ this_block_target }}>{{ ez_render_field( content, 'url' ) }}</a>
             
             {% endif %}
          {% endif %}
