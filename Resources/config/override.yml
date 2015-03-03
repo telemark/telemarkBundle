@@ -5,7 +5,6 @@ system:
         frontpage_tfk:
           template: tfktelemarkBundle:full:tfk_frontpage.html.twig
           match:
-           Identifier\ContentType: [frontpage]
            Id\Content: 2
         frontpage:
           template: tfktelemarkBundle:full:frontpage.html.twig

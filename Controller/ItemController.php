@@ -32,7 +32,9 @@ class ItemController extends Controller {
 
         $searchService = $this->getRepository()->getSearchService();
         $query = new Query();
-
+		
+ 		if ($content->getFieldValue('show_children') == '1') {
+			
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier( array('article','linkbox')),
                 new Criterion\ParentLocationId($locationId),
@@ -42,14 +44,16 @@ class ItemController extends Controller {
             new SortClause\LocationPriority( Query::SORT_DESC ),
             new SortClause\DatePublished( Query::SORT_DESC )
         );
-
+		
         // Initialize pagination.
         $items = new Pagerfanta(
             new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
         );
         $items->setMaxPerPage( 9 );
         $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
-
+		
+		
+		
         return $this->render(
             'tfktelemarkBundle:full:folder.html.twig', 
             array( 
@@ -57,11 +61,19 @@ class ItemController extends Controller {
                 'location' => $location,
                 'content' => $content
             ), $response );
+		}
+		else {
+		    return $this->render(
+            'tfktelemarkBundle:full:folder.html.twig', 
+            array( 
+                'location' => $location,
+                'content' => $content
+            ), $response );
+		}
     }
 
     public function menuAction( $locationId)
     {
-
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
         $response->setPublic();

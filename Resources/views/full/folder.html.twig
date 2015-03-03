@@ -73,7 +73,7 @@
     </div>
   </div>
 
-
+{% if content.fields.show_children["nor-NO"].bool == true %}
     {% for item in items %}
         {{
             render_esi(
@@ -110,5 +110,5 @@
         {% endif %}
     {% endif %}
 
-
+    {% endif %}
 {% endblock %}
