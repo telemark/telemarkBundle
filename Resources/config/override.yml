@@ -76,6 +76,10 @@ system:
           template: tfktelemarkBundle:line:slide_container.html.twig
           match:
             Identifier\ContentType: [slide_container]
+        image_gallery:
+          template: tfktelemarkBundle:line:image_gallery.html.twig
+          match:
+            Identifier\ContentType: [image_gallery]
       line:
         kampanjecontainer:
           template: tfktelemarkBundle:line:slide_container.html.twig
