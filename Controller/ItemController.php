@@ -2,6 +2,7 @@
 
 namespace tfk\telemarkBundle\Controller;
 
+use eZ\Publish\API\Repository\Values\Content\LocationQuery;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
@@ -10,6 +11,7 @@ use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
 use Pagerfanta\Pagerfanta;
 
@@ -19,13 +21,14 @@ class ItemController extends Controller {
 		// children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
+		 
         $response->setPublic();
         $response->setSharedMaxAge( 86400 );
         // Menu will expire when top location cache expires.
         $response->headers->set( 'X-Location-Id', $locationId );
         // Menu might vary depending on user permissions, so make the cache vary on the user hash.
         $response->setVary( 'X-User-Hash' );
-
+		 
         $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
         $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
 
@@ -54,7 +57,8 @@ class ItemController extends Controller {
             array( 
                 'items' => $items,
                 'location' => $location,
-                'content' => $content
+                'content' => $content,
+				'viewType' => $params['viewType']
             ), $response );
     }
 	

@@ -1,15 +1,13 @@
-<div class="content-list">
-    {% for item in items %}
+{% for item in items %}
         {{
             render_esi(
                 controller(
                     "ez_content:viewLocation",
                             {
                                 "locationId": item.contentInfo.mainLocationId,
-                                "viewType": "line"
+                                "viewType": viewType
                             }
                 )
             )
         }}
-    {% endfor %}
-</div>
+{% endfor %}
