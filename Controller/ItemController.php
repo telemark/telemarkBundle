@@ -49,7 +49,7 @@ class ItemController extends Controller {
         $items = new Pagerfanta(
             new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
         );
-        $items->setMaxPerPage( 9 );
+        $items->setMaxPerPage( '9' );
         $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
 		
 		

@@ -5,7 +5,7 @@ system:
         frontpage_tfk:
           template: tfktelemarkBundle:full:tfk_frontpage.html.twig
           match:
-           Id\Content: 2
+           Id\Content: 57
         frontpage:
           template: tfktelemarkBundle:full:frontpage.html.twig
           match:
