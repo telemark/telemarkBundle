@@ -2,7 +2,7 @@
     return {
         init: function(a, b) {
             this.avoid = a || !1, this.filetype = b || "png", this.svgSupport = this.supportsSvg(), 
-            this.svgSupport || (this.images = document.getElementsByTagName("img"), this.imgL = this.images.length, 
+            this.svgSupport || (this.images = document.getElementsByTagName("images"), this.imgL = this.images.length, 
             this.fallbacks());
         },
         fallbacks: function() {
@@ -500,7 +500,7 @@ window.grunticon = function(a) {
 };
 
 (function(a) {
-    var b = "/images/icons/";
+    var b = "/bundles/tfktelemark/images/icons/";
     a([ b + "icons.data.svg.css", b + "icons.data.png.css", b + "icons.fallback.css" ]);
 })(grunticon);
 
