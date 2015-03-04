@@ -7,37 +7,13 @@
 
 <li id="tabboks-tab-{{ content.contentInfo.id }}" class="tabs__content__item tabs__content__item--active">
 	<h1 class="tabs__content__header js-tabs-tab">{{ ez_render_field( content, 'title' ) }}</h1>
+  
+    {{ ez_render_field( content, 'related_objects', { 'template': 'tfktelemarkBundle:fields:related_objects.html.twig' } ) }}
 
-    <div class="tabs__content__block">
-      <div class="grid grid--12">
-
-        <div class="item item--vertical tabs__content__item__text grid__item--4-12"><a href="/Aktuelt/Verdensarvsoeknaden-paa-vei-til-Unesco" aria-hidden="true" tabindex="-1" class="item__imglink imglink"><img src="//localhost:9000/img/content/news/Verdensarvsoeknaden-4.jpg" alt="Klima- og miljøvernminister Tine Sundtoft mottar søknaden fra Tinn og Notodden kommune"/></a>
-          <div class="item__content">
-            <h2 class="item__header"><a href="/Aktuelt/Verdensarvsoeknaden-paa-vei-til-Unesco">Verdensarvsøknaden på vei til Unesco</a></h2><span class="sidenote">Publisert 28. januar 2014</span>
-            <p class="item__intro">En søknad det blir gøy å levere fra seg!</p>
-          </div>
-        </div>
-      
-        <div class="item item--vertical tabs__content__item__text grid__item--4-12"><a href="/Aktuelt/Ny-oekonomisjef-i-fylkeskommunen" aria-hidden="true" tabindex="-1" class="item__imglink imglink"><img src="//localhost:9000/img/content/news/Ailin-Aastvedt_fullskjerm-4.jpg" alt="Ailin Aastvedt"/></a>
-          <div class="item__content">
-            <h2 class="item__header"><a href="/Aktuelt/Ny-oekonomisjef-i-fylkeskommunen">Ny økonomisjef i fylkeskommunen</a></h2><span class="sidenote">Publisert 27. januar 2014</span>
-            <p class="item__intro">Ailin Aastvedt er ansatt som økonomisjef i fylkeskommunen</p>
-          </div>
-        </div>
-      
-        <div class="item item--vertical tabs__content__item__text grid__item--4-12"><a href="/Aktuelt/Liker-ikke-fisk" aria-hidden="true" tabindex="-1" class="item__imglink imglink"><img src="//localhost:9000/img/content/news/Laksewraps-4.jpg" alt="Laksewrap"/></a>
-          <div class="item__content">
-            <h2 class="item__header"><a href="/Aktuelt/Liker-ikke-fisk">«Liker ikke fisk»</a></h2><span class="sidenote">Publisert 25. januar 2014</span>
-            <p class="item__intro">Mer fisk og mindre sukker i kantina på Hjalmar Johansen vgs</p>
-          </div>
-        </div>
-      
-      </div>
 
       {% if this_block_url is defined %}
       	{% if not ez_is_field_empty( content, 'exit_url' ) %}
         	<a href="{{ this_block_url }}" class="see-more">{{ ez_field_value( content, 'exit_url' ) }}</a>
         {% endif %}
       {% endif %}
-    </div>
 </li>
