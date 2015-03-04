@@ -1,51 +1,5 @@
 <div class="slider">
   <ul class="slider__slides">
-  	<li class="slider__slide">
-      	<a href="/Vaare-tjenester/Kulturminner/Maanedens-kulturminne/PM5" class="top-image top-image--large">
-          <picture><!--[if IE 9]><video style="display: none;"><![endif]-->
-                        <source srcset="//localhost:9000/img/content/slider/PM5-ingress-12.jpg" media="(min-width: 886px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/PM5-ingress-9.jpg" media="(min-width: 600px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/PM5-ingress-6.jpg" media="(min-width: 400px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/PM5-ingress-4.jpg"/><!--[if IE 9]></video><![endif]--><img srcset="//localhost:9000/img/content/slider/PM5-ingress-12.jpg" alt="Månedens kulturminne"/>
-                      </picture>
-                      <div class="top-image__text-wrapper">
-                        <div class="top-image__text">
-                          <h2 class="top-image__header">Månedens kulturminne</h2>
-                          <div class="top-image__body">
-                            <p>PM5 en av de få bygningene i Skien sentrum som er igjen fra før bybrannen i 1886. PM5 på Smieøya forteller om Telemarks og Norges tidlige industrihistorie.</p>
-                          </div>
-                        </div>
-                      </div></a></li>
-                  <li class="slider__slide"><a href="/Vaare-tjenester/Utdanning/Fagopplaering/Fag-og-svennebrev/Fag-svenne-og-kompetansebrev-utdeling" class="top-image top-image--large">
-                      <picture><!--[if IE 9]><video style="display: none;"><![endif]-->
-                        <source srcset="//localhost:9000/img/content/slider/Ibsenhuset-2014-12.jpg" media="(min-width: 886px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/Ibsenhuset-2014-9.jpg" media="(min-width: 600px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/Ibsenhuset-2014-6.jpg" media="(min-width: 400px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/Ibsenhuset-2014-4.jpg"/><!--[if IE 9]></video><![endif]--><img srcset="//localhost:9000/img/content/slider/Ibsenhuset-2014-12.jpg" alt="Fag- og svennebrevutdeling"/>
-                      </picture>
-                      <div class="top-image__text-wrapper">
-                        <div class="top-image__text">
-                          <h2 class="top-image__header">Fag- og svennebrevutdeling</h2>
-                          <div class="top-image__body">
-                            <p>Utdeling i Ibsenhuset 28. februar 2014</p>
-                          </div>
-                        </div>
-                      </div></a></li>
-                  <li class="slider__slide"><a href="/Vaare-tjenester/Arealbruk-og-transport/Havn" class="top-image top-image--large">
-                      <picture><!--[if IE 9]><video style="display: none;"><![endif]-->
-                        <source srcset="//localhost:9000/img/content/slider/Forsidebilde-havneplan-12.jpg" media="(min-width: 886px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/Forsidebilde-havneplan-9.jpg" media="(min-width: 600px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/Forsidebilde-havneplan-6.jpg" media="(min-width: 400px)"/>
-                        <source srcset="//localhost:9000/img/content/slider/Forsidebilde-havneplan-4.jpg"/><!--[if IE 9]></video><![endif]--><img srcset="//localhost:9000/img/content/slider/Forsidebilde-havneplan-12.jpg" alt="Høring om godstransport"/>
-                      </picture>
-                      <div class="top-image__text-wrapper">
-                        <div class="top-image__text">
-                          <h2 class="top-image__header">Høring om godstransport</h2>
-                          <div class="top-image__body">
-                            <p>Mer gods skal flyttes fra veg til bane og sjø. Høringsfrist 28.februar 2014.</p>
-                          </div>
-                        </div>
-                      </div></a>
-                      </li>
+    {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['slide'] , 'viewType': 'line' }} )) }}
   </ul>
 </div>

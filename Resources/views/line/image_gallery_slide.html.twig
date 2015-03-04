@@ -1,1 +1,9 @@
-bildegalleri bilde
+<li class="grid__item grid__item--2-6 item">
+  <a href="//localhost:9000/img/content/news/Grottevatn-dam-kampanje-12.jpg" 
+    data-title="{% if not ez_is_field_empty( content, 'show_image_name' ) %}{% if not ez_is_field_empty( content, 'name' ) %}{{ ez_field_value( content, 'name' ) }}{% endif %}{% endif %}" 
+    data-caption="{% if not ez_is_field_empty( content, 'show_image_description' ) %}{% if not ez_is_field_empty( content, 'name' ) %}{{ ez_field_value( content, 'description' ) }}{% endif %}{% endif %}" 
+    data-credit="{% if not ez_is_field_empty( content, 'show_photographer' ) %}{% endif %}" 
+    class="js-popup--gallery">
+    <img src="//localhost:9000/img/content/news/Grottevatn-dam-kampanje-2-square.jpg" alt="Grottevatn dam">
+  </a>
+</li>

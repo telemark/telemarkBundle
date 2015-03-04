@@ -43,6 +43,10 @@ system:
           template: tfktelemarkBundle:line:infobox.html.twig
           match:
             Identifier\ContentType: [infobox]
+        image_gallery_slide:
+          template: tfktelemarkBundle:line:image_gallery_slide.html.twig
+          match:
+            Identifier\ContentType: [image_gallery_slide]
         tabboks:
           template: tfktelemarkBundle:line:tabboks.html.twig
           match:
@@ -55,6 +59,10 @@ system:
           template: tfktelemarkBundle:line:slide_container.html.twig
           match:
             Identifier\ContentType: [slide_container]
+        slide:
+          template: tfktelemarkBundle:line:slide.html.twig
+          match:
+            Identifier\ContentType: [slide]
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
