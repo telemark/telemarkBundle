@@ -121,16 +121,3 @@ system:
           template: tfktelemarkBundle:line:linkbox.html.twig
           match:
             Identifier\ContentType: [linkbox]
-      tabboks:
-        article:
-          template: tfktelemarkBundle:tabboks:article.html.twig
-          match:
-            Identifier\ContentType: [article]
-        folder:
-          template: tfktelemarkBundle:tabboks:folder.html.twig
-          match:
-            Identifier\ContentType: [folder]
-        linkbox:
-          template: tfktelemarkBundle:tabboks:linkbox.html.twig
-          match:
-            Identifier\ContentType: [linkbox]

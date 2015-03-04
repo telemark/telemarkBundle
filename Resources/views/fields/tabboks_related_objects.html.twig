@@ -2,7 +2,7 @@
   {% spaceless %}
     {% if not ez_is_field_empty( content, field ) %} 
       {% for contentId in field.value.destinationContentIds %}
-        {{ render( controller( "ez_content:viewContent", {'contentId': contentId, 'viewType': 'tabboks'} ) ) }}
+        {{ render( controller( "ez_content:viewContent", {'contentId': contentId, 'viewType': 'line'} ) ) }}
       {% endfor %}
     {% endif %}
   {% endspaceless %}

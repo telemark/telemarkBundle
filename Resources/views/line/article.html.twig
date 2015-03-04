@@ -3,12 +3,13 @@
 #}
 
 {% set imageId = ez_field_value( content, 'image' ) %}
+{% set article_url = path( 'ez_urlalias', {'contentId': content.contentInfo.id} ) %}
 
 <div class="item item--vertical grid__item--3-9">
 
   {% if imageId is defined and imageId.destinationContentId is not empty %}
 
-    <a href={{ path( location ) }} title="Les artikkelen {{ ez_field_value( content, 'title' ) }}" class="item__imglink imglink">    
+    <a href={{ article_url }} title="Les artikkelen {{ ez_field_value( content, 'title' ) }}" class="item__imglink imglink">    
         {{ render(
                     controller( 
                         "ez_content:viewContent", 
@@ -25,13 +26,13 @@
 
   <div class="item__content">
     <h2 class="item__header">
-      <a href={{ path( location ) }} title="Les artikkelen {{ ez_field_value( content, 'title' ) }}">
+      <a href={{ article_url }} title="Les artikkelen {{ ez_field_value( content, 'title' ) }}">
         {{ ez_render_field( content, 'title' ) }}
       </a>
     </h2>
     
     {% if not ez_is_field_empty( content, 'show_publishdate' ) %}
-      <span class="sidenote">Publisert {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }}</span>
+      <span class="sidenote">Publisert {{ content.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }}</span>
     {% endif %}
 
     {% if not ez_is_field_empty( content, 'short_intro' ) %}
