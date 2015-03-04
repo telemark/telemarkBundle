@@ -48,7 +48,9 @@ class ItemController extends Controller {
         $result = $searchService->findContent( $query );
         if ($result->totalCount > 0) {
             foreach ($result->searchHits as $item) {
-                $items[] = $item->valueObject;
+                $itemLoc  = $this->getRepository()->getLocationService()->loadLocation( $item->valueObject->contentInfo->mainLocationId );
+                if (!$itemLoc->invisible)
+                    $items[] = $item->valueObject;
             }
         }
 		

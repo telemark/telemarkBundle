@@ -104,3 +104,27 @@
     </div>
   </div>
 {% endif %}
+
+
+{#
+    Visningstype for galleri-slide
+#}
+
+{% if image_type is sameas('gallery_slide') %}
+  {% set data_credit = '' %}
+  
+  {% if use_data_credit is same as(1) %}
+    {% if not ez_is_field_empty( content, 'foto_byline' ) %}
+      {% set data_credit = ez_field_value( content, 'foto_byline' ) %}
+    {% endif %}
+  {% endif %}
+
+  <a href="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_12' ).uri, absolute=true ) }}" 
+    data-title="{{ data_title }}" 
+    data-caption="{{ data_caption }}" 
+    data-credit="{{ data_credit }}" 
+    class="js-popup--gallery">
+    <img src="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'kampanje-2-square' ).uri, absolute=true ) }}" alt="">
+  </a>
+
+{% endif %}

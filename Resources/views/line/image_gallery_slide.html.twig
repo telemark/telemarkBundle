@@ -1,9 +1,43 @@
+{% set imageId = ez_field_value( content, 'image' ) %}
+
+{% set data_title = '' %}
+{% set data_caption = '' %}
+{% set use_data_credit = 0 %}
+
+{% if not ez_is_field_empty( content, 'show_image_name' ) %}
+  {% if not ez_is_field_empty( content, 'name' ) %}
+    {% set data_title = ez_field_value( content, 'name' ) %}
+  {% endif %}
+{% endif %}
+
+{% if not ez_is_field_empty( content, 'show_image_description' ) %}
+  {% if not ez_is_field_empty( content, 'name' ) %}
+    {% set data_caption = ez_field_value( content, 'description' ) %}
+  {% endif %}
+{% endif %}
+
+{% if not ez_is_field_empty( content, 'show_photographer' ) %}
+  {% set use_data_credit = 1 %}
+{% endif %}
+
 <li class="grid__item grid__item--2-6 item">
-  <a href="//localhost:9000/img/content/news/Grottevatn-dam-kampanje-12.jpg" 
-    data-title="{% if not ez_is_field_empty( content, 'show_image_name' ) %}{% if not ez_is_field_empty( content, 'name' ) %}{{ ez_field_value( content, 'name' ) }}{% endif %}{% endif %}" 
-    data-caption="{% if not ez_is_field_empty( content, 'show_image_description' ) %}{% if not ez_is_field_empty( content, 'name' ) %}{{ ez_field_value( content, 'description' ) }}{% endif %}{% endif %}" 
-    data-credit="{% if not ez_is_field_empty( content, 'show_photographer' ) %}{% endif %}" 
-    class="js-popup--gallery">
-    <img src="//localhost:9000/img/content/news/Grottevatn-dam-kampanje-2-square.jpg" alt="Grottevatn dam">
-  </a>
+  {% if imageId is defined %}
+    {{  render(
+          controller( 
+            "ez_content:viewContent", 
+                {
+                  "contentId": imageId.destinationContentId,
+                  "viewType": "responsive",
+                  "params": 
+                    { 
+                      "image_type": "gallery_slide",
+                      "data_title": data_title,
+                      "data_caption" : data_caption,
+                      "use_data_credit" : use_data_credit
+                    }
+                }
+          )
+        ) 
+    }}
+  {% endif %}
 </li>
