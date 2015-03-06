@@ -18,6 +18,32 @@ class MenuController extends Controller
      * @param mixed|null $currentLocationId
      * @return Response
      */
+	  public function leftMenuAction( $currentLocationId )
+    {
+        /*if ( $currentLocationId !== null )
+        {
+            $location = $this->getLocationService()->loadLocation( $currentLocationId );
+            if ( isset( $location->path[2] ) )
+            {
+                var_dump($location->path[2]);
+                $secondLevelLocationId = $location->path[2];
+            }
+        }
+        */
+
+        $response = new Response;
+
+        $menu = $this->getMenu( 'top' );
+
+        $parameters = array( 'menu' => $menu );
+        /*if ( isset( $secondLevelLocationId ) && isset( $menu[$secondLevelLocationId] ) )
+        {
+            $parameters['submenu'] = $menu[$secondLevelLocationId];
+        }*/
+
+        return $this->render( 'tfktelemarkBundle::page_leftmenu.html.twig', $parameters, $response );
+    }
+	
     public function topMenuAction( $currentLocationId )
     {
         if ( $currentLocationId !== null )

@@ -1,0 +1,44 @@
+{#
+    Article - line view
+#}
+
+{% set imageId = ez_field_value( content, 'image' ) %}
+{% set article_url = path( 'ez_urlalias', {'contentId': content.contentInfo.id} ) %}
+
+<div class="item item--vertical grid__item--3-9">
+
+  {% if imageId is defined and imageId.destinationContentId is not empty %}
+
+    <a href={{ article_url }} title="Les artikkelen {{ ez_field_value( content, 'title' ) }}" class="item__imglink imglink">    
+        {{ render(
+                    controller( 
+                        "ez_content:viewContent", 
+                            {
+                                "contentId": imageId.destinationContentId,
+                                "viewType": "custom",
+                                "params": { "img_render_size": "responsive_04" }
+                            }
+                    )
+                ) }}
+    </a>
+
+  {% endif %}
+
+  <div class="item__content">
+    <h2 class="item__header">
+      <a href={{ article_url }} title="Les artikkelen {{ ez_field_value( content, 'title' ) }}">
+        {{ ez_render_field( content, 'title' ) }}
+      </a>
+    </h2>
+    
+    {% if not ez_is_field_empty( content, 'show_publishdate' ) %}
+      <span class="sidenote">Publisert {{ content.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }}</span>
+    {% endif %}
+
+    {% if not ez_is_field_empty( content, 'short_intro' ) %}
+      <div class="item__intro">{{ ez_render_field( content, 'short_intro' ) }}</div>
+    {% else %}
+      <div class="item__intro">{{ ez_render_field( content, 'intro' ) }}</div>
+    {% endif %}
+  </div>
+</div>

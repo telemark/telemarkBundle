@@ -1,10 +1,13 @@
 {% stylesheets
     '@tfktelemarkBundle/Resources/public/css/main.css'
-    '@tfktelemarkBundle/Resources/public/css/no-mq.css'
     '@tfktelemarkBundle/Resources/public/css/popup.css'
 %}
     <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
 {% endstylesheets %}
+
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="/bundles/tfktelemark/css/no-mq.css">
+<![endif]-->
 
 {% if ezpublish.legacy is defined %}
 <style type="text/css">

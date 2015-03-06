@@ -7,10 +7,9 @@
 </label>
 {{ form_end( form ) }#}
 
-<form id="form-search" method="get" action="/search">
-	<label class="pull-right">
-		<span class="hidden">{{ 'Search'|trans }}</span>
-		<input type="search" name="s" placeholder="Søk...">
+<form role="search" class="search" method="get" action="/search">
+  <label for="page-header__search__field" class="visuallyhidden">Søk</label>
+		<input id="page-header__search__field" class="search__field" type="search" name="s" placeholder="Søk...">
 		<input type="submit" value="Søk" class="hide hidden">	
-	</label>
+     	<button type="submit" class="search__btn icon--search">Søk</button>
 </form>

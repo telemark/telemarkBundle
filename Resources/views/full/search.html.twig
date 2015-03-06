@@ -1,6 +1,12 @@
 {% extends "tfktelemarkBundle::pagelayout.html.twig" %}
 
 {% block content %}
+   <div class="content">
+    <div class="constrained-content">
+	 <main id="main" role="main" tabindex="-1" class="main">
+	 
+        <div class="main__center">
+		
 <div class="class-search content-view-full constrained">
 
   <div class="fancy-header">
@@ -10,13 +16,14 @@
   <div class="result-list">
     {% if result %}
       {% for item in result %}
-         {{ render( controller( 'ez_content:viewLocation', {'locationId': item.NodeID, 'viewType': 'line', 'params': { 'type': 'line' }} ) ) }}
+         {{ render( controller( 'ez_content:viewLocation', {'locationId': item.NodeID, 'viewType': 'list', 'params': { 'type': 'list' }} ) ) }}
       {% endfor %}
     {% endif %}
   </div>
 
-</div>
-
+	  </main>
+    </div>
+  </div> 
 {% endblock %}
 
 

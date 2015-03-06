@@ -29,6 +29,6 @@ window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.cr
 
 
 ( function( grunticon ) {
-  var gruntIconPath = '/bundles/tfktelemark/img/icons/';
+  var gruntIconPath = '/bundles/tfktelemark/images/icons/';
   grunticon([ gruntIconPath + "icons.data.svg.css", gruntIconPath + "icons.data.png.css", gruntIconPath + "icons.fallback.css"]);
 })( grunticon );

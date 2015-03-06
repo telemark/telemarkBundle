@@ -37,7 +37,7 @@
                 <ul class="menu__content menu__level">
                   <li class="menu__item">
                     <div class="menu__item-content-wrapper">
-                      <div class="menu__item-content"><a href="/" class="menu__item-link menu__item-link--active">Forside</a>
+                      <div class="menu__item-content"><a href="{{ path( ezpublish.rootLocation ) }}" class="menu__item-link menu__item-link">Forside</a>
                       </div>
                     </div>
                   </li>
@@ -57,7 +57,7 @@
                     <div class="menu__item-content-wrapper">
                       <div class="menu__item-content menu__item--submenu"><a href="/Vaare-tjenester" class="menu__item-link menu__item-link--submenu">Våre Tjenester</a><i class="icon--menu-arrow-down menu__item__dropdown hide--to-l"></i><i class="icon--menu-arrow-right menu__item__dropdown hide--from-l js-menu-dropdown"></i>
                       </div>
-                         {{ render( controller("tfktelemarkBundle:Demo:mainMenu", {'locationId': '111' } )) }}
+                         {{ render( controller("tfktelemarkBundle:Item:mainMenu", {'locationId': '111' } )) }}
                     </div>
                   </li>
                   <li class="menu__item">
@@ -81,5 +81,4 @@
                 </ul>
               </div>
             </nav>
-
 </header>

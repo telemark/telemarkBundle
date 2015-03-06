@@ -18,7 +18,10 @@
 {% endif %}
 
 <div class="item item--vertical grid__item grid__item--4-12">
-	<a href={{ this_block_url }} target={{ this_block_target }}>
+
+  {% if imageId is defined %}
+    {% if not imageId is empty %}
+  <a href={{ this_block_url }} target={{ this_block_target }}>
          {{ render(
             controller( 
                 "ez_content:viewContent", 
@@ -30,6 +33,8 @@
             )
         ) }}
     </a>
+    {% endif %}
+  {% endif %}
 
 	<div class="item__content">
 		{% if not ez_is_field_empty( content, 'show_title' ) %}

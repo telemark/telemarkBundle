@@ -1,12 +1,7 @@
-<aside class="main__right">
+{% if not ez_is_field_empty( content, 'hide_title' ) %}
+  <h2>{{ ez_render_field( content, 'title' ) }}</h2>
+{% endif %}
 
-	{% if not ez_is_field_empty( content, 'hide_title' ) %}
-		<h2>{{ ez_render_field( content, 'title' ) }}</h2>
-	{% endif %}
-
-	{% if not ez_is_field_empty( content, 'description' ) %}
-		{{ ez_render_field( content, 'description' ) }}
-	{% endif %}
-Eg er ein infobox
-
-</aside>
+{% if not ez_is_field_empty( content, 'description' ) %}
+  {{ ez_render_field( content, 'description' ) }}
+{% endif %}

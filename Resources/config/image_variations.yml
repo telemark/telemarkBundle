@@ -179,7 +179,7 @@ system:
             responsive_06:
                 reference: reference
                 filters:
-                    - { name: geometry/scalewidth, params: [560] }
+                    - { name: geometry/scalewidth, params: [578] }
             responsive_04:
                 reference: reference
                 filters:

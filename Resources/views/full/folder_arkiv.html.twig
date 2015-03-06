@@ -1,37 +1,42 @@
 {% extends "tfktelemarkBundle::pagelayout.html.twig" %}
 
-
 {% block content %}
-<div class="container">
-            <div class="folder-title">
-                {{ ez_render_field(content, 'name') }}
-            </div>
-            <div class="folder-intro">
-                {{ ez_render_field(content, 'short_description') }}
-            </div>
+<div class="content">
+ 
+  {% if not ez_is_field_empty( content, 'show_name' ) %}
+    <h1>{{ ez_render_field(content, 'name') }}</h1>
+  {% endif %}
 
+  {% if not ez_is_field_empty( content, 'short_description' ) %}
+    <div class="byline">
+      {{ ez_render_field(content, 'short_description') }}
+    </div>
+  {% endif %}
 
-  {% if items|length() > 0 %}
-        {% for item in items %}
-            {{
-                render_esi(
-                    controller(
-                        "ez_content:viewLocation",
-                                {
-                                    "locationId": item.contentInfo.mainLocationId,
-                                    "viewType": "line"
-                                }
-                    )
-                )
-            }}
-        {% endfor %}
+  {% if not ez_is_field_empty( content, 'description' ) %}
+    {{ ez_render_field(content, 'description') }}
+  {% endif %}
 
-        {% if items.haveToPaginate() %}
-            <div class="pagination-centered">
-                {{ pagerfanta( items, 'twitter_bootstrap_translated', {'routeName': location} ) }}
-            </div>
-        {% endif %}
-    {% endif %}
 </div>
-    </section>
+
+{% if items|length() > 0 %}
+
+  {% if items.haveToPaginate() %}
+    {% include "tfktelemarkBundle:parts:paginator.html.twig" %}
+  {% endif %}
+
+  <div class="content">
+
+    {% for item in items %}
+      {{ render_esi( controller( "ez_content:viewLocation", { "locationId": item.contentInfo.mainLocationId, "viewType": "line" } )) }}
+    {% endfor %}
+  
+  </div>
+
+  {% if items.haveToPaginate() %}
+    {% include "tfktelemarkBundle:parts:paginator.html.twig" %}
+  {% endif %}
+
+{% endif %}
+   
 {% endblock %}

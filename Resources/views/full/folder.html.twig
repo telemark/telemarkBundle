@@ -10,6 +10,10 @@
     {% endif %}
 {% endif %}
 
+{% if location is defined and not location.isDraft %}
+	{% set currentLocation=location %}
+{% endif %}
+
 {% block content %}
 
 	{% if bannerImageId is defined %}
@@ -33,7 +37,8 @@
   
    <div class="content">
     <div class="constrained-content">
-      <div class="main">
+	 <main id="main" role="main" tabindex="-1" class="main">
+	 
         <div class="main__center">
 
         	{% if not ez_is_field_empty( content, 'show_name' ) %}
@@ -67,16 +72,30 @@
               {{ ez_render_field(content, 'description') }}
             {% endif %}
 
-        </div>
       </div>
-    </div>
-  </div> 
-  
+	 <aside class="main__right">
   	{{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['infobox'] , 'viewType': 'line' }} )) }}
-	
+	</aside>
+
+	 <nav role="navigation" class="main__left">
+
+        {% if location.path[2] is defined %}
+          {% set locId = location.path[2] %}
+        {% else %}
+          {% set locId = location.id %}
+        {% endif %}
+            {{ render(
+                controller(
+                    "tfktelemarkBundle:Menu:leftMenu",
+                    {'locationId': location.id, 'currentLocationId': locId}
+                )
+            ) }}
+              </nav>
   {% if content.getFieldValue('show_children') %}
   	{{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['linkbox'] , 'viewType': 'line' }} )) }}
     {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['tabboks'] , 'viewType': 'line' }} )) }}
-  {% endif %}
-  
+  {% endif %}  
+	  </main>
+    </div>
+  </div> 
 {% endblock %}

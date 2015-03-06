@@ -1,1 +1,12 @@
 {# Override this template and place javascript based statistics here (like Google Analytics) #}
+    <script>
+      // Picture element HTML5 shiv
+      document.createElement( "picture" );
+    </script>
+{% javascripts
+    '@tfktelemarkBundle/Resources/public/js/picturefill-0bb39762.js'
+	'@tfktelemarkBundle/Resources/public/js/vendor/modernizr-custom-0.4.1-cf76d0ba.js'
+%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+

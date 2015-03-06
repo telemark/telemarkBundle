@@ -4,16 +4,25 @@ services:
 #        arguments: [@service_id, "plain_value", %parameter%]
     telemark.criteria_helper:
         class: %ezdemo.criteria_helper.class%
-    telemark.menu.top:
-        class: EzSystems\DemoBundle\Menu\Builder
-        factory_service: ezdemo.menu.builder
-        factory_method: createTopMenu
-        arguments: [ @request ]
-        scope: request # needed as we have the request as a dependency here
-        tags:
-            - { name: knp_menu.menu, alias: top } # The alias is what is used to retrieve the menu
     telemark.search_helper:
         class: %ezdemo.search_helper.class%
         arguments:
             - @ezpublish.api.service.search
             - %ezdemo.search.list.limit%
+    telemark.menu.builder:
+        class: tfk\telemarkBundle\Menu\Builder
+        arguments:
+            - @knp_menu.factory
+            - @ezpublish.api.service.search
+            - @router
+            - @ezpublish.config.resolver
+            - @ezpublish.api.service.location
+            - @ezpublish.translation_helper
+    telemark.menu.top:
+        class: tfk\telemarkBundle\Menu\Builder
+        factory_service: telemark.menu.builder
+        factory_method: createTopMenu
+        arguments: [ @request ]
+        scope: request # needed as we have the request as a dependency here
+        tags:
+            - { name: knp_menu.menu, alias: top} # The alias is what is used to retrieve the menu

@@ -51,5 +51,18 @@
         {{ ez_render_field( content, 'body' ) }}
     {% endif %}
 </article>
+	 <nav role="navigation" class="main__left">
 
+        {% if location.path[2] is defined %}
+          {% set locId = location.path[2] %}
+        {% else %}
+          {% set locId = location.id %}
+        {% endif %}
+            {{ render(
+                controller(
+                    "tfktelemarkBundle:Menu:leftMenu",
+                    {'locationId': location.id, 'currentLocationId': locId}
+                )
+            ) }}
+              </nav>
 {% endblock %}

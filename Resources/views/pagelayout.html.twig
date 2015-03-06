@@ -32,23 +32,15 @@
 	{% endblock %}
 	<!-- Header area: END -->
 		<!-- Top menu area: END -->
-		{# TODO: implement logic to control path visibility #}
-		<!-- Path area: START -->
-		{% if pageData is defined and pageData.showPath %}
-			{% block path %}
-				{% include 'tfktelemarkBundle::page_toppath.html.twig' %}
-			{% endblock %}
-		{% endif %}
-		<!-- Path area: END -->
-
+{% block breadcrumb %}
+			{% if currentLocation is defined %}
+				{{ render( controller( 'tfktelemarkBundle:Item:viewBreadcrumb', { 'locationId': currentLocation.id } ) ) }}
+			{% endif %}
+		{% endblock %}
 <main id="main" role="main" tabindex="-1">
       <div class="content">
           <div class="constrained-content">
-		{% block breadcrumb %}
-			{% if currentLocation is defined %}
-				{{ render( controller( 'eZDemoBundle:Demo:viewBreadcrumb', { 'locationId': currentLocation.id } ) ) }}
-			{% endif %}
-		{% endblock %}
+		
 			<!-- Main area: START -->
 				{% block content %}{% endblock %}
 			<!-- Main area: END -->
