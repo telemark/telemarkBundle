@@ -51,12 +51,12 @@
             <h2>{% trans %}Search for "%searchText%" returned %searchCount% matches{% endtrans %}</h2>
         </div>
 
-        <div class="search-results">
+        <ul class="search-result">
             {% for searchResult in pagerSearch %}
                 {# Displaying elements calling the view line #}
                 {{ render_esi( controller( 'ez_content:viewLocation', {'locationId': searchResult.contentInfo.mainLocationId, 'viewType': 'list'} ) ) }}
             {% endfor %}
-        </div>
+        </ul>
 
         {% if pagerSearch.haveToPaginate() %}
             <div class="pagination-centered">

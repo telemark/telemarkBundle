@@ -14,6 +14,10 @@ system:
           controller: tfktelemarkBundle:Item:arkiv
           match:
             Id\Content: 58
+        tjenester:
+          template: tfktelemarkBundle:full:tjenester.html.twig
+          match:
+            Id\Content: 127
         folder:
           template: tfktelemarkBundle:full:folder.html.twig
           match:
@@ -63,6 +67,15 @@ system:
           template: tfktelemarkBundle:line:slide.html.twig
           match:
             Identifier\ContentType: [slide]
+      ezfind_line:
+        article:
+          template: tfktelemarkBundle:ezfind_line:article.html.twig
+          match:
+            Identifier\ContentType: [article]
+        folder:
+          template: tfktelemarkBundle:ezfind_line:folder.html.twig
+          match:
+            Identifier\ContentType: [folder]
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
@@ -125,8 +138,3 @@ system:
           template: tfktelemarkBundle:line:linkbox.html.twig
           match:
             Identifier\ContentType: [linkbox]
-      list:
-        article:
-          template: tfktelemarkBundle:list:article.html.twig
-          match:
-            Identifier\ContentType: [article]

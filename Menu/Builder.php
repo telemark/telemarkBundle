@@ -21,6 +21,7 @@ use Knp\Menu\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use eZ\Publish\Core\Helper\TranslationHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 
 /**
  * A simple eZ Publish menu provider.
@@ -62,13 +63,16 @@ class Builder
      */
     private $translationHelper;
 
-    public function __construct(
+    private $container;
+
+    public function __construct (
         FactoryInterface $factory,
         SearchService $searchService,
         RouterInterface $router,
         ConfigResolverInterface $configResolver,
         LocationService $locationService,
-        TranslationHelper $translationHelper
+        TranslationHelper $translationHelper,
+        Container $container
     )
     {
         $this->factory = $factory;
@@ -77,12 +81,14 @@ class Builder
         $this->configResolver = $configResolver;
         $this->locationService = $locationService;
         $this->translationHelper = $translationHelper;
+        $this->container = $container;
     }
 
     public function createTopMenu( Request $request )
     {
         $menu = $this->factory->createItem( 'root' );
         $locationId = $request->attributes->get('currentLocationId');
+
         $mainLoc = $this->locationService->loadLocation( $request->attributes->get('locationId') );
 
         if ($mainLoc->depth >= 4)

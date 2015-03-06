@@ -7,7 +7,9 @@
         {% set imageId = ez_field_value( content, 'image' ) %}
     {% endif %}
 {% endif %}
-
+   <div class="content">
+    <div class="constrained-content">
+	 <main id="main" role="main" tabindex="-1" class="main">
 <article class="main__center">
     <header class="article__header">
         <h1>{{ ez_render_field( content, 'title' ) }}</h1>
@@ -51,6 +53,10 @@
         {{ ez_render_field( content, 'body' ) }}
     {% endif %}
 </article>
+
+  	 <aside class="main__right">
+  	{{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['infobox'] , 'viewType': 'line' }} )) }}
+	</aside>
 	 <nav role="navigation" class="main__left">
 
         {% if location.path[2] is defined %}
@@ -65,4 +71,7 @@
                 )
             ) }}
               </nav>
+	  </main>
+    </div>
+  </div> 
 {% endblock %}

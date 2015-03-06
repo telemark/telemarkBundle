@@ -21,10 +21,6 @@
 
 {% if items|length() > 0 %}
 
-  {% if items.haveToPaginate() %}
-    {% include "tfktelemarkBundle:parts:paginator.html.twig" %}
-  {% endif %}
-
   <div class="content">
 
     {% for item in items %}

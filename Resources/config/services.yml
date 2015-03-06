@@ -18,6 +18,7 @@ services:
             - @ezpublish.config.resolver
             - @ezpublish.api.service.location
             - @ezpublish.translation_helper
+            - @service_container
     telemark.menu.top:
         class: tfk\telemarkBundle\Menu\Builder
         factory_service: telemark.menu.builder

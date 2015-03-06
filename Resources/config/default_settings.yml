@@ -38,3 +38,4 @@ parameters:
     ## Premium content
     telemark.premium_content.section_id: 7
     telemark.premium_content.role_id: 6
+    telemark.tjenester.id: 111
