@@ -19,8 +19,8 @@
 
 <div class="item item--vertical grid__item grid__item--4-12">
 
-  {% if imageId is defined %}
-    {% if not imageId is empty %}
+  {% if imageId is defined and imageId.destinationContentId is not empty %}
+    
   <a href={{ this_block_url }} target={{ this_block_target }}>
          {{ render(
             controller( 
@@ -33,7 +33,7 @@
             )
         ) }}
     </a>
-    {% endif %}
+    
   {% endif %}
 
 	<div class="item__content">
