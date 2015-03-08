@@ -8,7 +8,10 @@
 <li id="tabboks-tab-{{ content.contentInfo.id }}" class="tabs__content__item tabs__content__item--active">
 	<h1 class="tabs__content__header js-tabs-tab">{{ ez_render_field( content, 'title' ) }}</h1>
   <div class="tabs__content__block">
-    <div class="grid grid--6">  
+    <div class="grid grid--6">
+      {% if not ez_is_field_empty( content, 'text' ) %}
+        {{ ez_render_field( content, 'text' ) }}
+      {% endif %}
       {{ ez_render_field( content, 'related_objects', { 'template': 'tfktelemarkBundle:fields:tabboks_related_objects.html.twig' } ) }}
     </div>
     {% if this_block_url is defined %}
