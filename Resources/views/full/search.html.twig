@@ -15,17 +15,9 @@
   <ul class="search-result">
     {% if result %}
 
-      {% if result.haveToPaginate() %}
-        {% include "tfktelemarkBundle:parts:paginator.html.twig" %}
-      {% endif %}
-
       {% for item in result %}
          {{ render( controller( 'ez_content:viewLocation', {'locationId': item.NodeID, 'viewType': 'ezfind_line', 'params': { 'type': 'ezfind_line' }} ) ) }}
       {% endfor %}
-
-      {% if result.haveToPaginate() %}
-        {% include "tfktelemarkBundle:parts:paginator.html.twig" %}
-      {% endif %}
 
     {% endif %}
   </ul>
