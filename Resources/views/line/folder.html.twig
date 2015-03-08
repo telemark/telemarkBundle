@@ -1,12 +1,42 @@
-<div class="content-view-line">
-    <div class="class-folder">
+{#
+    Folder - line view
+#}
 
+{% set imageId = ez_field_value( content, 'image' ) %}
+{% set folder_url = path( 'ez_urlalias', {'contentId': content.contentInfo.id} ) %}
 
-        {% if not ez_is_field_empty( content, 'short_description' ) %}
-            <div class="attribute-short">
-                {{ ez_render_field( content, 'short_description' ) }}
-            </div>
-        {% endif %}
+<div class="item item--vertical grid__item--3-9">
 
-    </div>
+  {% if imageId is defined and imageId.destinationContentId is not empty %}
+
+    <a href={{ folder_url }} title="Les mer om {{ ez_field_value( content, 'name' ) }}" class="item__imglink imglink">    
+        {{ render(
+                    controller( 
+                        "ez_content:viewContent", 
+                            {
+                                "contentId": imageId.destinationContentId,
+                                "viewType": "custom",
+                                "params": { "img_render_size": "responsive_04" }
+                            }
+                    )
+                ) }}
+    </a>
+
+  {% endif %}
+
+  <div class="item__content">
+    <h2 class="item__header">
+      <a href={{ folder_url }} title="Gå til {{ ez_field_value( content, 'name' ) }}">
+        {{ ez_render_field( content, 'name' ) }}
+      </a>
+    </h2>
+    
+    <span class="sidenote">Oppdatert {{ content.contentInfo.modificationDate|localizeddate( 'short', 'short', app.request.locale ) }}</span>
+    
+    {% if not ez_is_field_empty( content, 'short_intro' ) %}
+      <div class="item__intro">{{ ez_render_field( content, 'short_intro' ) }}</div>
+    {% else %}
+      <div class="item__intro">{{ ez_render_field( content, 'short_description' ) }}</div>
+    {% endif %}
+  </div>
 </div>
