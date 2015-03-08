@@ -76,6 +76,10 @@ system:
           template: tfktelemarkBundle:ezfind_line:folder.html.twig
           match:
             Identifier\ContentType: [folder]
+        personprofil:
+          template: tfktelemarkBundle:ezfind_line:personprofil.html.twig
+          match:
+            Identifier\ContentType: [personprofil]
       custom:
         image:
           template: tfktelemarkBundle:custom:image.html.twig
