@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
+use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
+use Pagerfanta\Pagerfanta;
 
 class SearchController extends Controller
 {
@@ -95,6 +97,25 @@ class SearchController extends Controller
         $request = Request::createFromGlobals();
         $searchString = $request->query->get('s');
 
+        /*$query = new Query();
+     
+        $query->query = new Criterion\FullText( $searchString );
+        $query->filter = new Criterion\LogicalAnd(
+            array(
+                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+            )
+        );
+
+        // Initialize pagination.
+        $items = new Pagerfanta(
+            new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
+        );
+        $items->setMaxPerPage( 50 );
+        $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
+
+        $searchCount = $items->getNbResults();*/
+
+
         $result = $this->getLegacyKernel()->runCallback(
             function () use( $searchString )
             {      
@@ -113,7 +134,7 @@ class SearchController extends Controller
         return $this->render(
             "tfktelemarkBundle:full:search.html.twig",
             array(
-                "result" => $result['SearchResult'],
+                "items" => $result['SearchResult'],
                 'string' => $searchString,
                 'count' => $result['SearchCount']
             )

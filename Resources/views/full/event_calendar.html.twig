@@ -1,0 +1,39 @@
+{% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
+
+{% block content %}
+  
+   <div class="content">
+    <div class="constrained-content">
+	 <main id="main" role="main" tabindex="-1" class="main">
+	 
+        <div class="main__center">
+	{% include "file:extension/vp_tfk/design/tfk/override/templates/full/event_calendar.tpl"  with {"node": location} %}
+	      </div>
+	 <aside class="main__right">
+  	{% include "file:extension/vp_tfk/design/tfk/templates/page_sidebar_calendar.tpl"  with {"dennenoden": location, "current_node_id": location.id } %}
+	</aside>
+	 <nav role="navigation" class="main__left">
+
+        {% if location.path[2] is defined %}
+
+          {% if location.path[2] == 111 %}
+            {% set locId = location.path[3] %}
+          {% elseif location.path[2] == 566 %}
+		   {% set locId = location.path[5] %}
+		    {% else %}
+            {% set locId = location.path[2] %}
+          {% endif %}
+        {% else %}
+          {% set locId = location.id %}
+        {% endif %}
+            {{ render(
+                controller(
+                    "tfktelemarkBundle:Menu:leftMenu",
+                    {'locationId': location.id, 'currentLocationId': locId}
+                )
+            ) }}
+              </nav> 
+	  </main>
+    </div>
+  </div> 	
+{% endblock %}

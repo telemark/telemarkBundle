@@ -12,15 +12,26 @@
     <div class="block-title"><h2>{{ count }} resultater for "{{string}}"</h2></div>
   </div>
 
+  {% if items|length() > 0 %}
+
   <ul class="search-result">
-    {% if result %}
 
-      {% for item in result %}
-         {{ render( controller( 'ez_content:viewLocation', {'locationId': item.NodeID, 'viewType': 'ezfind_line', 'params': { 'type': 'ezfind_line' }} ) ) }}
-      {% endfor %}
-
-    {% endif %}
+    {% for item in items %}
+      {{ render( controller( 'ez_content:viewLocation', {'locationId': item.NodeID, 'viewType': 'ezfind_line', 'params': { 'type': 'ezfind_line' }} ) ) }}
+    {% endfor %}
+  
   </ul>
+
+  {#% if items.haveToPaginate() %}
+     {{ pagerfanta( items, 'twitter_bootstrap_translated', 
+     {'routeName': location, 
+     'prev_message': 'Forrige',
+     'next_message': 'Neste'
+    } ) }}
+  {% endif %#}
+
+{% endif %}
+
 
 	  </main>
     </div>

@@ -1,20 +1,54 @@
+.pagination {
+	position: relative;
+	text-align: center;
+}
 
 .pagination ul {
 	list-style: none;
+    padding-left: 85px;
+    padding-right: 85px;
 }
 
 .pagination li {
 	display: inline-block;
+	margin: 5px;
 }
 
-.pagination .prev a:after {
-	background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3Asketch%3D%22http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%2Fns%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%2215%22%3E%3Ctitle%3EDesktop%3C%2Ftitle%3E%3Cpath%20d%3D%22M7.778%2013.571l-.707.707-7.071-7.071.019-.018-.019-.018%207.071-7.071.707.707-6.382%206.382%206.382%206.382z%22%20sketch%3Atype%3D%22MSShapeGroup%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
+.pagination .prev {
+	position: absolute;
+	left: 0;
 }
 
-.pagination .next:after {
-	 background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3Asketch%3D%22http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%2Fns%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%2215%22%3E%3Ctitle%3EDesktop%3C%2Ftitle%3E%3Cpath%20d%3D%22M6.382%207.189l-6.382-6.382.707-.707%207.071%207.071-.019.018.019.018-7.071%207.071-.707-.707%206.382-6.382z%22%20sketch%3Atype%3D%22MSShapeGroup%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
+.pagination .prev a:before {
+	color: #383838;
+    content: "";
+    font-family: FontAwesome;
+    font-size: 27px;
+    margin-left: -13px;
+    position: absolute;
+}
+
+.pagination .next {
+	position: absolute;
+	right: 0;
+}
+
+.pagination .next a:after {
+	color: #383838;
+    content: "";
+    font-family: FontAwesome;
+    font-size: 27px;
+    margin-left: 4px;
+    position: absolute;
+}
+
+.pagination .next span, .pagination .prev span {
+	background-color: #e8f3f0;
+    border: 0 none;
+    color: #6c6c6c;
+    display: inline-block;
+    font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+    padding: 0.5em 1em;
 }
 
 .pagination a {
@@ -26,4 +60,13 @@
     font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
     padding: 0.5em 1em;
     text-decoration: underline;
+}
+
+.pagination li.active span {
+    background-color: #ffd520;
+    color: #000;
+    border: 0 none;
+    display: inline-block;
+    font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+    padding: 0.5em 1em;
 }

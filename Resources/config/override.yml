@@ -26,6 +26,18 @@ system:
           template: tfktelemarkBundle:full:article.html.twig
           match:
            Identifier\ContentType: [article]
+        event_calendar:
+          template: tfktelemarkBundle:full:event_calendar.html.twig
+          match:
+           Identifier\ContentType: [event_calendar]
+        event:
+          template: tfktelemarkBundle:full:event.html.twig
+          match:
+           Identifier\ContentType: [event]
+        survey:
+          template: tfktelemarkBundle:full:survey.html.twig
+          match:
+           Identifier\ContentType: [survey]
       line:
         article:
           template: tfktelemarkBundle:line:article.html.twig
