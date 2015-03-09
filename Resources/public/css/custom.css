@@ -1,0 +1,29 @@
+
+.pagination ul {
+	list-style: none;
+}
+
+.pagination li {
+	display: inline-block;
+}
+
+.pagination .prev a:after {
+	background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3Asketch%3D%22http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%2Fns%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%2215%22%3E%3Ctitle%3EDesktop%3C%2Ftitle%3E%3Cpath%20d%3D%22M7.778%2013.571l-.707.707-7.071-7.071.019-.018-.019-.018%207.071-7.071.707.707-6.382%206.382%206.382%206.382z%22%20sketch%3Atype%3D%22MSShapeGroup%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+}
+
+.pagination .next:after {
+	 background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3Asketch%3D%22http%3A%2F%2Fwww.bohemiancoding.com%2Fsketch%2Fns%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%2215%22%3E%3Ctitle%3EDesktop%3C%2Ftitle%3E%3Cpath%20d%3D%22M6.382%207.189l-6.382-6.382.707-.707%207.071%207.071-.019.018.019.018-7.071%207.071-.707-.707%206.382-6.382z%22%20sketch%3Atype%3D%22MSShapeGroup%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+}
+
+.pagination a {
+	background-color: #e8f3f0;
+    border: 0 none;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+    padding: 0.5em 1em;
+    text-decoration: underline;
+}

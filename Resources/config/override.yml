@@ -67,6 +67,10 @@ system:
           template: tfktelemarkBundle:line:slide.html.twig
           match:
             Identifier\ContentType: [slide]
+        did_u_know_line:
+          template: tfktelemarkBundle:line:did_u_know_line.html.twig
+          match:
+            Identifier\ContentType: [did_u_know_line]
       ezfind_line:
         article:
           template: tfktelemarkBundle:ezfind_line:article.html.twig
@@ -142,3 +146,7 @@ system:
           template: tfktelemarkBundle:line:linkbox.html.twig
           match:
             Identifier\ContentType: [linkbox]
+        did_u_know_container:
+          template: tfktelemarkBundle:line:did_u_know_container.html.twig
+          match:
+            Identifier\ContentType: [did_u_know_container]

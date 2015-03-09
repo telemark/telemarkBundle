@@ -78,7 +78,7 @@ class ItemController extends Controller {
             'tfktelemarkBundle::breadcrumb.html.twig'
         );
     }	
-	 public function childrenAction($locationId, $params = array()) {
+	public function childrenAction($locationId, $params = array()) {
 		// children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
@@ -122,6 +122,54 @@ class ItemController extends Controller {
                 'location' => $location,
                 'content' => $content,
 				'viewType' => $params['viewType']
+            ), $response );
+    }
+    public function randomChildAction($locationId, $params = array()) {
+        // children
+        // Setting HTTP cache for the response to be public and with a TTL of 1 day.
+        $response = new Response;
+         
+        $response->setPublic();
+        $response->setSharedMaxAge( 86400 );
+        // Menu will expire when top location cache expires.
+        $response->headers->set( 'X-Location-Id', $locationId );
+        // Menu might vary depending on user permissions, so make the cache vary on the user hash.
+        $response->setVary( 'X-User-Hash' );
+         
+        $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+
+        $searchService = $this->getRepository()->getSearchService();
+        $query = new Query();    
+        $query->criterion = new Criterion\LogicalAnd( array(
+                new Criterion\ContentTypeIdentifier($params['class']),
+                new Criterion\ParentLocationId($locationId),
+                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+            ) );
+        $query->sortClauses = array(
+            new SortClause\LocationPriority( Query::SORT_DESC ),
+            new SortClause\DatePublished( Query::SORT_DESC )
+        );
+
+        $items = array();
+        $result = $searchService->findContent( $query );
+        if ($result->totalCount > 0) {
+            foreach ($result->searchHits as $item) {
+                $itemLoc  = $this->getRepository()->getLocationService()->loadLocation( $item->valueObject->contentInfo->mainLocationId );
+                if (!$itemLoc->invisible)
+                    $items[] = $item->valueObject;
+            }
+        }
+        
+        $random_items = array($items[array_rand($items)]);
+
+        return $this->render(
+            'tfktelemarkBundle:parts:child_loop.html.twig', 
+            array( 
+                'items' => $random_items,
+                'location' => $location,
+                'content' => $content,
+                'viewType' => $params['viewType']
             ), $response );
     }
 	public function mainMenuAction($locationId) {

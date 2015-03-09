@@ -23,10 +23,20 @@
                     <li><a href="/rss/feed/aktuelt" class="social-links__link"><span title="RSS-feed" class="social-links__link__icon icon--rss"></span><span class="visuallyhidden">RSS-feed</span></a></li>
                   </ul>
                 </div>
-                <div class="social-block__other">Telemark fylkeskommune eier Telemarkskanalen</div>
-              </div>
-            </div>
-          </div>
+                {{ render(
+            controller( 
+                "ez_content:viewContent", 
+                  {
+                      "contentId": 6831,
+                      "viewType": "line",
+                      "params": { }
+                  }
+            )
+        ) }}
+                
+    </div>
+  </div>
+</div>
 
 {{ render(
             controller( 
