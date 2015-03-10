@@ -1,0 +1,16 @@
+{% extends "tfktelemarkBundle::pagelayout.html.twig" %}
+
+{% block content %}
+
+<div class="content">
+  <div class="constrained-content">
+    <main id="main" role="main" tabindex="-1" class="main">
+      {% if not ez_is_field_empty( content, 'show_name' ) %}
+        <h1>{{ ez_render_field(content, 'name') }}</h1>
+      {% endif %}
+      {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['linkbox'] , 'viewType': 'line' }} )) }}
+    </main>
+  </div>
+</div>
+
+{% endblock %}
