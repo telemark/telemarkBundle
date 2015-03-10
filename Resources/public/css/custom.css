@@ -70,3 +70,16 @@
     font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
     padding: 0.5em 1em;
 }
+
+.main__center {
+    display: inline-block;
+    float: none;
+    margin-left: 1.38889%;
+}
+
+.main__left {
+    margin-left: 0;
+}
+.main__right {
+    float: right;
+}

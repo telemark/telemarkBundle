@@ -162,3 +162,16 @@ system:
           template: tfktelemarkBundle:line:did_u_know_container.html.twig
           match:
             Identifier\ContentType: [did_u_know_container]
+      ezfind_line:
+        article:
+          template: tfktelemarkBundle:ezfind_line:article.html.twig
+          match:
+            Identifier\ContentType: [article]
+        folder:
+          template: tfktelemarkBundle:ezfind_line:folder.html.twig
+          match:
+            Identifier\ContentType: [folder]
+        personprofil:
+          template: tfktelemarkBundle:ezfind_line:personprofil.html.twig
+          match:
+            Identifier\ContentType: [personprofil]

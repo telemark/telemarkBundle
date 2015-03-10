@@ -72,9 +72,13 @@
             {% endif %}
 
             {% if content.getFieldValue('show_children') %}
+            <div class="grid grid--12">
               {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['linkbox'] , 'viewType': 'line' }} )) }}
+            </div>
               {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['tabboks'] , 'viewType': 'line' }} )) }}
-			        {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['article'] , 'viewType': 'line' }} )) }}
+			      <div class="grid grid--12">
+              {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['article'] , 'viewType': 'line' }} )) }}
+            </div>
             {% endif %} 
 
       </div>

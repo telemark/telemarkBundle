@@ -1,20 +1,7 @@
-{#{ form_start( form, { 'action': path('ezpublish_ezdemo_search'), 'attr': { 'class': 'span4 form-search' } } ) }}
-<label class="pull-right" for="{{ form.searchText.vars.id }}">
-    <span class="hidden">{{ 'Search'|trans }}</span>
-    {{ form_widget( form.searchText, { 'attr': {'class': 'search-query span3', 'placeholder': 'Search text'|trans } } ) }}
 
-    {{ form_widget( form.save, { 'attr': { 'class': 'hide hidden' } } ) }}
-</label>
-{{ form_end( form ) }#}
 <form action="/search" method="post" {{ form_enctype(form) }} class="well form-search">
 	<!-- form errors -->
 	{{ form_widget(form.term) }}
 	{{ form_rest(form) }}
 	<input class="btn btn-primary clear search__btn icon--search" type="submit" value="{{ 'Søk'|trans }}"/>
 </form>
-<!--<form role="search" class="search" method="get" action="/search">
-  <label for="page-header__search__field" class="visuallyhidden">Søk</label>
-		<input id="page-header__search__field" class="search__field" type="search" name="s" placeholder="Søk...">
-		<input type="submit" value="Søk" class="hide hidden">	
-     	<button type="submit" class="search__btn icon--search">Søk</button>
-</form>-->

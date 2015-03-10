@@ -35,6 +35,6 @@ services:
             - @form.factory
             - @netgen_search_and_filter.criteria_builder.default_basic_search
             - @netgen_search_and_filter.result_converter.default
-            - NetgenSearchAndFilterBundle::route_search_results.html.twig
-            - NetgenSearchAndFilterBundle:forms:basic_search.html.twig
+            - tfktelemarkBundle:full:search.html.twig
+            - tfktelemarkBundle:search:search.html.twig
             - 25

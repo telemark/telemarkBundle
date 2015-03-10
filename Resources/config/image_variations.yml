@@ -38,10 +38,6 @@ system:
                 filters:
                     geometry/scalewidthdownonly: [770]
                     geometry/crop: [770, 390, 0, 0]
-            imagefull:
-                reference: ~
-                filters:
-                    geometry/scalewidthdownonly: [770]
             listitem:
                 reference: null
                 filters:

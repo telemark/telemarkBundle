@@ -105,6 +105,8 @@ class ItemController extends Controller {
             new SortClause\DatePublished( Query::SORT_DESC )
         );
 
+        $query->limit = 20;
+
         $items = array();
         $result = $searchService->findContent( $query );
         if ($result->totalCount > 0) {
