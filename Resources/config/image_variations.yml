@@ -165,31 +165,31 @@ system:
                     - { name: geometry/scalewidthdownonly, params: [370] }
             # responsive bilder fra malverket
             responsive_12:
-                reference: reference
+                reference: null
                 filters:
                     - { name: geometry/scalewidth, params: [1140] }
             responsive_09:
-                reference: reference
+                reference: null
                 filters:
                     - { name: geometry/scalewidth, params: [846] }
             responsive_06:
-                reference: reference
+                reference: null
                 filters:
                     - { name: geometry/scalewidth, params: [578] }
             responsive_04:
-                reference: reference
+                reference: null
                 filters:
                     - { name: geometry/scalewidth, params: [360] }
             responsive_03:
-                reference: reference
+                reference: null
                 filters:
                     - { name: geometry/scalewidth, params: [260] }
             responsive_02:
-                reference: reference
+                reference: null
                 filters:
                     - { name: geometry/scalewidth, params: [162] }
             responsive_01:
-                reference: reference
+                reference: null
                 filters:
                     - { name: geometry/scalewidth, params: [65] }
             # Responsiv square

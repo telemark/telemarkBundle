@@ -8,17 +8,17 @@
 
 <title>{{ title|default( 'Home' ) }}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="author" content="eZ Systems"/>
-<meta name="copyright" content="eZ Systems"/>
-<meta name="description" content="Content Management System"/>
-<meta name="keywords" content="cms, publish, e-commerce, content management, development framework"/>
+<meta name="author" content="{% if content.fields.author is defined %}{{ ez_field_value(content,'author') }}{% else%}Telemark fykeskommune{% endif %}"/>
+<meta name="copyright" content="Telemark fylkeskommune"/>
+<meta name="description" content="{% if content.fields.meta_description is defined %}{{ ez_field_value(content,'meta_description') }}{% endif %}"/>
+<meta name="keywords" content="{% if content.fields.meta_keywords is defined %}{{ ez_field_value(content,'meta_keywords') }}{% endif %}"/>
 <meta name="MSSmartTagsPreventParsing" content="TRUE"/>
 <meta name="generator" content="eZ Platform"/>
 
 <link rel="Home" href="{{ path( ezpublish.rootLocation ) }}" title="{{ 'Home'|trans }}"/>
 <link rel="Index" href="{{ path( ezpublish.rootLocation ) }}" title="{{ 'Home'|trans }}"/>
 <link rel="Top" href="{{ path( ezpublish.rootLocation ) }}" title="{{ 'Home'|trans }}"/>
-<link rel="Shortcut icon" href="{{ asset( "bundles/ezdemo/images/favicon.ico" ) }}" type="image/x-icon"/>
+<link rel="Shortcut icon" href="{{ asset( "tfktelemarkBundle/Resources/public/images/icons/favicon.ico" ) }}" type="image/x-icon"/>
 
 {# adding canonical url for all defined content #}
 {% if content is defined and content.contentInfo.mainLocationId %}

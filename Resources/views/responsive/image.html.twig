@@ -81,6 +81,7 @@
 #}
 
 {% if image_type is sameas('slide') %}
+
   <picture>
     <!--[if IE 9]><video style="display: none;"><![endif]-->
     <source srcset="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_12' ).uri, absolute=true ) }}" media="(min-width: 886px)">

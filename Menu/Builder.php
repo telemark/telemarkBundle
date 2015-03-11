@@ -89,10 +89,14 @@ class Builder
         $menu = $this->factory->createItem( 'root' );
         $locationId = $request->attributes->get('currentLocationId');
 
+        $loc = $this->locationService->loadLocation( $locationId );
         $mainLoc = $this->locationService->loadLocation( $request->attributes->get('locationId') );
 
         if ($mainLoc->depth >= 4)
-            $mainLocId = $mainLoc->parentLocationId;
+            if ($loc->path[2] == 111 && $mainLoc->depth == 4 )
+                $mainLocId = $mainLoc->id;
+            else
+                $mainLocId = $mainLoc->parentLocationId;
         else 
             $mainLocId = $mainLoc->id;
 
@@ -129,9 +133,7 @@ class Builder
                 )
             );
             $menuItem->setChildrenAttribute( 'class', 'nav' );
-            var_dump($location->id);
-            var_dump($mainLocId);
-            var_dump($currentLocId);
+
             //add subitems
             if ($location->id == $mainLocId || ($location->parentLocationId == $mainLocId && $location->parentLocationId != $currentLocId)) {
                 $subitems = $this->getMenuItems($location->id);

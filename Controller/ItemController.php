@@ -100,10 +100,7 @@ class ItemController extends Controller {
                 new Criterion\ParentLocationId($locationId),
                 new Criterion\Visibility( Criterion\Visibility::VISIBLE )
             ) );
-        $query->sortClauses = array(
-            new SortClause\LocationPriority( Query::SORT_DESC ),
-            new SortClause\DatePublished( Query::SORT_DESC )
-        );
+        $query->sortClauses = $this->getSortOrder($location);
 
         $query->limit = 20;
 
@@ -267,5 +264,68 @@ class ItemController extends Controller {
                 'content' => $content
             ), $response );
 		}
+    }
+
+    private function getSortOrder($location) {
+        // Get sortfield data and sort results based on it. Fall back on Date Published
+        // Note: Not all sort-methods have been implemented. Those that have are:
+        // # 3: Date modified
+        // # 5: Depth
+        // # 8: Priority
+        // # 9: Name
+        // # 2: Date published (fallback)
+        // This means that if any sort-method is chosen on the parent object, which is not implemented here, it will sort by date published
+        switch ($location->sortField) {
+            case 3:
+                if( $location->sortOrder === 1 ) {
+                    $sortBy = array( new SortClause\DateModified( Query::SORT_ASC ) );
+                }
+                else {
+                    $sortBy = array( new SortClause\DateModified( Query::SORT_DESC ) );
+                }
+                break;
+            case 5:
+                if( $location->sortOrder === 1 ) {
+                    $sortBy = array( new SortClause\LocationDepth( Query::SORT_ASC ) );
+                }
+                else {
+                    $sortBy = array( new SortClause\LocationDepth( Query::SORT_DESC ) );
+                }
+                break;
+            case 8:
+                if( $location->sortOrder === 1 ) {
+                    $sortBy = array( new SortClause\LocationPriority( Query::SORT_ASC ) );
+                }
+                else {
+                    $sortBy = array( new SortClause\LocationPriority( Query::SORT_DESC ) );
+                }
+                break;
+            case 9:
+                if( $location->sortOrder === 1 ) {
+                    $sortBy = array( new SortClause\ContentName( Query::SORT_ASC ) );
+                }
+                else {
+                    $sortBy = array( new SortClause\ContentName( Query::SORT_DESC ) );
+                }
+                break;
+            case 2:
+                if( $location->sortOrder === 1 ) {
+                    $sortBy = array( new SortClause\DatePublished( Query::SORT_ASC ) );
+                }
+                else {
+                    $sortBy = array( new SortClause\DatePublished( Query::SORT_DESC ) );
+                }
+                break;
+            default:
+                if( $location->sortOrder === 1 ) {
+                    $sortBy = array( new SortClause\DatePublished( Query::SORT_ASC ) );
+                }
+                else {
+                    $sortBy = array( new SortClause\DatePublished( Query::SORT_DESC ) );
+                }
+                break;
+        }
+
+        return $sortBy;
     }
 }
