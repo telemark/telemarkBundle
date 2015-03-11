@@ -129,7 +129,9 @@ class Builder
                 )
             );
             $menuItem->setChildrenAttribute( 'class', 'nav' );
-
+            var_dump($location->id);
+            var_dump($mainLocId);
+            var_dump($currentLocId);
             //add subitems
             if ($location->id == $mainLocId || ($location->parentLocationId == $mainLocId && $location->parentLocationId != $currentLocId)) {
                 $subitems = $this->getMenuItems($location->id);

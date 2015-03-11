@@ -33,7 +33,7 @@
       </h2>
       
       {% if not ez_is_field_empty( content, 'show_publishdate' ) %}
-        <span class="sidenote">Publisert {{ content.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }}</span>
+        <span class="sidenote">Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}</span>
       {% endif %}
 
       {% if not ez_is_field_empty( content, 'short_intro' ) %}

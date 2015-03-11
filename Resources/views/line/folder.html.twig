@@ -31,7 +31,7 @@
       </a>
     </h2>
     
-    <span class="sidenote">Oppdatert {{ content.contentInfo.modificationDate|localizeddate( 'short', 'short', app.request.locale ) }}</span>
+    <span class="sidenote">Oppdatert {{ content.contentInfo.modificationDate|date("d.m.Y") }}</span>
     
     {% if not ez_is_field_empty( content, 'short_intro' ) %}
       <div class="item__intro">{{ ez_render_field( content, 'short_intro' ) }}</div>

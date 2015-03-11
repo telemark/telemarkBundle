@@ -28,7 +28,7 @@
       </a>
     </h2>
     <div class="sidenote">
-      {{ content.contentInfo.modificationDate|localizeddate( 'short', 'short', app.request.locale ) }}
+      Oppdatert {{ content.contentInfo.modificationDate|date("d.m.Y") }}
     </div>
     <div class="search-result__item__intro">
       {% if not ez_is_field_empty( content, 'short_intro' ) %}

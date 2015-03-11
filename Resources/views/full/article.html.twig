@@ -22,7 +22,7 @@
                             'template': 'eZDemoBundle:fields:ezauthor_simple.html.twig'
                         }
                     ) }}
-                        {% endif %} / Publisert: {{ location.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }} / Oppdatert: {{ location.contentInfo.modificationDate|localizeddate( 'short', 'short', app.request.locale ) }}
+                        {% endif %} / Publisert: {{ location.contentInfo.publishedDate|date("d.m.Y") }} / Oppdatert: {{ location.contentInfo.modificationDate|date("d.m.Y") }}
         </div>
     </header>
     {% if imageId is defined %}

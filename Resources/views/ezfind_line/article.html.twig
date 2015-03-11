@@ -29,7 +29,7 @@
     </h2>
     <div class="sidenote">
       {% if not ez_is_field_empty( content, 'show_publishdate' ) %}
-        {{ content.contentInfo.publishedDate|localizeddate( 'short', 'short', app.request.locale ) }}
+        Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}
       {% endif %}
     </div>
     <div class="search-result__item__intro">
