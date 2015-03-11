@@ -51,7 +51,7 @@
          {% if not ez_is_field_empty( content, 'show_url_text' ) %}
          	{% if not ez_is_field_empty( content, 'url' ) %}
             
-              <a href={{ this_block_url }} target={{ this_block_target }}>{{ ez_render_field( content, 'url' ) }}</a>
+              <a href={{ this_block_url }} target={{ this_block_target }}>{{ content.fields.url['nor-NO'].text }}</a>
             
             {% endif %}
          {% endif %}

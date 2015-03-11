@@ -16,7 +16,7 @@
     </div>
     {% if this_block_url is defined %}
     	{% if not ez_is_field_empty( content, 'exit_url' ) %}
-      	<a href="{{ this_block_url }}" class="see-more">{{ ez_field_value( content, 'exit_url' ) }}</a>
+      	<a href="{{ this_block_url }}" class="see-more">{{ content.fields.exit_url['nor-NO'].text }}</a>
       {% endif %}
     {% endif %}
   </div>
