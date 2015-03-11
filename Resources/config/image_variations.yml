@@ -160,7 +160,7 @@ system:
                     - { name: geometry/scalewidthdownonly, params: [770] }
             # this is a new image's size used in the place template
             imageplacesize:
-                reference: null
+                reference: original
                 filters:
                     - { name: geometry/scalewidthdownonly, params: [370] }
             # responsive bilder fra malverket

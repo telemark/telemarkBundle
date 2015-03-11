@@ -37,4 +37,4 @@ services:
             - @netgen_search_and_filter.result_converter.default
             - tfktelemarkBundle:full:search.html.twig
             - tfktelemarkBundle:search:search.html.twig
-            - 25
+            - 10
