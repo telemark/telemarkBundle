@@ -38,6 +38,10 @@ system:
           template: tfktelemarkBundle:full:survey.html.twig
           match:
            Identifier\ContentType: [survey]
+        file:
+          template: tfktelemarkBundle:full:file.html.twig
+          match:
+           Identifier\ContentType: [file]
       line:
         article:
           template: tfktelemarkBundle:line:article.html.twig
