@@ -101,6 +101,15 @@ system:
           template: tfktelemarkBundle:custom:image.html.twig
           match:
             Identifier\ContentType: [image]
+      boxline:
+        article:
+          template: tfktelemarkBundle:boxline:article.html.twig
+          match:
+            Identifier\ContentType: [article]
+        event:
+          template: tfktelemarkBundle:boxline:event.html.twig
+          match:
+            Identifier\ContentType: [event]
     content_view:
       custom:
         image:

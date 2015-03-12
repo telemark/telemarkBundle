@@ -2,6 +2,7 @@
     linkbox - line view
 #}
 
+{% set this_size = element_size|default('large') %}
 {% set imageId = ez_field_value( content, 'image' ) %}
 
 {% if not ez_is_field_empty( content, 'internal_resource' ) %}
@@ -17,7 +18,13 @@
 	{% set this_block_target = '_self' %}
 {% endif %}
 
-<div class="item item--vertical grid__item grid__item--4-12">
+{% if this_size is sameas('large') %}
+    <div class="item item--vertical grid__item--4-12">
+  {% elseif this_size is sameas('medium')%}
+    <div class="item item--vertical grid__item--3-6">
+  {% else %}
+    <div class="item item--vertical grid__item--4-12">
+  {% endif %}
 
   {% if imageId is defined and imageId.destinationContentId is not empty %}
     

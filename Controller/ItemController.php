@@ -120,7 +120,8 @@ class ItemController extends Controller {
                 'items' => $items,
                 'location' => $location,
                 'content' => $content,
-				'viewType' => $params['viewType']
+				'viewType' => $params['viewType'],
+                'params' => $params
             ), $response );
     }
     public function randomChildAction($locationId, $params = array()) {
@@ -168,7 +169,8 @@ class ItemController extends Controller {
                 'items' => $random_items,
                 'location' => $location,
                 'content' => $content,
-                'viewType' => $params['viewType']
+                'viewType' => $params['viewType'],
+                'params' => $params
             ), $response );
     }
 	public function mainMenuAction($locationId) {
@@ -264,6 +266,107 @@ class ItemController extends Controller {
                 'content' => $content
             ), $response );
 		}
+    }
+
+    public function infoboxRelatedAction($locationId) {
+        // children
+        // Setting HTTP cache for the response to be public and with a TTL of 1 day.
+        $response = new Response;
+         
+        $response->setPublic();
+        $response->setSharedMaxAge( 86400 );
+        // Menu will expire when top location cache expires.
+        $response->headers->set( 'X-Location-Id', $locationId );
+        // Menu might vary depending on user permissions, so make the cache vary on the user hash.
+        $response->setVary( 'X-User-Hash' );
+         
+        $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $content = $this->getRepository()->getContentService()->loadContent($location->contentInfo->id );
+        $related_content = $this->getRepository()->getContentService()->loadContent( $content->getFieldValue('related_object')->destinationContentId );
+
+        $searchService = $this->getRepository()->getSearchService();
+        $query = new Query();
+
+        if ($content->getFieldValue('show_last') == '1') {
+
+            $query->criterion = new Criterion\LogicalAnd( array(
+                new Criterion\ContentTypeIdentifier(array('article', 'file')),
+                new Criterion\ParentLocationId($related_content->contentInfo->mainLocationId),
+                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+            ) );
+
+            $query->sortClauses = array(new SortClause\DatePublished( Query::SORT_DESC ));
+
+            $query->limit = $content->getFieldValue('children_limit')->value;
+            $items = array();
+            $result = $searchService->findContent( $query );
+
+            if ($result->totalCount > 0) {
+                foreach ($result->searchHits as $item) {
+                    $itemLoc  = $this->getRepository()->getLocationService()->loadLocation( $item->valueObject->contentInfo->mainLocationId );
+                    if (!$itemLoc->invisible)
+                        $items[] = $item->valueObject;
+                }
+            }
+
+        } else {
+            if ($related_content->contentInfo->contentTypeId == 44) {
+
+                $now = time();
+                $query->criterion = new Criterion\LogicalAnd( array(
+                    new Criterion\ContentTypeIdentifier(array('event')),
+                    new Criterion\ParentLocationId($related_content->contentInfo->mainLocationId),
+                    new Criterion\Field(  'from_time', Criterion\Operator::GTE,  $now  ),
+                    new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+                ) );
+
+                $query->sortClauses = array(new SortClause\Field( 'event', 'from_time', Query::SORT_ASC ));
+
+                $query->limit = $content->getFieldValue('children_limit')->value;
+                $items = array();
+                $result = $searchService->findContent( $query );
+
+                if ($result->totalCount > 0) {
+                    foreach ($result->searchHits as $item) {
+                        $itemLoc  = $this->getRepository()->getLocationService()->loadLocation( $item->valueObject->contentInfo->mainLocationId );
+                        if (!$itemLoc->invisible)
+                            $items[] = $item->valueObject;
+                    }
+                }
+            } else if ($related_content->contentInfo->contentTypeId == 65) {
+                $items = array();
+                $items[] = $related_content;
+            } else {
+                $related_location  = $this->getRepository()->getLocationService()->loadLocation( $related_content->contentInfo->mainLocationId );
+                $query->criterion = new Criterion\LogicalAnd( array(
+                    new Criterion\LogicalNot(new Criterion\ContentTypeIdentifier(array('infobox', 'folder', 'frontpage_article', 'event_calendar'))),
+                    new Criterion\ParentLocationId($related_content->contentInfo->mainLocationId),
+                    new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+                ) );
+
+                $query->sortClauses = $this->getSortOrder($related_location);
+
+                $query->limit = $content->getFieldValue('children_limit')->value;
+                $items = array();
+                $result = $searchService->findContent( $query );
+
+                if ($result->totalCount > 0) {
+                    foreach ($result->searchHits as $item) {
+                        $itemLoc  = $this->getRepository()->getLocationService()->loadLocation( $item->valueObject->contentInfo->mainLocationId );
+                        if (!$itemLoc->invisible)
+                            $items[] = $item->valueObject;
+                    }
+                }
+            }
+
+        } 
+        
+        return $this->render(
+            'tfktelemarkBundle:parts:infobox_related.html.twig', 
+            array( 
+                'items' => $items,
+                'show_intro' => $content->getFieldValue('show_intro')
+            ), $response );
     }
 
     private function getSortOrder($location) {
