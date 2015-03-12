@@ -8,6 +8,7 @@
  */
 namespace tfk\telemarkBundle\Menu;
 
+use eZ\Publish\API\Repository\Repository;
 use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\Core\MVC\ConfigResolverInterface;
 use eZ\Publish\API\Repository\SearchService;
@@ -65,6 +66,11 @@ class Builder
 
     private $container;
 
+    /**
+     * @var \eZ\Publish\API\Repository\Repository
+     */
+    private $repository;
+
     public function __construct (
         FactoryInterface $factory,
         SearchService $searchService,
@@ -72,7 +78,8 @@ class Builder
         ConfigResolverInterface $configResolver,
         LocationService $locationService,
         TranslationHelper $translationHelper,
-        Container $container
+        Container $container,
+        Repository $repository
     )
     {
         $this->factory = $factory;
@@ -82,6 +89,7 @@ class Builder
         $this->locationService = $locationService;
         $this->translationHelper = $translationHelper;
         $this->container = $container;
+        $this->repository = $repository;
     }
 
     public function createTopMenu( Request $request )
@@ -123,15 +131,26 @@ class Builder
         {
             /** @var Location $location */
             $location = $searchHit->valueObject;
+            $content = $this->repository->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+
+            if ($content->getFieldValue('is_redirect_folder') && $content->getFieldValue('redirect_url')->link != '') {
+                $url = $content->getFieldValue('redirect_url')->link;
+                $target = '_BLANK';
+            } else {
+                $url = $this->router->generate( $location );
+                $target = '_SELF';
+            }
+
             $menuItem = isset( $menu[$location->parentLocationId] ) ? $menu[$location->parentLocationId] : $menu;
             $menuItem->addChild(
                 $location->id,
                 array(
                     'label' => $this->translationHelper->getTranslatedContentNameByContentInfo( $location->contentInfo ),
-                    'uri' => $this->router->generate( $location ),
+                    'uri' => $url,
                     'attributes' => array( 'class' => 'side-menu__item', 'id' => 'nav-location-' . $location->id )
                 )
             );
+            $menuItem[$location->id]->setLinkAttribute('target', $target);
             $menuItem->setChildrenAttribute( 'class', 'nav' );
 
             //add subitems
@@ -139,14 +158,23 @@ class Builder
                 $subitems = $this->getMenuItems($location->id);
                 foreach ($subitems as $subitem) {
                     $sublocation = $subitem->valueObject;
+                    $subcontent = $this->repository->getContentService()->loadContentByContentInfo( $sublocation->getContentInfo() );
+                    if ($subcontent->getFieldValue('is_redirect_folder') && $subcontent->getFieldValue('redirect_url')->link != '') {
+                            $suburl = $subcontent->getFieldValue('redirect_url')->link;
+                            $subtarget = '_BLANK';
+                        } else {
+                            $suburl = $this->router->generate( $sublocation );
+                            $subtarget = '_SELF';
+                        }
                     $menuItem[$location->id]->addChild(
                         $sublocation->id,
                         array(
                             'label' => $this->translationHelper->getTranslatedContentNameByContentInfo( $sublocation->contentInfo ),
-                            'uri' => $this->router->generate( $sublocation ),
+                            'uri' => $suburl,
                             'attributes' => array( 'class' => 'side-menu__item', 'id' => 'nav-location-' . $sublocation->id )
                         )
                     );
+                    $menuItem[$location->id][$sublocation->id]->setLinkAttribute('target', $subtarget);
                 }
             }
         }

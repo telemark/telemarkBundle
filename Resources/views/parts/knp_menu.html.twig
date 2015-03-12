@@ -60,14 +60,6 @@
     {%- if classes is not empty %}
         {%- set attributes = attributes|merge({'class': classes|join(' ')}) %}
     {%- endif %}
-
-    {%- set this_url = item.uri %}
-    {%- set this_target = "_self" %}
-    {%- if item.content.fields.is_redirect_folder is not empty %}
-      {%- set this_url =  item.content.fields.redirect_url %}
-      {%- set this_target = "_blank" %}
-    {%- endif %}
-
 {# displaying the item #}
     <li{{ _self.attributes(attributes) }}>
         {%- if item.uri is not empty and (not item.current or options.currentAsLink) %}
@@ -84,7 +76,7 @@
 {% endif %}
 {% endblock %}
 
-{% block linkElement %}<a href="{{ this_url }}"{{ _self.attributes(item.linkAttributes) }} target="{{ this_target }}">{{ block('label') }}</a>{% endblock %}
+{% block linkElement %}<a href="{{ item.uri }}"{{ _self.attributes(item.linkAttributes) }}>{{ block('label') }}</a>{% endblock %}
 
 {% block spanElement %}<span{{ _self.attributes(item.labelAttributes) }}>{{ block('label') }}</span>{% endblock %}
 
