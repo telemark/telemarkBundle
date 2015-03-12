@@ -1,1 +1,10 @@
-BOXLINE:EVENT
+<li class="calendar-list__item">
+  <time datetime="{{ content.fields.from_time['nor-NO']|date('Y-m-d') }}" title="{{ content.fields.from_time['nor-NO']|date('d.m.Y') }}" class="calendar-list__sheet">
+    <span class="calendar-list__sheet__month">{{ content.fields.from_time['nor-NO']|date('M') }}</span>
+    <span class="calendar-list__sheet__day">{{ content.fields.from_time['nor-NO']|date('d') }}</span>
+  </time>
+  <div class="calendar-list__desc">
+    <h3 class="calendar-list__desc__header"><a href={{ path( 'ez_urlalias', {'contentId': content.contentInfo.id} ) }}>{{ez_field_value(content, 'title')}}</a></h3>
+    <div class="calendar-list__desc__intro sidenote"></div>
+  </div>
+</li>
