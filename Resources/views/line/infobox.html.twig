@@ -8,9 +8,7 @@
 
 {% if content.getFieldValue('related_object').destinationContentId and content.getFieldValue('children_limit').value > 0 %}
 
-	<ul class="calendar-list">
 	{{ render( controller("tfktelemarkBundle:Item:infoboxRelated", {'locationId': location.id } )) }}
-	</ul>
 
 	{#% if content.getFieldValue('show_last') %}
 		{{ render( controller("tfktelemarkBundle:Item:infoboxRelated", 

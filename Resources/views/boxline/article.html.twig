@@ -1,1 +1,14 @@
-BOXLINE:ARTICLE
+<li class="calendar-list__item">
+  <time datetime="{{ content.contentInfo.publishedDate|date("Y-m-d") }}" title="{{ content.contentInfo.publishedDate|date("d.m.Y") }}" class="calendar-list__sheet">
+    <span class="calendar-list__sheet__month">{{ content.contentInfo.publishedDate|date("M") }}</span>
+    <span class="calendar-list__sheet__day">{{ content.contentInfo.publishedDate|date("d") }}</span>
+  </time>
+  <div class="calendar-list__desc">
+    <h3 class="calendar-list__desc__header"><a href={{ path( 'ez_urlalias', {'contentId': content.contentInfo.id} ) }}>{{ez_field_value(content, 'title')}}</a></h3>
+    <div class="calendar-list__desc__intro sidenote">
+    {% if not show_intro is empty%}
+    	{{ez_render_field(content, 'intro')}}
+    {% endif %}
+    </div>
+  </div>
+</li>
