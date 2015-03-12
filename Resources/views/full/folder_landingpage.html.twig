@@ -2,9 +2,7 @@
 
 {% block content %}
 
-<div class="content">
-  <div class="constrained-content">
-    <main id="main" role="main" tabindex="-1" class="main">
+
       {% if not ez_is_field_empty( content, 'show_name' ) %}
         <h1>{{ ez_render_field(content, 'name') }}</h1>
       {% endif %}
@@ -21,8 +19,6 @@
       <div class="grid grid--12">
         {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['linkbox'] , 'viewType': 'line' }} )) }}
       </div>
-    </main>
-  </div>
-</div>
+
 
 {% endblock %}

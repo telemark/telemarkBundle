@@ -1,19 +1,13 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="//cloud.webtype.com/css/29f4b454-5ddc-454a-b1dc-ce911c228cd8.css">
-{% stylesheets
+{% stylesheets 
+    filter='?cssmin' output='css/*'
+	'@tfktelemarkBundle/Resources/public/css/29f4b454-5ddc-454a-b1dc-ce911c228cd8.css'
+	'@tfktelemarkBundle/Resources/public/css/font-awesome.min.css'
     '@tfktelemarkBundle/Resources/public/css/main.css'
     '@tfktelemarkBundle/Resources/public/css/popup.css'
     '@tfktelemarkBundle/Resources/public/css/custom.css'
 %}
-    <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
 {% endstylesheets %}
-
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="/bundles/tfktelemark/css/no-mq.css">
 <![endif]-->
-
-{% if ezpublish.legacy is defined %}
-<style type="text/css">
-    @import url("{{ asset('extension/ezwt/design/standard/stylesheets/websitetoolbar.css') }}");
-</style>
-{% endif %}

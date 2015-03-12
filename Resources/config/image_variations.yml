@@ -167,7 +167,7 @@ system:
             responsive_12:
                 reference: null
                 post_processors:
-                        jpegoptim: {}
+                        jpegoptim: { max: [60] }
                 filters:
                     - { name: geometry/scalewidth, params: [1140] }
             responsive_09:

@@ -40,23 +40,23 @@
 <main id="main" role="main" tabindex="-1">
       <div class="content">
           <div class="constrained-content">
-		
 			<!-- Main area: START -->
 				{% block content %}{% endblock %}
 			<!-- Main area: END -->
 		</div>
      </div>
 </main>
+</div>
+</div>
 	<!-- Footer area: START -->
 {% include 'tfktelemarkBundle::page_footer.html.twig' %}
-	<!-- Footer area: END -->
-</div>
-</div>
+
 <!-- Complete page area: END -->
 <!-- Footer script area: START -->
 {% block footerScript %}
 	{% include 'tfktelemarkBundle::page_footer_script.html.twig' %}
 {% endblock %}
+
 <!-- Footer script area: END -->
 </body>
 </html>

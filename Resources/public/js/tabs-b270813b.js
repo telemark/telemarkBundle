@@ -94,4 +94,6 @@
     };
 })(jQuery);
 
-$(".js-tabs").tabs();
+$(function() {
+  $(".js-tabs").tabs();    
+});

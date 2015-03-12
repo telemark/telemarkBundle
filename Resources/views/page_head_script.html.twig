@@ -3,10 +3,9 @@
       // Picture element HTML5 shiv
       document.createElement( "picture" );
     </script>
-{% javascripts
+{% javascripts 
     '@tfktelemarkBundle/Resources/public/js/picturefill-0bb39762.js'
 	'@tfktelemarkBundle/Resources/public/js/vendor/modernizr-custom-0.4.1-cf76d0ba.js'
 %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script type="text/javascript" src="{{ asset_url }}" async="async" defer="defer"></script>
 {% endjavascripts %}
-
