@@ -21,8 +21,6 @@
 
 .pagination .prev a:before {
 	color: #383838;
-    content: "";
-    font-family: FontAwesome;
     font-size: 27px;
     margin-left: -13px;
     position: absolute;
@@ -35,8 +33,6 @@
 
 .pagination .next a:after {
 	color: #383838;
-    content: "";
-    font-family: FontAwesome;
     font-size: 27px;
     margin-left: 4px;
     position: absolute;

@@ -166,10 +166,10 @@ system:
             # responsive bilder fra malverket
             responsive_12:
                 reference: null
-                post_processors:
-                        jpegoptim: { max: [60] }
                 filters:
-                    - { name: geometry/scalewidth, params: [1140] }
+                    - {  name: geometry/scalewidth, params: [1140] }
+                post_processors:
+                        jpegoptim: { max: [80] }
             responsive_09:
                 reference: null
                 post_processors:
