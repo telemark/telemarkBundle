@@ -34,7 +34,9 @@
      {{ pagerfanta( items, 'twitter_bootstrap_translated', 
      {'routeName': location, 
      'prev_message': 'Forrige',
-     'next_message': 'Neste'
+     'next_message': 'Neste',
+	 'css_next_class': 'pagination__next',
+	 'css_prev_class': 'pagination__prev'
     } ) }}
   {% endif %}
 
