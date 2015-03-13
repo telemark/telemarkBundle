@@ -22,6 +22,7 @@
 .pagination .prev a:before {
 	color: #383838;
     content: "";
+    font-family: FontAwesome;
     font-size: 27px;
     margin-left: -13px;
     position: absolute;
@@ -35,6 +36,7 @@
 .pagination .next a:after {
 	color: #383838;
     content: "";
+    font-family: FontAwesome;
     font-size: 27px;
     margin-left: 4px;
     position: absolute;
@@ -45,6 +47,7 @@
     border: 0 none;
     color: #6c6c6c;
     display: inline-block;
+    font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
     padding: 0.5em 1em;
 }
 
@@ -54,6 +57,7 @@
     color: #000;
     cursor: pointer;
     display: inline-block;
+    font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
     padding: 0.5em 1em;
     text-decoration: underline;
 }
@@ -63,6 +67,7 @@
     color: #000;
     border: 0 none;
     display: inline-block;
+    font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
     padding: 0.5em 1em;
 }
 

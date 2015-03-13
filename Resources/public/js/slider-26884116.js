@@ -1,4 +1,4 @@
-/*! telemark-frontend - v0.0.0 - 2015-01-14 */!function(a) {
+!function(a) {
     a.flexslider = function(b, c) {
         var d = a(b);
         d.vars = a.extend({}, a.flexslider.defaults, c);

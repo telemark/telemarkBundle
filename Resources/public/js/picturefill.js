@@ -1,3 +1,4 @@
+
 window.matchMedia || (window.matchMedia = function() {
     "use strict";
     var a = window.styleMedia || window.media;
@@ -26,7 +27,6 @@ window.matchMedia || (window.matchMedia = function() {
         };
     };
 }());
-
 (function(a, b) {
     "use strict";
     if (a.HTMLPictureElement) {

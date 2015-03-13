@@ -1,4 +1,4 @@
-/*! telemark-frontend - v0.0.0 - 2015-01-14 */var tabsIdList = [];
+var tabsIdList = [];
 
 (function(a, b) {
     "use strict";

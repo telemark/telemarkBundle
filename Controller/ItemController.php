@@ -361,11 +361,17 @@ class ItemController extends Controller {
 
         } 
         
+        if ($content->getFieldValue('show_intro') == '1') {
+            $show_intro = true;
+        } else {
+            $show_intro = false;
+        }
+
         return $this->render(
             'tfktelemarkBundle:parts:infobox_related.html.twig', 
             array( 
                 'items' => $items,
-                'show_intro' => $content->getFieldValue('show_intro')
+                'show_intro' => $show_intro
             ), $response );
     }
 

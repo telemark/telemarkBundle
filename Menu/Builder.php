@@ -135,10 +135,10 @@ class Builder
 
             if ($content->getFieldValue('is_redirect_folder') && $content->getFieldValue('redirect_url')->link != '') {
                 $url = $content->getFieldValue('redirect_url')->link;
-                $target = '_BLANK';
+                $target = '_blank';
             } else {
                 $url = $this->router->generate( $location );
-                $target = '_SELF';
+                $target = '_self';
             }
 
             $menuItem = isset( $menu[$location->parentLocationId] ) ? $menu[$location->parentLocationId] : $menu;
@@ -161,10 +161,10 @@ class Builder
                     $subcontent = $this->repository->getContentService()->loadContentByContentInfo( $sublocation->getContentInfo() );
                     if ($subcontent->getFieldValue('is_redirect_folder') && $subcontent->getFieldValue('redirect_url')->link != '') {
                             $suburl = $subcontent->getFieldValue('redirect_url')->link;
-                            $subtarget = '_BLANK';
+                            $subtarget = '_blank';
                         } else {
                             $suburl = $this->router->generate( $sublocation );
-                            $subtarget = '_SELF';
+                            $subtarget = '_self';
                         }
                     $menuItem[$location->id]->addChild(
                         $sublocation->id,

@@ -1,4 +1,4 @@
-/*! telemark-frontend - v0.0.0 - 2015-01-14 */var svgeezy = function() {
+var svgeezy = function() {
     return {
         init: function(a, b) {
             this.avoid = a || !1, this.filetype = b || "png", this.svgSupport = this.supportsSvg(), 
@@ -28,14 +28,6 @@
     };
 }();
 
-/**
- * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
- *
- * @version 0.6.12
- * @codingstandard ftlabs-jsv2
- * @copyright The Financial Times Limited [All Rights Reserved]
- * @license MIT License (see LICENSE.txt)
- */
 function FastClick(a) {
     "use strict";
     var b, c = this;
@@ -482,9 +474,6 @@ $(".js-font-adjust").hover(function() {
     });
 })(jQuery);
 
-/*!
- * grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license.
- */
 window.grunticon = function(a) {
     if (a && 3 === a.length) {
         var b = window, c = !(!b.document.createElementNS || !b.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect || !document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1") || window.opera && -1 === navigator.userAgent.indexOf("Chrome")), d = function(d) {
@@ -504,15 +493,6 @@ window.grunticon = function(a) {
     a([ b + "icons.data.svg.css", b + "icons.data.png.css", b + "icons.fallback.css" ]);
 })(grunticon);
 
-/*!
- * classie - class helper functions
- * from bonzo https://github.com/ded/bonzo
- * 
- * classie.has( elem, 'my-class' ) -> true/false
- * classie.add( elem, 'my-new-class' )
- * classie.remove( elem, 'my-unwanted-class' )
- * classie.toggle( elem, 'my-class' )
- */
 (function(a) {
     "use strict";
     function b(a) {
@@ -586,17 +566,6 @@ var mp = {
     backLinkText: "Tilbake",
     menuIsInit: false
 };
-
-/*!
- * mlpushmenu.js v1.0.0
- * http://www.codrops.com
- *
- * Licensed under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- * 
- * Copyright 2013, Codrops
- * http://www.codrops.com
- */
 (function(a, b) {
     "use strict";
     function c(a, b) {

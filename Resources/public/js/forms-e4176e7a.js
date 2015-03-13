@@ -1,4 +1,4 @@
-/*! telemark-frontend - v0.0.0 - 2015-01-14 */(function() {
+(function() {
     if (!("noValidate" in document.createElement("form")) || !document.createElement("a").classList) {
         return;
     }
