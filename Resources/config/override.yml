@@ -42,6 +42,10 @@ system:
           template: tfktelemarkBundle:full:file.html.twig
           match:
            Identifier\ContentType: [file]
+        infobox:
+          template: tfktelemarkBundle:full:infobox.html.twig
+          match:
+            Identifier\ContentType: [infobox]
       line:
         article:
           template: tfktelemarkBundle:line:article.html.twig
