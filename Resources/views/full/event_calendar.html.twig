@@ -7,10 +7,10 @@
 	 <main id="main" role="main" tabindex="-1" class="main">
 	 
         <div class="main__center">
-	{% include "file:extension/vp_tfk/design/tfk/override/templates/full/event_calendar.tpl"  with {"node": location} %}
+	{% include "file:extension/vp_tfk/design/tfk/override/templates/full/event_calendar.tpl"  with {"node": location, "view_parameters": ezpublish.viewParameters} %}
 	      </div>
 	 <aside class="main__right">
-  	{% include "file:extension/vp_tfk/design/tfk/templates/page_sidebar_calendar.tpl"  with {"dennenoden": location, "current_node_id": location.id } %}
+  	{% include "file:extension/vp_tfk/design/tfk/templates/page_sidebar_calendar.tpl"  with {"dennenoden": location, "current_node_id": location.id, "view_parameters": ezpublish.viewParameters } %}
 	</aside>
 	 <nav role="navigation" class="main__left">
 
