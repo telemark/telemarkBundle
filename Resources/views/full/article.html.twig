@@ -1,5 +1,9 @@
 {% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
 
+{% block facebookMeta %}
+    {% include 'tfktelemarkBundle:meta:article_meta.html.twig' %}
+{% endblock %}
+
 {% block content %}
 
 {% if not ez_is_field_empty( content, 'do_show_image' ) %}

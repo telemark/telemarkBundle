@@ -1,0 +1,23 @@
+<meta property="og:title" content="{{content.getFieldValue('title')}}">
+<meta property="og:site_name" content="Telemark fylkeskommune">
+<meta property="og:url" content="{{ asset(path( location ), absolute=true)}}">
+<meta property="og:description" content="{% if content.getFieldValue('meta_description') != '' %}{{ ez_field_value(content,'meta_description') }}{% else %}{{ ez_field_value(content, 'intro')|striptags}}{% endif %}">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="nb_NO">
+
+{% if not ez_is_field_empty( content, 'do_show_image' ) %}
+    {% if not ez_is_field_empty( content, 'image' ) %}
+        {% set imageId = ez_field_value( content, 'image' ) %}
+        {% if imageId is defined %}
+            {{ render(
+                controller( 
+                    "ez_content:viewContent", 
+                      {
+                          "contentId": imageId.destinationContentId,
+                          "viewType": "meta"
+                      }
+                )
+            ) }}
+        {% endif %}
+    {% endif %}
+{% endif %}

@@ -129,6 +129,11 @@ system:
           template: tfktelemarkBundle:responsive:image.html.twig
           match:
             Identifier\ContentType: [image]
+      meta:
+        image:
+          template: tfktelemarkBundle:meta:image.html.twig
+          match:
+            Identifier\ContentType: [image]
       embed-inline:
         image:
           template: tfktelemarkBundle:embed-inline:image.html.twig
