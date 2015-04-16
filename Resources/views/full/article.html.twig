@@ -68,10 +68,20 @@
 	 <nav role="navigation" class="main__left">
 
         {% if location.path[2] is defined %}
-          {% set locId = location.path[2] %}
+          {% if location.path[2] == 111 %}
+            {% set locId = location.path[3] %}
+              {% if location.path[5] is defined and location.path[5] == 566 %}
+                {% set locId = 566 %}
+              {% elseif location.path[5] is defined and location.path[5] == 9791 %}
+                {% set locId = 9791 %}
+              {% endif %}
+          {% else %}
+            {% set locId = location.path[2] %}
+          {% endif %}
         {% else %}
           {% set locId = location.id %}
         {% endif %}
+        
             {{ render(
                 controller(
                     "tfktelemarkBundle:Menu:leftMenu",

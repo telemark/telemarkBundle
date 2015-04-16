@@ -199,9 +199,17 @@ class Builder
                 new Criterion\LanguageCode( $this->configResolver->getParameter( 'languages' ) )
             )
         );
-        $query->sortClauses = array( 
-            new Query\SortClause\Location\Priority(Query::SORT_DESC),
-        ); 
+
+        if ( $rootLocation->sortOrder === 1 ) {
+            $query->sortClauses = array( 
+                new Query\SortClause\Location\Priority(Query::SORT_ASC),
+            );
+        }
+        else {
+            $query->sortClauses = array( 
+                new Query\SortClause\Location\Priority(Query::SORT_DESC),
+            );
+        }
 
         return $this->searchService->findLocations( $query )->searchHits;
     }
