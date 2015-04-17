@@ -22,6 +22,10 @@ system:
           template: tfktelemarkBundle:full:folder.html.twig
           match:
             Identifier\ContentType: [folder]
+        hidden_folder:
+          template: tfktelemarkBundle:full:hidden_folder.html.twig
+          match:
+            Identifier\ContentType: [hidden_folder]
         article:
           template: tfktelemarkBundle:full:article.html.twig
           match:
@@ -46,6 +50,10 @@ system:
           template: tfktelemarkBundle:full:infobox.html.twig
           match:
             Identifier\ContentType: [infobox]
+        image_gallery:
+          template: tfktelemarkBundle:full:image_gallery.html.twig
+          match:
+            Identifier\ContentType: [image_gallery]
       line:
         article:
           template: tfktelemarkBundle:line:article.html.twig

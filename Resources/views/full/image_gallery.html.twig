@@ -1,0 +1,36 @@
+{% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
+
+{% block content %}
+  
+   <div class="content">
+    <div class="constrained-content">
+	 <main id="main" role="main" tabindex="-1" class="main">
+	 
+        <div class="main__center">
+	{% include "file:extension/vp_tfk/design/tfk/override/templates/full/image_gallery.tpl"  with {"node": location} %}
+	      </div>
+	 <nav role="navigation" class="main__left">
+
+        {% if location.path[2] is defined %}
+
+          {% if location.path[2] == 111 %}
+            {% set locId = location.path[3] %}
+          {% elseif location.path[2] == 566 %}
+		   {% set locId = location.path[5] %}
+		    {% else %}
+            {% set locId = location.path[2] %}
+          {% endif %}
+        {% else %}
+          {% set locId = location.id %}
+        {% endif %}
+            {{ render(
+                controller(
+                    "tfktelemarkBundle:Menu:leftMenu",
+                    {'locationId': location.id, 'currentLocationId': locId}
+                )
+            ) }}
+              </nav> 
+	  </main>
+    </div>
+  </div> 	
+{% endblock %}
