@@ -16,41 +16,43 @@
 	{% block facebookMeta %}{% endblock %}
 </head>
 <body>
-    <div class="menu-container">
-      <div id="mp-pusher" class="menu-pusher">
-{% if location is defined and not location.isDraft %}
-	{% set currentLocation=location %}
-{% endif %}
-
-<!-- Complete page area: START -->
-{% if ezpublish.legacy is defined and currentLocation is defined %}
-	{{ render( controller( "ezpublish_legacy.website_toolbar.controller:websiteToolbarAction", { 'locationId': currentLocation.id} ) ) }}
-{% endif %}
-
-	<!-- Header area: START -->
-	{% block header %}
-		{% include 'tfktelemarkBundle::page_header.html.twig' %}
-	{% endblock %}
-	<!-- Header area: END -->
-		<!-- Top menu area: END -->
-{% block breadcrumb %}
-			{% if currentLocation is defined %}
-				{{ render( controller( 'tfktelemarkBundle:Item:viewBreadcrumb', { 'locationId': currentLocation.id } ) ) }}
+  <div class="menu-container">
+    <div id="mp-pusher" class="menu-pusher">
+			{% if location is defined and not location.isDraft %}
+				{% set currentLocation=location %}
 			{% endif %}
-		{% endblock %}
-<main id="main" role="main" tabindex="-1">
-      <div class="content">
-          <div class="constrained-content">
-			<!-- Main area: START -->
-				{% block content %}{% endblock %}
-			<!-- Main area: END -->
+
+			<!-- Complete page area: START -->
+			{% if ezpublish.legacy is defined and currentLocation is defined %}
+				{{ render( controller( "ezpublish_legacy.website_toolbar.controller:websiteToolbarAction", { 'locationId': currentLocation.id} ) ) }}
+			{% endif %}
+
+			<!-- Header area: START -->
+			{% block header %}
+				{% include 'tfktelemarkBundle::page_header.html.twig' %}
+			{% endblock %}
+
+			<!-- Header area: END -->
+				<!-- Top menu area: END -->
+			{% block breadcrumb %}
+				{% if currentLocation is defined %}
+					{{ render( controller( 'tfktelemarkBundle:Item:viewBreadcrumb', { 'locationId': currentLocation.id } ) ) }}
+				{% endif %}
+			{% endblock %}
+
+			<main id="main" role="main" tabindex="-1">
+    		<div class="content">
+        	<div class="constrained-content">
+						<!-- Main area: START -->
+						{% block content %}{% endblock %}
+						<!-- Main area: END -->
+					</div>
+   			</div>
+			</main>
+			<!-- Footer area: START -->
+			{% include 'tfktelemarkBundle::page_footer.html.twig' %}
 		</div>
-     </div>
-</main>
-</div>
-</div>
-	<!-- Footer area: START -->
-{% include 'tfktelemarkBundle::page_footer.html.twig' %}
+	</div>
 
 <!-- Complete page area: END -->
 <!-- Footer script area: START -->
