@@ -1,7 +1,8 @@
+{% set siteLang = app.request.locale[:2] %}
 <!DOCTYPE html>
-<!--[if lt IE 9 ]><html class="unsupported-ie ie" lang="{{ app.request.locale }}"><![endif]-->
-<!--[if IE 9 ]><html class="ie ie9" lang="{{ app.request.locale }}"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html lang="{{ app.request.locale }}"><!--<![endif]-->
+<!--[if lt IE 9 ]><html class="unsupported-ie ie" lang="{{ siteLang }}"><![endif]-->
+<!--[if IE 9 ]><html class="ie ie9" lang="{{ siteLang }}"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="{{ siteLang }}"><!--<![endif]-->
 <head>
 	{# TODO: this probably won't be needed anymore as we will relay on the HTTP cache #}
 	{% include 'tfktelemarkBundle::page_head_displaystyles.html.twig' %}
