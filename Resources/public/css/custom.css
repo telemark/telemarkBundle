@@ -64,7 +64,7 @@
     padding: 0.5em 1em;
 }
 
-.main__center {
+/*.main__center {
     display: inline-block;
     float: none;
     margin-left: 1.38889%;
@@ -76,7 +76,7 @@
 .main__right {
     float: right;
 }
-
+*/
 input #basicsearch_term {
 	font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
 }
