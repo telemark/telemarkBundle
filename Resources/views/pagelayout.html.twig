@@ -1,7 +1,8 @@
+{% set siteLang = app.request.locale[:2] %}
 <!DOCTYPE html>
-<!--[if lt IE 9 ]><html class="unsupported-ie ie" lang="{{ app.request.locale }}"><![endif]-->
-<!--[if IE 9 ]><html class="ie ie9" lang="{{ app.request.locale }}"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html lang="{{ app.request.locale }}"><!--<![endif]-->
+<!--[if lt IE 9 ]><html class="unsupported-ie ie" lang="{{ siteLang }}"><![endif]-->
+<!--[if IE 9 ]><html class="ie ie9" lang="{{ siteLang }}"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="{{ siteLang }}"><!--<![endif]-->
 <head>
 	{# TODO: this probably won't be needed anymore as we will relay on the HTTP cache #}
 	{% include 'tfktelemarkBundle::page_head_displaystyles.html.twig' %}
@@ -16,41 +17,43 @@
 	{% block facebookMeta %}{% endblock %}
 </head>
 <body>
-    <div class="menu-container">
-      <div id="mp-pusher" class="menu-pusher">
-{% if location is defined and not location.isDraft %}
-	{% set currentLocation=location %}
-{% endif %}
-
-<!-- Complete page area: START -->
-{% if ezpublish.legacy is defined and currentLocation is defined %}
-	{{ render( controller( "ezpublish_legacy.website_toolbar.controller:websiteToolbarAction", { 'locationId': currentLocation.id} ) ) }}
-{% endif %}
-
-	<!-- Header area: START -->
-	{% block header %}
-		{% include 'tfktelemarkBundle::page_header.html.twig' %}
-	{% endblock %}
-	<!-- Header area: END -->
-		<!-- Top menu area: END -->
-{% block breadcrumb %}
-			{% if currentLocation is defined %}
-				{{ render( controller( 'tfktelemarkBundle:Item:viewBreadcrumb', { 'locationId': currentLocation.id } ) ) }}
+  <div class="menu-container">
+    <div id="mp-pusher" class="menu-pusher">
+			{% if location is defined and not location.isDraft %}
+				{% set currentLocation=location %}
 			{% endif %}
-		{% endblock %}
-<main id="main" role="main" tabindex="-1">
-      <div class="content">
-          <div class="constrained-content">
-			<!-- Main area: START -->
-				{% block content %}{% endblock %}
-			<!-- Main area: END -->
+
+			<!-- Complete page area: START -->
+			{% if ezpublish.legacy is defined and currentLocation is defined %}
+				{{ render( controller( "ezpublish_legacy.website_toolbar.controller:websiteToolbarAction", { 'locationId': currentLocation.id} ) ) }}
+			{% endif %}
+
+			<!-- Header area: START -->
+			{% block header %}
+				{% include 'tfktelemarkBundle::page_header.html.twig' %}
+			{% endblock %}
+
+			<!-- Header area: END -->
+				<!-- Top menu area: END -->
+			{% block breadcrumb %}
+				{% if currentLocation is defined %}
+					{{ render( controller( 'tfktelemarkBundle:Item:viewBreadcrumb', { 'locationId': currentLocation.id } ) ) }}
+				{% endif %}
+			{% endblock %}
+
+			<main id="main" role="main" tabindex="-1">
+    		<div class="content">
+        	<div class="constrained-content">
+						<!-- Main area: START -->
+						{% block content %}{% endblock %}
+						<!-- Main area: END -->
+					</div>
+   			</div>
+			</main>
+			<!-- Footer area: START -->
+			{% include 'tfktelemarkBundle::page_footer.html.twig' %}
 		</div>
-     </div>
-</main>
-</div>
-</div>
-	<!-- Footer area: START -->
-{% include 'tfktelemarkBundle::page_footer.html.twig' %}
+	</div>
 
 <!-- Complete page area: END -->
 <!-- Footer script area: START -->
