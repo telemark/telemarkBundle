@@ -39,7 +39,7 @@
       </h2>
       
       {% if not ez_is_field_empty( content, 'show_publishdate' ) %}
-        <span class="sidenote">Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}</span>
+        <span class="sidenote">Oppdatert {{ content.contentInfo.modificationDate|date("d.m.Y") }}</span>
       {% endif %}
 
       {% if not ez_is_field_empty( content, 'short_intro' ) %}
