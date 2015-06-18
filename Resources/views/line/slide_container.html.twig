@@ -1,9 +1,11 @@
 <div class="content">
-  <div class="constrained-content">
-    <div class="slider">
-      <ul class="slider__slides">
-        {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['slide'] , 'viewType': 'line' }} )) }}
-      </ul>
+  <div class="slider-wrapper">
+    <div class="constrained">
+      <div class="slider">
+        <ul class="slider__slides">
+          {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['slide'] , 'viewType': 'line' }} )) }}
+        </ul>
+      </div>
     </div>
   </div>
 </div>

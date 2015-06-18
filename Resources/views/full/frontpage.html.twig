@@ -2,57 +2,56 @@
 
 {% block content %}
 
-{{ render(
-            controller( 
-                "ez_content:viewContent", 
-                  {
-                      "contentId": 499,
-                      "viewType": "line",
-                      "params": { }
-                  }
+  {{ render(
+    controller( 
+      "ez_content:viewContent", 
+        {
+          "contentId": 499,
+          "viewType": "line",
+          "params": { }
+        }
+    )
+  ) }}
+
+  <div class="constrained-content">
+    <div class="social-block quote">
+      <div class="social-block__social-links">
+        <ul class="social-links">
+          <li><a href="https://www.facebook.com/telemarkfylke" class="social-links__link"><span title="Facebook" class="social-links__link__icon icon--facebook"></span><span class="visuallyhidden">Facebook</span></a></li>
+          <li><a href="https://twitter.com/telemarkfylke" class="social-links__link"><span title="Twitter" class="social-links__link__icon icon--twitter"></span><span class="visuallyhidden">Twitter</span></a></li>
+          <li><a href="https://plus.google.com/108353607427028279455/" class="social-links__link"><span title="Google+" class="social-links__link__icon icon--google"></span><span class="visuallyhidden">Google+</span></a></li>
+          <li><a href="/rss/feed/aktuelt" class="social-links__link"><span title="RSS-feed" class="social-links__link__icon icon--rss"></span><span class="visuallyhidden">RSS-feed</span></a></li>
+        </ul>
+      </div>
+      {{ render(
+          controller( 
+            "ez_content:viewContent", 
+              {
+                "contentId": 6831,
+                "viewType": "line",
+                "params": { }
+              }
             )
-        ) }}
+          ) }}
 
+    </div>
+  </div>
 
-<div class="social-block quote">
-                <div class="social-block__social-links">
-                  <ul class="social-links">
-                    <li><a href="https://www.facebook.com/telemarkfylke" class="social-links__link"><span title="Facebook" class="social-links__link__icon icon--facebook"></span><span class="visuallyhidden">Facebook</span></a></li>
-                    <li><a href="https://twitter.com/telemarkfylke" class="social-links__link"><span title="Twitter" class="social-links__link__icon icon--twitter"></span><span class="visuallyhidden">Twitter</span></a></li>
-                    <li><a href="https://plus.google.com/108353607427028279455/" class="social-links__link"><span title="Google+" class="social-links__link__icon icon--google"></span><span class="visuallyhidden">Google+</span></a></li>
-                    <li><a href="/rss/feed/aktuelt" class="social-links__link"><span title="RSS-feed" class="social-links__link__icon icon--rss"></span><span class="visuallyhidden">RSS-feed</span></a></li>
-                  </ul>
-                </div>
-                {{ render(
-            controller( 
-                "ez_content:viewContent", 
-                  {
-                      "contentId": 6831,
-                      "viewType": "line",
-                      "params": { }
-                  }
-            )
-        ) }}
+  {{ render(
+    controller( 
+      "ez_content:viewContent", 
+        {
+          "contentId": 3843,
+          "viewType": "line",
+          "params": { 
+            "tabboks_size":"large"
+          }
+        }
+    )
+  ) }}
 
-</div>
-
-{{ render(
-            controller( 
-                "ez_content:viewContent", 
-                  {
-                      "contentId": 3843,
-                      "viewType": "line",
-                      "params": { 
-                        "tabboks_size":"large"
-                      }
-                  }
-            )
-        ) }}
-
-
-
-<div class="content">
-{% include 'tfktelemarkBundle:parts:recruitments.html.twig' %}
-</div>
+  <div class="content">
+    {% include 'tfktelemarkBundle:parts:recruitments.html.twig' %}
+  </div>
 
 {% endblock %}
