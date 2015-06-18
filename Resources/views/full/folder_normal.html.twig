@@ -16,6 +16,8 @@
 
 {% block content %}
 
+  <div class="constrained-content content">
+
   {% if bannerImageId is defined %}
     {{  render(
           controller( 
@@ -34,6 +36,7 @@
         ) 
     }}
   {% endif %}
+      <div class="main">
         <div class="main__center">
 
           {% if not ez_is_field_empty( content, 'show_name' ) %}
@@ -107,5 +110,7 @@
                     {'locationId': location.id, 'currentLocationId': locId}
                 )
             ) }}
-              </nav> 
+              </nav>
+    </div>
+  </div>
 {% endblock %}
