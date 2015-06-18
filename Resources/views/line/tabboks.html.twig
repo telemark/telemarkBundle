@@ -1,10 +1,15 @@
 {% set element_size = params.tabboks_size|default('large')%}
+
+{% if params.tabboks_size != 'medium' %}
 <div class="content">
   <div class="constrained-content">
+{% endif %}
     <div class="tabs js-tabs">
       <ul class="tabs__content">
         {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['tabboks_tab'] , 'viewType': 'line', 'element_size': element_size }} )) }}
       </ul>
     </div>
+{% if params.tabboks_size != 'medium' %}
   </div>
 </div>
+{% endif %}
