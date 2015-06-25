@@ -16,7 +16,7 @@ use eZ\Bundle\EzPublishCoreBundle\Controller;
 use Pagerfanta\Pagerfanta;
 
 class ItemController extends Controller {
-	
+
 	/**
      * Displays breadcrumb for a given $locationId
      *
@@ -77,24 +77,24 @@ class ItemController extends Controller {
         return $this->render(
             'tfktelemarkBundle::breadcrumb.html.twig'
         );
-    }	
+    }
 	public function childrenAction($locationId, $params = array()) {
 		// children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
-		 
+
         $response->setPublic();
         $response->setSharedMaxAge( 86400 );
         // Menu will expire when top location cache expires.
         $response->headers->set( 'X-Location-Id', $locationId );
         // Menu might vary depending on user permissions, so make the cache vary on the user hash.
         $response->setVary( 'X-User-Hash' );
-		 
+
         $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
         $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
 
         $searchService = $this->getRepository()->getSearchService();
-        $query = new Query();	 
+        $query = new Query();
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier($params['class']),
                 new Criterion\ParentLocationId($locationId),
@@ -102,7 +102,7 @@ class ItemController extends Controller {
             ) );
         $query->sortClauses = $this->getSortOrder($location);
 
-        $query->limit = 20;
+        $query->limit = 50;
 
         $items = array();
         $result = $searchService->findContent( $query );
@@ -113,10 +113,10 @@ class ItemController extends Controller {
                     $items[] = $item->valueObject;
             }
         }
-		
+
         return $this->render(
-            'tfktelemarkBundle:parts:child_loop.html.twig', 
-            array( 
+            'tfktelemarkBundle:parts:child_loop.html.twig',
+            array(
                 'items' => $items,
                 'location' => $location,
                 'content' => $content,
@@ -128,19 +128,19 @@ class ItemController extends Controller {
         // children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
-         
+
         $response->setPublic();
         $response->setSharedMaxAge( 86400 );
         // Menu will expire when top location cache expires.
         $response->headers->set( 'X-Location-Id', $locationId );
         // Menu might vary depending on user permissions, so make the cache vary on the user hash.
         $response->setVary( 'X-User-Hash' );
-         
+
         $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
         $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
 
         $searchService = $this->getRepository()->getSearchService();
-        $query = new Query();    
+        $query = new Query();
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier($params['class']),
                 new Criterion\ParentLocationId($locationId),
@@ -160,12 +160,12 @@ class ItemController extends Controller {
                     $items[] = $item->valueObject;
             }
         }
-        
+
         $random_items = array($items[array_rand($items)]);
 
         return $this->render(
-            'tfktelemarkBundle:parts:child_loop.html.twig', 
-            array( 
+            'tfktelemarkBundle:parts:child_loop.html.twig',
+            array(
                 'items' => $random_items,
                 'location' => $location,
                 'content' => $content,
@@ -238,9 +238,9 @@ class ItemController extends Controller {
 
         $searchService = $this->getRepository()->getSearchService();
         $query = new Query();
-		
+
  		if ($content->getFieldValue('show_children') == '1') {
-			
+
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier( array('article','linkbox')),
                 new Criterion\ParentLocationId($locationId),
@@ -250,17 +250,17 @@ class ItemController extends Controller {
             new SortClause\LocationPriority( Query::SORT_DESC ),
             new SortClause\DatePublished( Query::SORT_DESC )
         );
-		
+
         // Initialize pagination.
         $items = new Pagerfanta(
             new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
         );
         $items->setMaxPerPage( 6 );
         $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
-			
+
         return $this->render(
-            'tfktelemarkBundle:full:folder_arkiv.html.twig', 
-            array( 
+            'tfktelemarkBundle:full:folder_arkiv.html.twig',
+            array(
                 'items' => $items,
                 'location' => $location,
                 'content' => $content
@@ -272,14 +272,14 @@ class ItemController extends Controller {
         // children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
-         
+
         $response->setPublic();
         $response->setSharedMaxAge( 86400 );
         // Menu will expire when top location cache expires.
         $response->headers->set( 'X-Location-Id', $locationId );
         // Menu might vary depending on user permissions, so make the cache vary on the user hash.
         $response->setVary( 'X-User-Hash' );
-         
+
         $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
         $content = $this->getRepository()->getContentService()->loadContent($location->contentInfo->id );
         $related_content = $this->getRepository()->getContentService()->loadContent( $content->getFieldValue('related_object')->destinationContentId );
@@ -359,8 +359,8 @@ class ItemController extends Controller {
                 }
             }
 
-        } 
-        
+        }
+
         if ($content->getFieldValue('show_intro') == '1') {
             $show_intro = true;
         } else {
@@ -368,8 +368,8 @@ class ItemController extends Controller {
         }
 
         return $this->render(
-            'tfktelemarkBundle:parts:infobox_related.html.twig', 
-            array( 
+            'tfktelemarkBundle:parts:infobox_related.html.twig',
+            array(
                 'items' => $items,
                 'show_intro' => $show_intro
             ), $response );

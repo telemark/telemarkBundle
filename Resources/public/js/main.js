@@ -12,8 +12,8 @@
 var svgeezy = function() {
     return {
         init: function(a, b) {
-            this.avoid = a || !1, this.filetype = b || "png", this.svgSupport = this.supportsSvg(), 
-            this.svgSupport || (this.images = document.getElementsByTagName("img"), this.imgL = this.images.length, 
+            this.avoid = a || !1, this.filetype = b || "png", this.svgSupport = this.supportsSvg(),
+            this.svgSupport || (this.images = document.getElementsByTagName("img"), this.imgL = this.images.length,
             this.fallbacks());
         },
         fallbacks: function() {
@@ -510,15 +510,12 @@ window.grunticon = function(a) {
     }
 };
 
-(function(a) {
-    var b = "//localhost:9000/images/icons/";
-    a([ b + "icons.data.svg.css", b + "icons.data.png.css", b + "icons.fallback.css" ]);
-})(grunticon);
+
 
 /*!
  * classie - class helper functions
  * from bonzo https://github.com/ded/bonzo
- * 
+ *
  * classie.has( elem, 'my-class' ) -> true/false
  * classie.add( elem, 'my-new-class' )
  * classie.remove( elem, 'my-unwanted-class' )
@@ -604,7 +601,7 @@ var mp = {
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2013, Codrops
  * http://www.codrops.com
  */
