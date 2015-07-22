@@ -19,6 +19,7 @@ system:
           match:
             Id\Content: 127
         folder:
+          controller: tfktelemarkBundle:Item:folderInit
           template: tfktelemarkBundle:full:folder.html.twig
           match:
             Identifier\ContentType: [folder]

@@ -375,6 +375,47 @@ class ItemController extends Controller {
             ), $response );
     }
 
+    public function folderInitAction($locationId, $viewType, $layout = false, array $params = array()) {
+
+        $repository = $this->getRepository();
+        $location = $repository->getLocationService()->loadLocation($locationId);
+        $content = $repository->getContentService()->loadContent($location->contentInfo->id);
+        $show_pagination = false;
+        $items = false;
+
+        if ($content->getFieldValue('show_pagination')->bool) {
+            $show_pagination = true;
+            $searchService = $repository->getSearchService();
+            $query = new Query();
+
+            $query->criterion = new Criterion\LogicalAnd( array(
+                    new Criterion\ContentTypeIdentifier( array('article','linkbox')),
+                    new Criterion\ParentLocationId($locationId),
+                    new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+                ) );
+            $query->sortClauses = array(
+                new SortClause\LocationPriority( Query::SORT_DESC ),
+                new SortClause\DatePublished( Query::SORT_DESC )
+            );
+
+            // Initialize pagination.
+            $items = new Pagerfanta(
+                new ContentSearchAdapter( $query, $repository->getSearchService() )
+            );
+            $items->setMaxPerPage( 12 );
+            $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
+        } 
+        return $this->get( 'ez_content' )->viewLocation(
+            $locationId,
+            $viewType,
+            $layout,
+            array(
+                'show_pagination' => $show_pagination,
+                'items' => $items
+            ) + $params
+        );
+    }
+
     private function getSortOrder($location) {
         // Get sortfield data and sort results based on it. Fall back on Date Published
         // Note: Not all sort-methods have been implemented. Those that have are:
