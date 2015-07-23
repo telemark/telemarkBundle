@@ -237,18 +237,27 @@ class ItemController extends Controller {
         $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
 
         $searchService = $this->getRepository()->getSearchService();
+
+        $subtree = '';
+        foreach ($location->path as $value) {
+            $subtree .= "/" . $value;
+        }
+        $subtree .= "/";
+        $limit_date = date_create()->modify('-6 month')->getTimestamp();
+
         $query = new Query();
 
  		if ($content->getFieldValue('show_children') == '1') {
 
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier( array('article','linkbox')),
-                new Criterion\ParentLocationId($locationId),
+                new Criterion\Subtree($subtree),
+                new Criterion\DateMetadata(Criterion\DateMetadata::MODIFIED,Criterion\Operator::GT,$limit_date),
                 new Criterion\Visibility( Criterion\Visibility::VISIBLE )
             ) );
         $query->sortClauses = array(
             new SortClause\LocationPriority( Query::SORT_DESC ),
-            new SortClause\DatePublished( Query::SORT_DESC )
+            new SortClause\DateModified( Query::SORT_DESC )
         );
 
         // Initialize pagination.
@@ -402,7 +411,10 @@ class ItemController extends Controller {
             $items = new Pagerfanta(
                 new ContentSearchAdapter( $query, $repository->getSearchService() )
             );
-            $items->setMaxPerPage( 12 );
+
+            $count = $content->getFieldValue('pagination_count')->value;
+            if ($count == 0) $count = 12;
+            $items->setMaxPerPage($count);
             $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
         } 
         return $this->get( 'ez_content' )->viewLocation(

@@ -17,6 +17,15 @@
 	{% block facebookMeta %}{% endblock %}
 </head>
 <body>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=104427336329204";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
   <div class="menu-container">
     <div id="mp-pusher" class="menu-pusher">
 			{% if location is defined and not location.isDraft %}
@@ -41,11 +50,10 @@
 				{% endif %}
 			{% endblock %}
 
-			<main id="main" role="main" tabindex="-1">
 				<!-- Main area: START -->
 				{% block content %}{% endblock %}
 				<!-- Main area: END -->
-			</main>
+
 			<!-- Footer area: START -->
 			{% include 'tfktelemarkBundle::page_footer.html.twig' %}
 		</div>
