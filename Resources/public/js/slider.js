@@ -515,7 +515,8 @@
 (function() {
     var a = $(window), b, c;
     function d() {
-        return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
+        //return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
+        return 1;
     }
     a.load(function() {
         $(".slider").flexslider({

@@ -2,7 +2,7 @@
 {% extends "tfktelemarkBundle::pagelayout.html.twig" %}
 
 {% block content %}
-
+    <div class="constrained-content content">
     <h1>{{ 'Søk'|trans }}</h1>
 
     {% include form_template with { form: form, form_action: path( route, {'context': context} )} %}
@@ -30,6 +30,6 @@
             </div>
         {% endif %}
     {% endif %}
-
+</div>
 {% endblock %}
 

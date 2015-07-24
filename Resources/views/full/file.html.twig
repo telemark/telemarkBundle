@@ -1,16 +1,15 @@
 {% extends noLayout ? viewbaseLayout : "tfktelemarkBundle::pagelayout.html.twig" %}
 
 {% block content %}
-  
-   <div class="content">
-    <div class="constrained-content">
-	 <main id="main" role="main" tabindex="-1" class="main">
-	 
+
+
+	   <div class="constrained-content content">
+      <div class="main">
         <div class="main__center">
-	{% include "file:extension/ezdemo/design/ezdemo/override/templates/full/file.tpl"  with {"node": location} %}
+	         {% include "file:extension/ezdemo/design/ezdemo/override/templates/full/file.tpl"  with {"node": location} %}
 	      </div>
-	
-	 <nav role="navigation" class="main__left">
+	     <aside class="main__right"></aside>
+	     <nav role="navigation" class="main__left">
 
         {% if location.path[2] is defined %}
 
@@ -30,8 +29,8 @@
                     {'locationId': location.id, 'currentLocationId': locId}
                 )
             ) }}
-              </nav> 
-	  </main>
+        </nav> 
     </div>
-  </div> 	
+     </div> 
+
 {% endblock %}

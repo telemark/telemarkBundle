@@ -86,3 +86,29 @@ input #basicsearch_term {
 	font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
 }
 
+.slider__slide, .top-image__text-wrapper {
+    background-color: #007c97;
+}
+
+.top-image__text-wrapper {
+    color: #fff;
+}
+
+@media all and (min-width: 769px) {
+
+    .slider__slide img {
+        float: left;
+        width: 59.5%;
+        background-color: #fff;
+        padding-right: 0.5%
+    }
+
+    .top-image__text-wrapper {
+        float: left;
+        width: 40%;
+    }
+
+    .slider .top-image__text {
+        padding: 0.5em 20px;
+    }
+}

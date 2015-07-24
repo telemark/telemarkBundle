@@ -252,12 +252,12 @@ class ItemController extends Controller {
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier( array('article','linkbox')),
                 new Criterion\Subtree($subtree),
-                new Criterion\DateMetadata(Criterion\DateMetadata::MODIFIED,Criterion\Operator::GT,$limit_date),
+                new Criterion\DateMetadata(Criterion\DateMetadata::CREATED,Criterion\Operator::GT,$limit_date),
                 new Criterion\Visibility( Criterion\Visibility::VISIBLE )
             ) );
         $query->sortClauses = array(
             new SortClause\LocationPriority( Query::SORT_DESC ),
-            new SortClause\DateModified( Query::SORT_DESC )
+            new SortClause\DatePublished( Query::SORT_DESC )
         );
 
         // Initialize pagination.
