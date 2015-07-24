@@ -391,10 +391,10 @@ class ItemController extends Controller {
         $content = $repository->getContentService()->loadContent($location->contentInfo->id);
         $show_pagination = false;
         $items = false;
+        $searchService = $repository->getSearchService();
 
         if ($content->getFieldValue('show_pagination')->bool) {
             $show_pagination = true;
-            $searchService = $repository->getSearchService();
             $query = new Query();
 
             $query->criterion = new Criterion\LogicalAnd( array(
@@ -416,14 +416,35 @@ class ItemController extends Controller {
             if ($count == 0) $count = 12;
             $items->setMaxPerPage($count);
             $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
-        } 
+        }
+
+        //henter eventuelle infobokser
+        $query = new Query();
+        $query->criterion = new Criterion\LogicalAnd( array(
+                new Criterion\ContentTypeIdentifier('infobox'),
+                new Criterion\ParentLocationId($locationId),
+                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+            ) );
+        $query->sortClauses = $this->getSortOrder($location);
+
+        $query->limit = 50;
+
+        $infoboxes = array();
+        $result = $searchService->findContent( $query );
+        if ($result->totalCount > 0) {
+            $infoboxes = true;
+        } else {
+            $infoboxes = false;
+        }
+
         return $this->get( 'ez_content' )->viewLocation(
             $locationId,
             $viewType,
             $layout,
             array(
                 'show_pagination' => $show_pagination,
-                'items' => $items
+                'items' => $items,
+                'infoboxes' => $infoboxes
             ) + $params
         );
     }
