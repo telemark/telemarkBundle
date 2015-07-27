@@ -1,4 +1,4 @@
-/*! telemark-frontend - v0.0.0 - 2015-06-18 */!function(a) {
+/*! telemark-frontend - v0.0.0 - 2015-07-27 */!function(a) {
     a.flexslider = function(b, c) {
         var d = a(b);
         d.vars = a.extend({}, a.flexslider.defaults, c);
@@ -514,10 +514,6 @@
 
 (function() {
     var a = $(window), b, c;
-    function d() {
-        //return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3;
-        return 1;
-    }
     a.load(function() {
         $(".slider").flexslider({
             namespace: "slider__",
@@ -525,22 +521,7 @@
             animation: "slide",
             slideshow: false,
             prevText: "Forrige",
-            nextText: "Neste",
-            itemWidth: 358,
-            itemMargin: 33,
-            minItems: d(),
-            maxItems: d(),
-            start: function(a) {
-                b = a;
-            }
+            nextText: "Neste"
         });
-    });
-    a.resize(function() {
-        clearTimeout(c);
-        c = setTimeout(function() {
-            var a = d();
-            b.vars.minItems = a;
-            b.vars.maxItems = a;
-        }, 100);
     });
 })();
