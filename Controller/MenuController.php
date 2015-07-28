@@ -34,8 +34,9 @@ class MenuController extends Controller
         $response = new Response;
 
         $menu = $this->getMenu( 'top' );
-
+        $menu->setChildrenAttribute('class', 'nav side-menu');
         $parameters = array( 'menu' => $menu );
+
         /*if ( isset( $secondLevelLocationId ) && isset( $menu[$secondLevelLocationId] ) )
         {
             $parameters['submenu'] = $menu[$secondLevelLocationId];
@@ -59,6 +60,7 @@ class MenuController extends Controller
 
         $menu = $this->getMenu( 'top' );
         $parameters = array( 'menu' => $menu );
+
         if ( isset( $secondLevelLocationId ) && isset( $menu[$secondLevelLocationId] ) )
         {
             $parameters['submenu'] = $menu[$secondLevelLocationId];
