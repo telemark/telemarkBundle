@@ -1,17 +1,11 @@
-<div class="slider">
-  <ul class="slider__slides">
-        {% for item in items %}
-            {{
-                render_esi(
-                    controller(
-                        "ez_content:viewLocation",
-                                {
-                                    "locationId": item.contentInfo.mainLocationId,
-                                    "viewType": "line"
-                                }
-                    )
-                )
-            }}
-        {% endfor %}
-  </ul>
+<div class="content">
+  <div class="slider-wrapper">
+    <div class="constrained">
+      <div class="slider">Embed
+        <ul class="slider__slides">
+          {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['slide'] , 'viewType': 'embed-inline' }} )) }}
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
