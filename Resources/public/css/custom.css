@@ -85,3 +85,7 @@ body {
 input #basicsearch_term {
 	font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
 }
+
+.slider__slide a {
+    float: left;
+}
