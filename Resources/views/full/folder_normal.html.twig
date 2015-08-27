@@ -75,18 +75,9 @@
                 {% if items|length() > 0 %}
                   <div class="grid grid--12">
                     {% for item in items %}
-                       {{ render_esi( controller( "ez_content:viewLocation", { "locationId": item.contentInfo.mainLocationId, "viewType": "line" } )) }} 
+                       {{ render_esi( controller( "ez_content:viewLocation", { "locationId": item.contentInfo.mainLocationId, "viewType": "line", 'params': { 'element_size' : 'medium' } } )) }} 
                     {% endfor %}
                   </div>
-                    {% if items.haveToPaginate() %}
-                       {{ pagerfanta( items, 'twitter_bootstrap_translated', 
-                       {'routeName': location, 
-                       'prev_message': 'Forrige',
-                       'next_message': 'Neste',
-                     'css_next_class': 'pagination__next',
-                     'css_prev_class': 'pagination__prev'
-                      } ) }}
-                    {% endif %}
                   {% endif %}
               {% else %}
                 {% if infoboxes %}
@@ -136,6 +127,18 @@
                 )
             ) }}
               </nav>
+
+      {% if show_pagination %}
+        {% if items.haveToPaginate() %}
+           {{ pagerfanta( items, 'twitter_bootstrap_translated', 
+           {'routeName': location, 
+           'prev_message': 'Forrige',
+           'next_message': 'Neste',
+         'css_next_class': 'pagination__next',
+         'css_prev_class': 'pagination__prev'
+          } ) }}
+        {% endif %}
+      {% endif %}
     </div>
   </div>
 {% endblock %}
