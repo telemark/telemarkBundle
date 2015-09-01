@@ -69,6 +69,15 @@ body {
     padding: 0.5em 1em;
 }
 
+.pagination__next a, .pagination__prev a {
+    padding: 0;
+}
+
+.main .pagination {
+    float: left;
+    width: 100%;
+}
+
 /*.main__center {
     display: inline-block;
     float: none;
@@ -84,4 +93,8 @@ body {
 */
 input #basicsearch_term {
 	font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+}
+
+.slider__slide a {
+    float: left;
 }

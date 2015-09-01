@@ -26,41 +26,45 @@ var tabsIdList = [];
         },
         _init: function() {
             var c = this, d = c.el, e = a("<ul></ul>").addClass(c.options.tabsBarClass);
-            a(d).find(".js-tabs-tab").each(function(d) {
-                var f = encodeURIComponent(a(this).text().toLowerCase().replace(" ", "-")), g = f, h = a("<a></a>").addClass(c.options.tabsBarItemLink + " " + c.options.tabsBarItemJSLink).text(a(this).text()), i = a("<li></li>").addClass(c.options.tabsBarItemClass), j = 1, k = a(this).next();
-                while (a.inArray(g, b) !== -1) {
-                    g = f + j;
-                    j++;
-                }
-                b.push(g);
-                h.attr("href", function() {
-                    return "#" + g;
-                }).data("index", d);
-                i.append(h);
-                a(this).wrap(a("<a></a>").addClass(c.options.tabsBarItemJSLink).attr("href", function() {
-                    return "#" + g;
-                }).data("index", d));
-                i.append(h);
-                e.append(i);
-                k.attr("id", g).attr("tabindex", "-1").addClass(c.options.contentHidden);
-                c.tabs.push(h);
-                c.content.push(k);
-                if (location.hash.substr(1) === g) {
-                    c.activeTab = d;
-                }
-            });
-            c._setActiveTab(this.activeTab, true);
-            a(d).prepend(e);
-            a(d).addClass("tabs--ready").on("click", c.options.tabsBarItemJSLinkClass, function() {
-                var b = a(this).attr("href");
-                if (history.pushState) {
-                    history.pushState(null, null, b);
-                } else {
-                    location.hash = b;
-                }
-                c._setActiveTab(a(this).data("index"));
-                return false;
-            });
+            if (a(d).find(".js-tabs-tab").length > 1 ) {
+                a(d).find(".js-tabs-tab").each(function(d) {
+                    var f = encodeURIComponent(a(this).text().toLowerCase().replace(" ", "-")), g = f, h = a("<a></a>").addClass(c.options.tabsBarItemLink + " " + c.options.tabsBarItemJSLink).text(a(this).text()), i = a("<li></li>").addClass(c.options.tabsBarItemClass), j = 1, k = a(this).next();
+                    while (a.inArray(g, b) !== -1) {
+                        g = f + j;
+                        j++;
+                    }
+                    b.push(g);
+                    h.attr("href", function() {
+                        return "#" + g;
+                    }).data("index", d);
+                    i.append(h);
+                    a(this).wrap(a("<a></a>").addClass(c.options.tabsBarItemJSLink).attr("href", function() {
+                        return "#" + g;
+                    }).data("index", d));
+                    i.append(h);
+                    e.append(i);
+                    k.attr("id", g).attr("tabindex", "-1").addClass(c.options.contentHidden);
+                    c.tabs.push(h);
+                    c.content.push(k);
+                    if (location.hash.substr(1) === g) {
+                        c.activeTab = d;
+                    }
+                });
+                c._setActiveTab(this.activeTab, true);
+                a(d).prepend(e);
+                a(d).addClass("tabs--ready").on("click", c.options.tabsBarItemJSLinkClass, function() {
+                    var b = a(this).attr("href");
+                    if (history.pushState) {
+                        history.pushState(null, null, b);
+                    } else {
+                        location.hash = b;
+                    }
+                    c._setActiveTab(a(this).data("index"));
+                    return false;
+                });
+            } else {
+                a(d).find(".js-tabs-tab").addClass('visuallyhidden');
+            }
         },
         _setActiveTab: function(b, c) {
             var c = c ? c : false, d = this.activeTab, e = this.tabs[d], f = this.content[d], g = f.prev().children(this.options.tabsContentHeaderClass), h = this.tabs[b], i = this.content[b], j = i.prev().children(this.options.tabsContentHeaderClass);

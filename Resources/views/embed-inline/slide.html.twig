@@ -1,0 +1,37 @@
+{% set imageId = ez_field_value( content, 'image' ) %}
+
+{% if not ez_is_field_empty( content, 'internal_resource' ) %}
+	{% set externalResourceId = ez_field_value( content, 'internal_resource' ) %}
+	{% set this_block_url = url( 'ez_urlalias', {'contentId': externalResourceId} ) %}
+{% else %}
+	{% set this_block_url = ez_field_value( content, 'url' ) %}
+{% endif %}
+
+{% if not ez_is_field_empty( content, 'open_in_new_window' ) %}
+	{% set this_block_target = '_blank' %}	
+{% else %}
+	{% set this_block_target = '_self' %}
+{% endif %}
+
+<li class="slider__slide">
+  <a href={{ this_block_url }} target={{ this_block_target }} class="top-image top-image--large">
+    {% if imageId is defined %}
+    {{  render(
+          controller( 
+            "ez_content:viewContent", 
+                {
+                  "contentId": imageId.destinationContentId,
+                  "viewType": "responsive",
+                  "params": 
+                    { 
+                      "image_title": ez_field_value(content, 'title'),
+                      "image_text" : ez_field_value(content, 'text'),
+                      "image_type" : "slider"
+                    }
+                }
+          )
+        ) 
+    }}
+  {% endif %}
+  </a>
+</li>
