@@ -1,7 +1,7 @@
 <div class="content">
-  <div class="slider-wrapper">
+  <div class="slider-wrapper slider-wrapper--fullwidth">
     <div class="constrained">
-      <div class="slider">
+      <div class="slider slider--fullwidth">
         <ul class="slider__slides">
           {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['slide'] , 'viewType': 'line' }} )) }}
         </ul>

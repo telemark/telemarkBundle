@@ -1,11 +1,9 @@
-<div class="content">
-  <div class="slider-wrapper">
-    <div class="constrained">
-      <div class="slider">
-        <ul class="slider__slides">
-          {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['slide'] , 'viewType': 'embed-inline' }} )) }}
-        </ul>
-      </div>
+<div class="slider-wrapper slider-wrapper--inline">
+  <div class="constrained">
+    <div class="slider slider--inline">
+      <ul class="slider__slides">
+        {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': content.contentInfo.mainLocationId,  'params' : { 'class' : ['slide'] , 'viewType': 'embed-inline' }} )) }}
+      </ul>
     </div>
   </div>
 </div>
