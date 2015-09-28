@@ -182,6 +182,10 @@ system:
           template: tfktelemarkBundle:line:linkbox.html.twig
           match:
             Identifier\ContentType: [linkbox]
+        tabboks:
+          template: tfktelemarkBundle:line:tabboks.html.twig
+          match:
+            Identifier\ContentType: [tabboks]
       line:
         kampanjecontainer:
           template: tfktelemarkBundle:line:slide_container.html.twig
