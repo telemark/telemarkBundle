@@ -193,7 +193,17 @@ class Builder
 
         $query->query = new Criterion\LogicalAnd(
             array(
-                new Criterion\ContentTypeIdentifier( array('folder', 'event_calendar', 'survey', 'frontpage') ),
+                new Criterion\LogicalOr(
+                    array(
+                        new Criterion\ContentTypeIdentifier( array('event_calendar', 'survey', 'frontpage') ),
+                        new Criterion\LogicalAnd(
+                            array(
+                                new Criterion\ContentTypeIdentifier( array('folder') ),
+                                new Criterion\Field('hide_from_main_menu', Criterion\Operator::EQ, '0')
+                            )
+                        )
+                    )
+                ),
                 new Criterion\Visibility( Criterion\Visibility::VISIBLE ),
                 new Criterion\ParentLocationId( $rootLocationId ),
                 new Criterion\LanguageCode( $this->configResolver->getParameter( 'languages' ) )
