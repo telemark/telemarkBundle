@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
 use Pagerfanta\Pagerfanta;
 
+use tfk\telemarkBundle\Helper\SortLocationHelper;
+
 class ItemController extends Controller {
 
 	/**
@@ -79,7 +81,7 @@ class ItemController extends Controller {
         );
     }
 	public function childrenAction($locationId, $params = array()) {
-		// children
+        // children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
 
@@ -175,50 +177,64 @@ class ItemController extends Controller {
     }
 	public function mainMenuAction($locationId) {
 
-        $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $locationId );
-        $results = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-        $locationList = array();
-        $subLocationList = array();
-        foreach ( $results->locations as $result ) {
+        $response = new Response;
+        $response->headers->set( 'X-Location-Id', $locationId );
+        $response->setPublic();
+        $response->setSharedMaxAge( 3600 );    
+            
+        $location = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $searchService = $this->getRepository()->getSearchService();
+        $query = new LocationQuery();
+        $arrCriteria[] = new Criterion\ParentLocationId( $locationId );
+        $arrCriteria[] = new Criterion\ContentTypeIdentifier( array('folder') );
+        $arrCriteria[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
+        $arrCriteria[] = new Criterion\Field( "hide_from_main_menu", Criterion\Operator::EQ, false );
+        $query->criterion = new Criterion\LogicalAnd($arrCriteria);
 
-            $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
-            $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
+        $sorting = new SortLocationHelper();
+        $sortingClause = $sorting->getSortClauseFromLocation( $location );
+        $query->sortClauses = array($sortingClause);
 
-            if ($content->getFieldValue('hide_from_main_menu') == '0') {
-                $locationList[] = $currentLocation;
-                $subresults = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-                foreach ($subresults->locations as $subresult) {
-                    if (!empty($subresult)) {
-                        $subLocationList[$result->contentInfo->mainLocationId][] = $this->getRepository()->getLocationService()->loadLocation( $subresult->contentInfo->mainLocationId );
-                    }
-                }
-            }
+        $result = $searchService->findLocations( $query );
 
-
+        $items = array();
+        foreach($result->searchHits as $hit)
+        {
+            $items[] = $hit->valueObject;
         }
-        return $this->render('tfktelemarkBundle:parts:menu_main.html.twig', array( 'list' => $locationList, 'sublist' => $subLocationList) );
+
+        return $this->render('tfktelemarkBundle:parts:menu_main.html.twig', array( 'list' => $items ), $response );
     }
 
 	public function leftMenuAction($locationId) {
 
-        $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $locationId );
-        $results = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-        $locationList = array();
-        $subLocationList = array();
-        foreach ( $results->locations as $result ) {
+        $response = new Response;
+        $response->headers->set( 'X-Location-Id', $locationId );
+        $response->setPublic();
+        $response->setSharedMaxAge( 3600 ); 
 
-            $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
-            $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
+        $location = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $searchService = $this->getRepository()->getSearchService();
+        $query = new LocationQuery();
+        $arrCriteria[] = new Criterion\ParentLocationId( $locationId );
+        $arrCriteria[] = new Criterion\ContentTypeIdentifier( array('folder') );
+        $arrCriteria[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
+        $arrCriteria[] = new Criterion\Field( "hide_from_main_menu", Criterion\Operator::EQ, false );
+        $query->criterion = new Criterion\LogicalAnd($arrCriteria);
 
-                $locationList[] = $currentLocation;
-                $subresults = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-                foreach ($subresults->locations as $subresult) {
-                    if (!empty($subresult)) {
-                        $subLocationList[$result->contentInfo->mainLocationId][] = $this->getRepository()->getLocationService()->loadLocation( $subresult->contentInfo->mainLocationId );
-                    }
-                }
+        $sorting = new SortLocationHelper();
+        $sortingClause = $sorting->getSortClauseFromLocation( $location );
+        $query->sortClauses = array($sortingClause);
+
+        $result = $searchService->findLocations( $query );
+
+        $items = array();
+        foreach($result->searchHits as $hit)
+        {
+            $items[] = $hit->valueObject;
         }
-        return $this->render('tfktelemarkBundle:parts:menu_left.html.twig', array( 'list' => $locationList, 'sublist' => $subLocationList) );
+
+        return $this->render('tfktelemarkBundle:parts:menu_left.html.twig', array( 'list' => $locationList), $response );
     }
 
     public function arkivAction($locationId)
