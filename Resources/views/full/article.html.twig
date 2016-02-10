@@ -29,6 +29,10 @@
                         {% endif %} / Publisert: {{ location.contentInfo.publishedDate|date("d.m.Y") }} / Oppdatert: {{ location.contentInfo.modificationDate|date("d.m.Y") }}
         </div>
     </header>
+    {#
+        not available in content type article
+        "image_text" : ez_field_value(content, 'image_text'),
+    #}
     {% if imageId is defined %}
         {{ render(
             controller( 
@@ -38,7 +42,6 @@
                       "viewType": "responsive",
                       "params": { 
                                     "image_title": ez_field_value(content, 'image_title'),
-                                    "image_text" : ez_field_value(content, 'image_text'),
                                     "image_type": "ingress"
                                 }
                   }
