@@ -259,38 +259,35 @@ class ItemController extends Controller {
             $subtree .= "/" . $value;
         }
         $subtree .= "/";
-        $limit_date = date_create()->modify('-6 month')->getTimestamp();
 
         $query = new Query();
+        
+        if ($content->getFieldValue('show_children') == '1')
+        {
+            $query->criterion = new Criterion\LogicalAnd( array(
+                    new Criterion\ContentTypeIdentifier( array('article','linkbox')),
+                    new Criterion\Subtree($subtree),
+                    new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+                ) );
+            $query->sortClauses = array(
+                new SortClause\DatePublished( Query::SORT_DESC )
+            );
 
- 		if ($content->getFieldValue('show_children') == '1') {
+            // Initialize pagination.
+            $items = new Pagerfanta(
+                new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
+            );
+            $items->setMaxPerPage( 6 );
+            $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
 
-        $query->criterion = new Criterion\LogicalAnd( array(
-                new Criterion\ContentTypeIdentifier( array('article','linkbox')),
-                new Criterion\Subtree($subtree),
-                new Criterion\DateMetadata(Criterion\DateMetadata::CREATED,Criterion\Operator::GT,$limit_date),
-                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
-            ) );
-        $query->sortClauses = array(
-            new SortClause\LocationPriority( Query::SORT_DESC ),
-            new SortClause\DatePublished( Query::SORT_DESC )
-        );
-
-        // Initialize pagination.
-        $items = new Pagerfanta(
-            new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
-        );
-        $items->setMaxPerPage( 6 );
-        $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
-
-        return $this->render(
-            'tfktelemarkBundle:full:folder_arkiv.html.twig',
-            array(
-                'items' => $items,
-                'location' => $location,
-                'content' => $content
-            ), $response );
-		}
+            return $this->render(
+                'tfktelemarkBundle:full:folder_arkiv.html.twig',
+                array(
+                    'items' => $items,
+                    'location' => $location,
+                    'content' => $content
+                ), $response );
+        }
     }
 
     public function infoboxRelatedAction($locationId) {
