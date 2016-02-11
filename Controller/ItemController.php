@@ -185,11 +185,22 @@ class ItemController extends Controller {
         $location = $this->getRepository()->getLocationService()->loadLocation( $locationId );
         $searchService = $this->getRepository()->getSearchService();
         $query = new LocationQuery();
-        $arrCriteria[] = new Criterion\ParentLocationId( $locationId );
-        $arrCriteria[] = new Criterion\ContentTypeIdentifier( array('folder') );
-        $arrCriteria[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
-        $arrCriteria[] = new Criterion\Field( "hide_from_main_menu", Criterion\Operator::EQ, false );
-        $query->criterion = new Criterion\LogicalAnd($arrCriteria);
+        $arrCriteria1[] = new Criterion\ParentLocationId( $locationId );
+        $arrCriteria1[] = new Criterion\ContentTypeIdentifier( array('folder') );
+        $arrCriteria1[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
+        $arrCriteria1[] = new Criterion\Field( "hide_from_main_menu", Criterion\Operator::EQ, false );
+
+        $arrCriteria2[] = new Criterion\ParentLocationId( $locationId );
+        $arrCriteria2[] = new Criterion\ContentTypeIdentifier( array('event_calendar') );
+        $arrCriteria2[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
+
+        $arrCriteria3[] = new Criterion\LogicalAnd($arrCriteria1);
+        $arrCriteria3[] = new Criterion\LogicalAnd($arrCriteria2);
+
+        $query->criterion = new Criterion\LogicalOr($arrCriteria3);
+
+        //$query->criterion = new Criterion\LogicalAnd($arrCriteria);
+        //$query->criterion = new Criterion\LogicalAnd($arrCriteria);
 
         $sorting = new SortLocationHelper();
         $sortingClause = $sorting->getSortClauseFromLocation( $location );
