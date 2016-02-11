@@ -199,9 +199,6 @@ class ItemController extends Controller {
 
         $query->criterion = new Criterion\LogicalOr($arrCriteria3);
 
-        //$query->criterion = new Criterion\LogicalAnd($arrCriteria);
-        //$query->criterion = new Criterion\LogicalAnd($arrCriteria);
-
         $sorting = new SortLocationHelper();
         $sortingClause = $sorting->getSortClauseFromLocation( $location );
         $query->sortClauses = array($sortingClause);
