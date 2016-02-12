@@ -102,6 +102,7 @@ class ItemController extends Controller {
                 new Criterion\ParentLocationId($locationId),
                 new Criterion\Visibility( Criterion\Visibility::VISIBLE )
             ) );
+
         $query->sortClauses = $this->getSortOrder($location);
 
         $query->limit = 50;
@@ -126,6 +127,59 @@ class ItemController extends Controller {
                 'params' => $params
             ), $response );
     }
+
+    public function childrenItemsAction($locationId, $params = array()) {
+        // children
+        // Setting HTTP cache for the response to be public and with a TTL of 1 day.
+        $response = new Response;
+
+        $response->setPublic();
+        $response->setSharedMaxAge( 86400 );
+        // Menu will expire when top location cache expires.
+        $response->headers->set( 'X-Location-Id', $locationId );
+        // Menu might vary depending on user permissions, so make the cache vary on the user hash.
+        $response->setVary( 'X-User-Hash' );
+
+        $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+
+        $searchService = $this->getRepository()->getSearchService();
+
+        $query = new LocationQuery();
+        $query->criterion = new Criterion\LogicalAnd( array(
+                new Criterion\ContentTypeIdentifier($params['class']),
+                new Criterion\ParentLocationId($locationId),
+                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+        ) );
+
+        $sorting = new SortLocationHelper();
+        $sortingClause = $sorting->getSortClauseFromLocation( $location );
+        $query->sortClauses = array($sortingClause);
+
+        $query->limit = 50;
+
+        $items = array();
+        $result = $searchService->findLocations( $query );
+        if ($result->totalCount > 0) {
+            foreach ($result->searchHits as $item) {
+                $items[] = $item->valueObject;
+            }
+        }
+
+        return $this->render(
+            'tfktelemarkBundle:parts:child_items_loop.html.twig',
+            array(
+                'items' => $items,
+                'location' => $location,
+                'content' => $content,
+                'viewType' => $params['viewType'],
+                'params' => $params
+            ), $response );
+    }
+
+
+
+
     public function randomChildAction($locationId, $params = array()) {
         // children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
