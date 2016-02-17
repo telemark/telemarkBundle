@@ -75,7 +75,7 @@
                 {% if items|length() > 0 %}
                   <div class="grid grid--12">
                     {% for item in items %}
-                       {{ render_esi( controller( "ez_content:viewLocation", { "locationId": item.contentInfo.mainLocationId, "viewType": "line", 'params': { 'element_size' : 'medium' } } )) }} 
+                       {{ render_esi( controller( "ez_content:viewLocation", { "locationId": item.id, "viewType": "line", 'params': { 'element_size' : 'medium' } } )) }} 
                     {% endfor %}
                   </div>
                   {% endif %}

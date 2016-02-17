@@ -8,6 +8,7 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
+use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
@@ -470,7 +471,7 @@ class ItemController extends Controller {
 
         if ($content->getFieldValue('show_pagination')->bool) {
             $show_pagination = true;
-            $query = new Query();
+            $query = new LocationQuery();
 
             $query->criterion = new Criterion\LogicalAnd( array(
                     new Criterion\ContentTypeIdentifier( array('article','linkbox')),
@@ -478,13 +479,13 @@ class ItemController extends Controller {
                     new Criterion\Visibility( Criterion\Visibility::VISIBLE )
                 ) );
             $query->sortClauses = array(
-                new SortClause\LocationPriority( Query::SORT_DESC ),
+                new SortClause\Location\Priority( Query::SORT_DESC ),
                 new SortClause\DatePublished( Query::SORT_DESC )
             );
 
             // Initialize pagination.
             $items = new Pagerfanta(
-                new ContentSearchAdapter( $query, $repository->getSearchService() )
+                new LocationSearchAdapter( $query, $repository->getSearchService() )
             );
 
             $count = $content->getFieldValue('pagination_count')->value;
@@ -494,7 +495,7 @@ class ItemController extends Controller {
         }
 
         //henter eventuelle infobokser
-        $query = new Query();
+        $query = new LocationQuery();
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier('infobox'),
                 new Criterion\ParentLocationId($locationId),
