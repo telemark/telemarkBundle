@@ -70,7 +70,7 @@
           {{ ez_render_field(content, 'description') }}
         {% endif %}
 <div class="grid grid--12">
-        {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['linkbox'] , 'viewType': 'line' }} )) }}
+        {{ render( controller("tfktelemarkBundle:Item:childrenItems", {'locationId': location.id,  'params' : { 'class' : ['linkbox'] , 'viewType': 'line' }} )) }}
         </div>
 
 	  </main>

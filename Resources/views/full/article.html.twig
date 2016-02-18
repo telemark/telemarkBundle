@@ -29,6 +29,10 @@
                         {% endif %} / Publisert: {{ location.contentInfo.publishedDate|date("d.m.Y") }} / Oppdatert: {{ location.contentInfo.modificationDate|date("d.m.Y") }}
         </div>
     </header>
+    {#
+        not available in content type article
+        "image_text" : ez_field_value(content, 'image_text'),
+    #}
     {% if imageId is defined %}
         {{ render(
             controller( 
@@ -38,7 +42,6 @@
                       "viewType": "responsive",
                       "params": { 
                                     "image_title": ez_field_value(content, 'image_title'),
-                                    "image_text" : ez_field_value(content, 'image_text'),
                                     "image_type": "ingress"
                                 }
                   }
@@ -57,13 +60,13 @@
         {{ ez_render_field( content, 'body' ) }}
     {% endif %}
 
-    {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['tabboks'] , 'viewType': 'line' }} )) }}
-    {{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['image_gallery'] , 'viewType': 'line' }} )) }}
+    {{ render( controller("tfktelemarkBundle:Item:childrenItems", {'locationId': location.id,  'params' : { 'class' : ['tabboks'] , 'viewType': 'line' }} )) }}
+    {{ render( controller("tfktelemarkBundle:Item:childrenItems", {'locationId': location.id,  'params' : { 'class' : ['image_gallery'] , 'viewType': 'line' }} )) }}
 
 </article>
 
   	 <aside class="main__right">
-  	{{ render( controller("tfktelemarkBundle:Item:children", {'locationId': location.id,  'params' : { 'class' : ['infobox'] , 'viewType': 'line' }} )) }}
+  	{{ render( controller("tfktelemarkBundle:Item:childrenItems", {'locationId': location.id,  'params' : { 'class' : ['infobox'] , 'viewType': 'line' }} )) }}
 	</aside>
 	 <nav role="navigation" class="main__left">
 

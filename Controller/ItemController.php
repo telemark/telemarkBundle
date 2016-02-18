@@ -8,12 +8,15 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\API\Repository\Values\Content\Query\SortClause;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
+use eZ\Publish\Core\Pagination\Pagerfanta\LocationSearchAdapter;
 use eZ\Publish\API\Repository\Values\Content\Location;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use eZ\Bundle\EzPublishCoreBundle\Controller;
 use Pagerfanta\Pagerfanta;
+
+use tfk\telemarkBundle\Helper\SortLocationHelper;
 
 class ItemController extends Controller {
 
@@ -79,7 +82,7 @@ class ItemController extends Controller {
         );
     }
 	public function childrenAction($locationId, $params = array()) {
-		// children
+        // children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
         $response = new Response;
 
@@ -100,6 +103,7 @@ class ItemController extends Controller {
                 new Criterion\ParentLocationId($locationId),
                 new Criterion\Visibility( Criterion\Visibility::VISIBLE )
             ) );
+
         $query->sortClauses = $this->getSortOrder($location);
 
         $query->limit = 50;
@@ -124,6 +128,59 @@ class ItemController extends Controller {
                 'params' => $params
             ), $response );
     }
+
+    public function childrenItemsAction($locationId, $params = array()) {
+        // children
+        // Setting HTTP cache for the response to be public and with a TTL of 1 day.
+        $response = new Response;
+
+        $response->setPublic();
+        $response->setSharedMaxAge( 86400 );
+        // Menu will expire when top location cache expires.
+        $response->headers->set( 'X-Location-Id', $locationId );
+        // Menu might vary depending on user permissions, so make the cache vary on the user hash.
+        $response->setVary( 'X-User-Hash' );
+
+        $location  = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $content = $this->getRepository()->getContentService()->loadContentByContentInfo( $location->getContentInfo() );
+
+        $searchService = $this->getRepository()->getSearchService();
+
+        $query = new LocationQuery();
+        $query->criterion = new Criterion\LogicalAnd( array(
+                new Criterion\ContentTypeIdentifier($params['class']),
+                new Criterion\ParentLocationId($locationId),
+                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+        ) );
+
+        $sorting = new SortLocationHelper();
+        $sortingClause = $sorting->getSortClauseFromLocation( $location );
+        $query->sortClauses = array($sortingClause);
+
+        $query->limit = 50;
+
+        $items = array();
+        $result = $searchService->findLocations( $query );
+        if ($result->totalCount > 0) {
+            foreach ($result->searchHits as $item) {
+                $items[] = $item->valueObject;
+            }
+        }
+
+        return $this->render(
+            'tfktelemarkBundle:parts:child_items_loop.html.twig',
+            array(
+                'items' => $items,
+                'location' => $location,
+                'content' => $content,
+                'viewType' => $params['viewType'],
+                'params' => $params
+            ), $response );
+    }
+
+
+
+
     public function randomChildAction($locationId, $params = array()) {
         // children
         // Setting HTTP cache for the response to be public and with a TTL of 1 day.
@@ -175,52 +232,72 @@ class ItemController extends Controller {
     }
 	public function mainMenuAction($locationId) {
 
-        $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $locationId );
-        $results = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-        $locationList = array();
-        $subLocationList = array();
-        foreach ( $results->locations as $result ) {
+        $response = new Response;
+        $response->headers->set( 'X-Location-Id', $locationId );
+        $response->setPublic();
+        $response->setSharedMaxAge( 3600 );    
+            
+        $location = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $searchService = $this->getRepository()->getSearchService();
+        $query = new LocationQuery();
+        $arrCriteria1[] = new Criterion\ParentLocationId( $locationId );
+        $arrCriteria1[] = new Criterion\ContentTypeIdentifier( array('folder') );
+        $arrCriteria1[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
+        $arrCriteria1[] = new Criterion\Field( "hide_from_main_menu", Criterion\Operator::EQ, false );
 
-            $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
-            $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
+        $arrCriteria2[] = new Criterion\ParentLocationId( $locationId );
+        $arrCriteria2[] = new Criterion\ContentTypeIdentifier( array('event_calendar') );
+        $arrCriteria2[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
 
-            if ($content->getFieldValue('hide_from_main_menu') == '0') {
-                $locationList[] = $currentLocation;
-                $subresults = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-                foreach ($subresults->locations as $subresult) {
-                    if (!empty($subresult)) {
-                        $subLocationList[$result->contentInfo->mainLocationId][] = $this->getRepository()->getLocationService()->loadLocation( $subresult->contentInfo->mainLocationId );
-                    }
-                }
-            }
+        $arrCriteria3[] = new Criterion\LogicalAnd($arrCriteria1);
+        $arrCriteria3[] = new Criterion\LogicalAnd($arrCriteria2);
 
+        $query->criterion = new Criterion\LogicalOr($arrCriteria3);
 
+        $sorting = new SortLocationHelper();
+        $sortingClause = $sorting->getSortClauseFromLocation( $location );
+        $query->sortClauses = array($sortingClause);
+
+        $result = $searchService->findLocations( $query );
+
+        $items = array();
+        foreach($result->searchHits as $hit)
+        {
+            $items[] = $hit->valueObject;
         }
-        return $this->render('tfktelemarkBundle:parts:menu_main.html.twig', array( 'list' => $locationList, 'sublist' => $subLocationList) );
+
+        return $this->render('tfktelemarkBundle:parts:menu_main.html.twig', array( 'list' => $items ), $response );
     }
 
 	public function leftMenuAction($locationId) {
 
-        $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $locationId );
-        $results = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-        $locationList = array();
-        $subLocationList = array();
-        foreach ( $results->locations as $result ) {
+        $response = new Response;
+        $response->headers->set( 'X-Location-Id', $locationId );
+        $response->setPublic();
+        $response->setSharedMaxAge( 3600 ); 
 
-            $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
-            $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
+        $location = $this->getRepository()->getLocationService()->loadLocation( $locationId );
+        $searchService = $this->getRepository()->getSearchService();
+        $query = new LocationQuery();
+        $arrCriteria[] = new Criterion\ParentLocationId( $locationId );
+        $arrCriteria[] = new Criterion\ContentTypeIdentifier( array('folder') );
+        $arrCriteria[] = new Criterion\Visibility( Criterion\Visibility::VISIBLE );
+        $arrCriteria[] = new Criterion\Field( "hide_from_main_menu", Criterion\Operator::EQ, false );
+        $query->criterion = new Criterion\LogicalAnd($arrCriteria);
 
-            if ($content->getFieldValue('hide_from_main_menu') == '0') {
-                $locationList[] = $currentLocation;
-                $subresults = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
-                foreach ($subresults->locations as $subresult) {
-                    if (!empty($subresult)) {
-                        $subLocationList[$result->contentInfo->mainLocationId][] = $this->getRepository()->getLocationService()->loadLocation( $subresult->contentInfo->mainLocationId );
-                    }
-                }
-            }
+        $sorting = new SortLocationHelper();
+        $sortingClause = $sorting->getSortClauseFromLocation( $location );
+        $query->sortClauses = array($sortingClause);
+
+        $result = $searchService->findLocations( $query );
+
+        $items = array();
+        foreach($result->searchHits as $hit)
+        {
+            $items[] = $hit->valueObject;
         }
-        return $this->render('tfktelemarkBundle:parts:menu_left.html.twig', array( 'list' => $locationList, 'sublist' => $subLocationList) );
+
+        return $this->render('tfktelemarkBundle:parts:menu_left.html.twig', array( 'list' => $locationList), $response );
     }
 
     public function arkivAction($locationId)
@@ -245,38 +322,35 @@ class ItemController extends Controller {
             $subtree .= "/" . $value;
         }
         $subtree .= "/";
-        $limit_date = date_create()->modify('-6 month')->getTimestamp();
 
         $query = new Query();
+        
+        if ($content->getFieldValue('show_children') == '1')
+        {
+            $query->criterion = new Criterion\LogicalAnd( array(
+                    new Criterion\ContentTypeIdentifier( array('article','linkbox')),
+                    new Criterion\Subtree($subtree),
+                    new Criterion\Visibility( Criterion\Visibility::VISIBLE )
+                ) );
+            $query->sortClauses = array(
+                new SortClause\DatePublished( Query::SORT_DESC )
+            );
 
- 		if ($content->getFieldValue('show_children') == '1') {
+            // Initialize pagination.
+            $items = new Pagerfanta(
+                new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
+            );
+            $items->setMaxPerPage( 6 );
+            $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
 
-        $query->criterion = new Criterion\LogicalAnd( array(
-                new Criterion\ContentTypeIdentifier( array('article','linkbox')),
-                new Criterion\Subtree($subtree),
-                new Criterion\DateMetadata(Criterion\DateMetadata::CREATED,Criterion\Operator::GT,$limit_date),
-                new Criterion\Visibility( Criterion\Visibility::VISIBLE )
-            ) );
-        $query->sortClauses = array(
-            new SortClause\LocationPriority( Query::SORT_DESC ),
-            new SortClause\DatePublished( Query::SORT_DESC )
-        );
-
-        // Initialize pagination.
-        $items = new Pagerfanta(
-            new ContentSearchAdapter( $query, $this->getRepository()->getSearchService() )
-        );
-        $items->setMaxPerPage( 6 );
-        $items->setCurrentPage( $this->getRequest()->get( 'page', 1 ) );
-
-        return $this->render(
-            'tfktelemarkBundle:full:folder_arkiv.html.twig',
-            array(
-                'items' => $items,
-                'location' => $location,
-                'content' => $content
-            ), $response );
-		}
+            return $this->render(
+                'tfktelemarkBundle:full:folder_arkiv.html.twig',
+                array(
+                    'items' => $items,
+                    'location' => $location,
+                    'content' => $content
+                ), $response );
+        }
     }
 
     public function infoboxRelatedAction($locationId) {
@@ -397,7 +471,7 @@ class ItemController extends Controller {
 
         if ($content->getFieldValue('show_pagination')->bool) {
             $show_pagination = true;
-            $query = new Query();
+            $query = new LocationQuery();
 
             $query->criterion = new Criterion\LogicalAnd( array(
                     new Criterion\ContentTypeIdentifier( array('article','linkbox')),
@@ -405,13 +479,13 @@ class ItemController extends Controller {
                     new Criterion\Visibility( Criterion\Visibility::VISIBLE )
                 ) );
             $query->sortClauses = array(
-                new SortClause\LocationPriority( Query::SORT_DESC ),
+                new SortClause\Location\Priority( Query::SORT_DESC ),
                 new SortClause\DatePublished( Query::SORT_DESC )
             );
 
             // Initialize pagination.
             $items = new Pagerfanta(
-                new ContentSearchAdapter( $query, $repository->getSearchService() )
+                new LocationSearchAdapter( $query, $repository->getSearchService() )
             );
 
             $count = $content->getFieldValue('pagination_count')->value;
@@ -421,7 +495,7 @@ class ItemController extends Controller {
         }
 
         //henter eventuelle infobokser
-        $query = new Query();
+        $query = new LocationQuery();
         $query->criterion = new Criterion\LogicalAnd( array(
                 new Criterion\ContentTypeIdentifier('infobox'),
                 new Criterion\ParentLocationId($locationId),

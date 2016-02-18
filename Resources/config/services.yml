@@ -2,6 +2,11 @@ services:
 #    tfktelemark.example:
 #        class: tfk\telemarkBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    telemark.sort_location_helper:
+        class: tfk\telemarkBundle\Helper\SortLocationHelper
+        arguments:  [@ezpublish.api.repository, @service_container,  @ezpublish.config.resolver]
+
+
     telemark.criteria_helper:
         class: %ezdemo.criteria_helper.class%
     telemark.search_helper:
