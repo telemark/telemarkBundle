@@ -210,6 +210,7 @@ class ItemController extends Controller {
             $currentLocation = $this->getRepository()->getLocationService()->loadLocation( $result->contentInfo->mainLocationId );
             $content = $this->getRepository()->getContentService()->loadContent($currentLocation->contentInfo->id);
 
+            if ($content->getFieldValue('hide_from_main_menu') == '0') {
                 $locationList[] = $currentLocation;
                 $subresults = $this->getRepository()->getLocationService()->loadLocationChildren( $currentLocation );
                 foreach ($subresults->locations as $subresult) {
@@ -217,6 +218,7 @@ class ItemController extends Controller {
                         $subLocationList[$result->contentInfo->mainLocationId][] = $this->getRepository()->getLocationService()->loadLocation( $subresult->contentInfo->mainLocationId );
                     }
                 }
+            }
         }
         return $this->render('tfktelemarkBundle:parts:menu_left.html.twig', array( 'list' => $locationList, 'sublist' => $subLocationList) );
     }
