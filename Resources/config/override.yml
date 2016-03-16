@@ -1,10 +1,10 @@
 system:
   tfk:
-    fieldtypes:
-      ezxml:
-        custom_tags:
-          - { path: %kernel.root_dir%/../src/tfk/telemarkBundle/Resources/tags/youtube.xsl, priority: 10 }
-          - { path: %kernel.root_dir%/../src/tfk/telemarkBundle/Resources/tags/quote.xsl, priority: 10 }
+#    fieldtypes:
+#      ezxml:
+#        custom_tags:
+#          - { path: %kernel.root_dir%/../src/tfk/telemarkBundle/Resources/tags/youtube.xsl, priority: 10 }
+#          - { path: %kernel.root_dir%/../src/tfk/telemarkBundle/Resources/tags/quote.xsl, priority: 10 }
     location_view:
       full:
         frontpage_tfk:
