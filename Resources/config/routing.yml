@@ -1,8 +1,8 @@
 tfktelemark_homepage:
     path:     /hello/{name}
     defaults: { _controller: tfktelemarkBundle:Default:index }
-netgen_search_example:
-    path: /search/{context}
-    defaults:  { _controller: NetgenSearchAndFilterBundle:Search:searchRoute, context: null }
-    requirements:
-        locationId:  \s
+#netgen_search_example:
+#    path: /search/{context}
+#    defaults:  { _controller: NetgenSearchAndFilterBundle:Search:searchRoute, context: null }
+#    requirements:
+#        locationId:  \s

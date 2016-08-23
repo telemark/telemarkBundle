@@ -1,5 +1,5 @@
 system:
-    default:
+    tfk:
         templating:
             view_layout: "tfktelemarkBundle::pagelayout.html.twig"
             module_layout: "tfktelemarkBundle::pagelayout_legacy.html.twig"
