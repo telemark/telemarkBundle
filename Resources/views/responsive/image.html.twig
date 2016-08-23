@@ -23,15 +23,15 @@
         <!--img.top-image__img(src="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_06' ).uri, absolute=true ) }}")-->
         <div class="top-image__text-wrapper">
             <div class="top-image__text">
-                {% if image_title is defined %}
+                {% if image_title %}
                     <div class="top-image__header">
                         {{ image_title }}
                     </div>
                 {% endif %}
                 <div class="top-image__body">
-                    {#% if image_text is defined %}
+                    {% if image_text %}
                         {{ image_text }}<br />
-                    {% endif %#}
+                    {% endif %}
                     {% if not ez_is_field_empty( content, 'foto_byline' ) %}
                         <em>Foto: {{ ez_render_field( content, 'foto_byline' ) }}</em>
                     {% endif %}
@@ -62,13 +62,13 @@
         <!--img.top-image__img(src="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_12' ).uri, absolute=true ) }}")-->
         <div class="top-image__text-wrapper">
             <div class="top-image__text">
-                {% if image_title is defined %}
+                {% if image_title %}
                     <h2 class="top-image__header">{{ image_title }}</h2>
                 {% endif %}
                 <div class="top-image__body">
-                    {#% if image_text is defined %}
+                    {% if image_text %}
                         {{ image_text }}<br />
-                    {% endif %#}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -80,18 +80,18 @@
     Visningstype for slideshow
 #}
 
-{% if image_type is sameas('slide') and content.getField( 'image' ), content.versionInfo, 'responsive_06' ).uri %}
+{% if image_type is sameas('slide') %}
     <img sizes="(min-width: 64em) 757px, 100vw" src="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_06' ).uri, absolute=true ) }}" srcset="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_04' ).uri, absolute=true ) }} 360w, {{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_06' ).uri, absolute=true ) }} 578w, {{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_09' ).uri, absolute=true ) }} 846w" alt="{% if image_alt is defined %}{{image_alt}}{% elseif content.fields.image['nor-NO'].alternativeText is defined %}{{ content.fields.image['nor-NO'].alternativeText }}{% endif %}">
   <!--img.top-image__img(src="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_12' ).uri, absolute=true ) }}")-->
   <div class="top-image__text-wrapper">
     <div class="top-image__text">
-      {% if image_title is defined %}
+      {% if image_title %}
         <h2 class="top-image__header">{{ image_title }}</h2>
       {% endif %}
       <div class="top-image__body">
-        {#% if image_text is defined %}
+        {% if image_text %}
           {{ image_text }}<br />
-        {% endif %#}
+        {% endif %}
       </div>
     </div>
   </div>
@@ -102,13 +102,13 @@
   <!--img.top-image__img(src="{{ asset( ez_image_alias( content.getField( 'image' ), content.versionInfo, 'responsive_12' ).uri, absolute=true ) }}")-->
   <div class="top-image__text-wrapper">
     <div class="top-image__text">
-      {% if image_title is defined %}
+      {% if image_title %}
         <h2 class="top-image__header">{{ image_title }}</h2>
       {% endif %}
       <div class="top-image__body">
-        {#% if image_text is defined %}
+        {% if image_text %}
           {{ image_text }}<br />
-        {% endif %#}
+        {% endif %}
       </div>
     </div>
   </div>

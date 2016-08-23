@@ -35,3 +35,7 @@
 
 # OSX
 .DS_Store
+sftp-config.json
+sftp-config.json_dev
+Resources/views/page_footer_script.html.twig_old
+Resources/public/css/main.css_newer

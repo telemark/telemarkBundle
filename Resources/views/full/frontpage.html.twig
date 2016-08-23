@@ -13,6 +13,15 @@
     )
   ) }}
 
+{% if not ez_is_field_empty( content, 'alert_small' ) %}
+  <div class="constrained-content">
+    <div style="margin-top: 15px; color: black; padding: 10px; border: 2px solid red; font-weight: normal; font-size: 24px; line-height: 2">
+      {{ ez_render_field( content, 'alert_small' ) }}
+    </div>
+  </div>
+{% endif %}
+
+{% if ez_is_field_empty( content, 'alert_small' ) %}
   <div class="constrained-content">
     <div class="social-block quote">
       <div class="social-block__social-links">
@@ -33,9 +42,9 @@
               }
             )
           ) }}
-
     </div>
   </div>
+{% endif %}
 
   {{ render(
     controller( 
@@ -50,8 +59,18 @@
     )
   ) }}
 
+{% if not ez_is_field_empty( content, 'alert_large' ) %}
+  <div class="constrained-content">   
+    <div style="margin-top: 15px; color: black; padding: 10px; border: 2px solid red; font-weight: normal; font-size: 24px; line-height: 2">
+      {{ ez_render_field( content, 'alert_large' ) }}
+    </div>
+  </div>
+{% endif %}
+
+{% if ez_is_field_empty( content, 'alert_large' ) %}
   <div class="content">
     {% include 'tfktelemarkBundle:parts:recruitments.html.twig' %}
   </div>
+{% endif %}
 
 {% endblock %}
