@@ -39,3 +39,17 @@ parameters:
     telemark.premium_content.section_id: 7
     telemark.premium_content.role_id: 6
     telemark.tjenester.id: 111
+
+
+    # search
+    search.default.content.limit: 10
+    search.default.content.identifiers:
+        - article
+        - event
+        - event_calendar
+        - folder
+        
+    search.default.content.facets:
+        - class
+        - article/tags
+        - date

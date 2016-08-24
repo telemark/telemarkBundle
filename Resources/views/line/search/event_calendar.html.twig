@@ -1,0 +1,23 @@
+<div class="article">
+    <div class="search-result--col-left">
+        <figure class="ezimage-field">
+            <img src="{{ asset('bundles/tfktelemark/images/kalender.jpg') }}" alt="Kalender" />
+        </figure>
+    </div>
+    <div class="search-result--col-right">
+        <div>
+            <a href="{{ path( "ez_urlalias", {"locationId": location.id } ) }}">{{ ez_render_field(content, 'title' ) }}</a>
+            {# <a href="{{ search_item.LocalAttributeValueList.global_url_alias }}">{{ ez_render_field(content, 'title' ) }}</a> #}
+        </div>
+            {% if search_item.LocalAttributeValueList.highlight is defined%}
+                <div>
+                    {{ search_item.LocalAttributeValueList.highlight|raw }}
+                </div>
+            {% endif %}
+            {% if search_item.LocalAttributeValueList.score_percent is defined%}
+                <div>
+                    Relevans: {{ search_item.LocalAttributeValueList.score_percent }}%
+                </div>
+            {% endif %}
+    </div>
+</div>
