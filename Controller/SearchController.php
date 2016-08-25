@@ -19,6 +19,7 @@ use eZ\Publish\API\Repository\Values\Content\Query\Criterion;
 use eZ\Publish\Core\Pagination\Pagerfanta\ContentSearchAdapter;
 use Pagerfanta\Pagerfanta;
 
+
 class SearchController extends Controller
 {
 
@@ -70,7 +71,6 @@ class SearchController extends Controller
 
         $scriptUri              = $request->server->get('SCRIPT_URI');
         $searchString           = $request->query->get('SearchText');  
-        //$searchString           = 'telemark';
         $queryString            = $request->server->get('QUERY_STRING'); 
         //if ( $request->query->get('offset') !== null )
         $contentOffset          = intval( $request->query->get('offset') );
@@ -81,8 +81,7 @@ class SearchController extends Controller
 
         $queryUri = $scriptUri.'?'.$queryString;
         $searchUri = $scriptUri.'?SearchText='.$searchString;
-echo $searchString;
-//$searchString           = 'telemark';
+
         $response = new Response();
 
         $renderArray = array(
@@ -118,8 +117,10 @@ echo $searchString;
 
             default:
                 $sortQuery = array('score' => 'desc');
+                $sort = 'score';
                 break;
         }
+
         $contentResult = array();
 
         if ( $searchString )

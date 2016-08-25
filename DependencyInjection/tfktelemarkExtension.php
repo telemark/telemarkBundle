@@ -49,5 +49,10 @@ class tfktelemarkExtension extends Extension implements PrependExtensionInterfac
         $config = Yaml::parse( file_get_contents( $configFile ) );
         $container->prependExtensionConfig( 'ezpublish', $config );
         $container->addResource( new FileResource( $configFile ) );
+
+        $configFile = __DIR__ . '/../Resources/config/liip_image_variations.yml';
+        $config = Yaml::parse( file_get_contents( $configFile ) );
+        $container->prependExtensionConfig( 'liip_imagine', $config );
+        $container->addResource( new FileResource( $configFile ) );
     }
 }

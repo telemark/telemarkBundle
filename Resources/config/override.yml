@@ -241,3 +241,8 @@ system:
           template: tfktelemarkBundle:ezfind_line:personprofil.html.twig
           match:
             Identifier\ContentType: [personprofil]
+      relation:
+        image:
+          template: tfktelemarkBundle:relation:image.html.twig
+          match:
+            Identifier\ContentType: [image]

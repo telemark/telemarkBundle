@@ -1,0 +1,3 @@
+{% if not ez_is_field_empty( content, 'image') %}
+    {{ ez_render_field( content, 'image', { 'parameters': { 'alias': 'search_result' } } )}}
+{% endif %}
