@@ -1,6 +1,6 @@
 
 .sidebar-left {
-
+  @extend %clearfix;
   ul {
     font-size: .9em;
   }
