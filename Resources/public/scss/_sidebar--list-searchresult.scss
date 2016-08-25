@@ -1,0 +1,25 @@
+
+.sidebar--list-searchresult {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > .header-title {
+    margin-top: .65em;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
+  }
+}
+
+#facet-list {
+
+  .header-title {
+    font-size: 1.25em;
+  }
+}

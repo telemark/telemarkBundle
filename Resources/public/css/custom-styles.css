@@ -3,13 +3,13 @@
  * http://susydocs.oddbird.net/en/latest/
  */
 .search-field {
-  margin: rhythm(2) 0; }
+  margin: 1em 0; }
   .search-field > form {
     position: relative;
     overflow: hidden; }
   .search-field .search-field-text {
     width: 100%;
-    padding-right: rhythm(7); }
+    padding-right: 3.5em; }
   .search-field .search-field-button {
     position: absolute;
     right: 0;
@@ -26,19 +26,19 @@
       border-color: #242424; }
 
 .search-result--item {
-  margin-bottom: rhythm(3);
-  padding-bottom: rhythm(2);
+  margin-bottom: 1.5em;
+  padding-bottom: 1.5em;
   border-bottom: 1px solid #575757; }
   .search-result--item img {
     display: block;
-    margin-bottom: rhythm(1); }
+    margin-bottom: .5em; }
     @media (min-width: 800px) {
       .search-result--item img {
         margin-bottom: 0; } }
   @media (min-width: 500px) {
     .search-result--item {
-      margin-bottom: rhythm(3);
-      padding-bottom: rhythm(3); } }
+      margin-bottom: 1.5em;
+      padding-bottom: 1.5em; } }
   @media (min-width: 800px) {
     .search-result--item > .article {
       margin: 0 - 1.38889%; }
@@ -98,13 +98,13 @@
 .search-sorting {
   font-size: .9em;
   border-bottom: 1px solid;
-  padding-bottom: rhythm(5); }
+  padding-bottom: 2.5em; }
   @media (min-width: 500px) {
     .search-sorting {
-      padding-bottom: rhythm(2); } }
+      padding-bottom: 1em; } }
   @media (min-width: 800px) {
     .search-sorting {
-      margin-bottom: rhythm(3);
+      margin-bottom: 1.5em;
       padding-bottom: 0; } }
   .search-sorting > ul {
     margin: 0;
@@ -116,10 +116,10 @@
     .search-sorting > ul > li {
       display: block; }
       .search-sorting > ul > li:first-child {
-        margin-bottom: rhythm(1); }
+        margin-bottom: .5em; }
         @media (min-width: 500px) {
           .search-sorting > ul > li:first-child {
-            margin-top: rhythm(2); } }
+            margin-top: 1em; } }
         @media (min-width: 800px) {
           .search-sorting > ul > li:first-child {
             border: 0;
@@ -134,8 +134,119 @@
           .search-sorting > ul > li::before {
             content: "|";
             display: inline-block;
-            margin: 0 rhythm(0.4); } }
+            margin: 0 .2em; } }
 
 .section__employee-searchResults > .employee {
-  margin-top: rhythm(2); }
+  margin-top: 1em; }
+
+.sidebar-left ul {
+  font-size: .9em; }
+
+.sidebar-right {
+  margin-top: 3em;
+  font-size: .85em; }
+  @media (min-width: 800px) {
+    .sidebar-right {
+      margin-top: 0; } }
+  .sidebar-right h3 {
+    font-size: inherit; }
+  .sidebar-right > .sidebar-info:first-child > h3 {
+    margin-top: 0; }
+  .sidebar-right > .sidebar-info .attribute-pdf > a {
+    white-space: pre-line;
+    word-wrap: break-word; }
+
+.sidebar--list-searchresult {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .sidebar--list-searchresult > .header-title, .search-sorting > ul.sidebar--list-searchresult > li:first-child {
+    margin-top: .65em; }
+  .sidebar--list-searchresult ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 1em;
+    margin-bottom: 1.5em; }
+
+#facet-list .header-title, #facet-list .search-sorting > ul > li:first-child {
+  font-size: 1.25em; }
+
+.sidebar-left {
+  margin-bottom: 2em; }
+  @media (min-width: 500px) {
+    .sidebar-left {
+      width: 30.5555555556%;
+      float: left;
+      margin-left: 1.3888888889%;
+      margin-right: 1.3888888889%; } }
+  @media (min-width: 800px) {
+    .sidebar-left {
+      width: 22.2222222222%;
+      float: left;
+      margin-left: 1.3888888889%;
+      margin-right: 1.3888888889%; } }
+
+.main-content {
+  margin-bottom: 2em; }
+  @media (min-width: 500px) {
+    .main-content {
+      width: 63.8888888889%;
+      float: right;
+      margin-left: 1.3888888889%;
+      margin-right: 1.3888888889%; } }
+  @media (min-width: 800px) {
+    .main-content {
+      width: 47.2222222222%;
+      float: left;
+      margin-left: 1.3888888889%;
+      margin-right: 1.3888888889%; } }
+  @media (min-width: 800px) {
+    .main-content.folder-view {
+      width: 72.2222222222%;
+      float: right;
+      margin-left: 1.3888888889%;
+      margin-right: 1.3888888889%; } }
+
+.message-box {
+  padding: 1em; }
+
+.message-box--normal {
+  background-color: #eee; }
+
+.message-box--warning {
+  background-color: #ECD078; }
+
+.message-box--error {
+  background-color: #b30000;
+  color: white; }
+  .message-box--error a {
+    color: white; }
+
+.message-box--icon {
+  padding-left: 3em;
+  position: relative; }
+  .message-box--icon::before {
+    font-size: 1.5em;
+    left: 1.75em;
+    margin-top: -.5em;
+    position: absolute;
+    top: 50%;
+    color: #939393; }
+
+*,
+* > *,
+*:before,
+*:after {
+  box-sizing: border-box; }
+
+.clearfix:after, .margin-minus:after, .list-items-2:after, .list-items-3:after, .list-items-4:after, .sidebar--list--2:after, .constrained:after, .user-forgotpassword:after, .content--meta:after, .employee--single-card:after, .event-overview--item:after, .gallery-footer-nav:after, .menu-main-item .menu-main-item__submenu-content:after, .paginering:after, .search-result--item:after, .search-result--item > .article:after, .sidebar-right:after {
+  clear: both; }
+
+.clearfix:before, .margin-minus:before, .list-items-2:before, .list-items-3:before, .list-items-4:before, .sidebar--list--2:before, .constrained:before, .user-forgotpassword:before, .content--meta:before, .employee--single-card:before, .event-overview--item:before, .gallery-footer-nav:before, .menu-main-item .menu-main-item__submenu-content:before, .paginering:before, .search-result--item:before, .search-result--item > .article:before, .sidebar-right:before, .clearfix:after, .margin-minus:after, .list-items-2:after, .list-items-3:after, .list-items-4:after, .sidebar--list--2:after, .constrained:after, .user-forgotpassword:after, .content--meta:after, .employee--single-card:after, .event-overview--item:after, .gallery-footer-nav:after, .menu-main-item .menu-main-item__submenu-content:after, .paginering:after, .search-result--item:after, .search-result--item > .article:after, .sidebar-right:after {
+  content: " ";
+  display: table; }
+
+.figure {
+  margin: 0; }
 /*# sourceMappingURL=custom-styles.css.map */

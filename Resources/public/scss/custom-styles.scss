@@ -69,3 +69,102 @@ $breakpoint-large: $large;
 
 @import "search-field";
 @import "search-result";
+@import "sidebars";
+@import "sidebar--list-searchresult";
+
+
+
+
+
+
+.sidebar-left {
+  margin-bottom: 2em;
+
+  @include susy-breakpoint($medium, $susy-large) {
+    @include span(4)
+  }
+
+  @include susy-breakpoint($large, $susy-large) {
+    @include span(3);
+  }
+}
+
+.main-content {
+  margin-bottom: 2em;
+
+  @include susy-breakpoint($medium, $susy-large) {
+    @include span(8 last)
+  }
+
+  @include susy-breakpoint($large, $susy-large) {
+    @include span(6)
+  }
+
+  &.folder-view {
+    @include susy-breakpoint($large, $susy-large) {
+      @include span(9 last)
+    }
+  }
+}
+
+
+.message-box {
+  padding: 1em;
+}
+
+.message-box--normal {
+  background-color: $light-gray;
+}
+
+.message-box--warning {
+  background-color: $orange;
+}
+
+.message-box--error {
+  background-color: $red;
+  color: white;
+
+  a {
+    color: white;
+  }
+}
+
+.message-box--icon {
+  padding-left: 3em;
+  position: relative;
+
+  &::before {
+    font-size: 1.5em;
+    left: 1.75em;
+    margin-top: -.5em;
+    position: absolute;
+    top: 50%;
+    color: $gray;
+  }
+}
+
+
+
+
+// Shame
+*,
+* > *,
+*:before, 
+*:after {
+  box-sizing: border-box;
+}
+
+.clearfix:after, .margin-minus:after, .list-items-2:after, .list-items-3:after, .list-items-4:after, .sidebar--list--2:after, .constrained:after, .user-forgotpassword:after, .content--meta:after, .employee--single-card:after, .event-overview--item:after, .gallery-footer-nav:after, .menu-main-item .menu-main-item__submenu-content:after, .paginering:after, .search-result--item:after, .search-result--item>.article:after, .sidebar-right:after {
+  clear: both;
+}
+.clearfix:before, .margin-minus:before, .list-items-2:before, .list-items-3:before, .list-items-4:before, .sidebar--list--2:before, .constrained:before, .user-forgotpassword:before, .content--meta:before, .employee--single-card:before, .event-overview--item:before, .gallery-footer-nav:before, .menu-main-item .menu-main-item__submenu-content:before, .paginering:before, .search-result--item:before, .search-result--item>.article:before, .sidebar-right:before, .clearfix:after, .margin-minus:after, .list-items-2:after, .list-items-3:after, .list-items-4:after, .sidebar--list--2:after, .constrained:after, .user-forgotpassword:after, .content--meta:after, .employee--single-card:after, .event-overview--item:after, .gallery-footer-nav:after, .menu-main-item .menu-main-item__submenu-content:after, .paginering:after, .search-result--item:after, .search-result--item>.article:after, .sidebar-right:after {
+  content: " ";
+  display: table;
+}
+
+
+
+
+.figure {
+    margin: 0;
+}
