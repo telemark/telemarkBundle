@@ -84,13 +84,14 @@
 .search_pagination {
   text-align: center; }
   .search_pagination a {
-    border: 0; }
+    border: 0;
+    text-decoration: none; }
     .search_pagination a.pagination-left {
       float: left; }
       .search_pagination a.pagination-left::before {
         font-family: hfk;
         font-size: 0.8em;
-        color: #c4d600;
+        color: #000;
         content: "g";
         padding-right: 0.5em; }
     .search_pagination a.pagination-right {
@@ -98,7 +99,7 @@
       .search_pagination a.pagination-right::after {
         font-family: hfk;
         font-size: 0.8em;
-        color: #c4d600;
+        color: #000;
         content: "h";
         padding-left: 0.5em; }
 

@@ -76,6 +76,7 @@
 
   a {
     border: 0;
+    text-decoration: none;
 
     &.pagination-left {
       float: left;
@@ -83,7 +84,7 @@
       &::before {
         font-family: hfk;
         font-size: 0.8em;
-        color: $brandcolor;
+        color: #000;
         content: "g";
         padding-right: 0.5em;
       }
@@ -95,7 +96,7 @@
       &::after {
         font-family: hfk;
         font-size: 0.8em;
-        color: $brandcolor;
+        color: #000;
         content: "h";
         padding-left: 0.5em;
       }
