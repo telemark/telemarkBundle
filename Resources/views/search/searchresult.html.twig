@@ -6,9 +6,9 @@
         <div class="constrained-content">
 
                 <div class="folder-view">
-                    <h2>Innhold{% if contentCount is defined %} ({{ contentCount }} treff){% endif %}</h2>
+                    <h2>Søket etter «{% if searchString is defined %}{{ searchString }}{% endif %}» gav {% if contentCount is defined %} {{ contentCount }} treff{% endif %}</h2>
                 </div>
-                            
+
                 <div class="margin-minus">
 
                     <div class="sidebar-left">
