@@ -106,11 +106,11 @@
 
 .search-sorting {
   font-size: .9em;
-  border-bottom: 1px solid;
   padding-bottom: 2.5em;
 
   @include susy-breakpoint($medium, $susy-large) {
-    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid;
   }
 
   @include susy-breakpoint($large, $susy-large) {
@@ -136,6 +136,10 @@
 
         @include susy-breakpoint($medium, $susy-large) {
           margin-top: 1em;
+        }
+
+        @include susy-breakpoint($small $large, $large) {
+          border-bottom: 1px solid;
         }
 
         @include susy-breakpoint($large, $susy-large) {
