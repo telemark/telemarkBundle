@@ -49,9 +49,9 @@ parameters:
         - event_calendar
         - folder
         
-    search.default.content.faceting: false
+    search.default.content.faceting: true
     search.default.content.facets:
-        - class
-        - article/tags
+        #- class
+        #- article/tags
         - date
 
