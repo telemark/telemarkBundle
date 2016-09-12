@@ -26,9 +26,14 @@
             {# <a href="{{ search_item.LocalAttributeValueList.global_url_alias }}">{{ ez_field_value( content, 'title', search_item.CurrentLanguage ) }}</a> #}
         </div>
         <div class="search-result--text">
-            {% if search_item.LocalAttributeValueList.highlight is defined%}
+            {#% if search_item.LocalAttributeValueList.highlight is defined%}
                 <div>
                     {{ search_item.LocalAttributeValueList.highlight|raw }}
+                </div>
+            {% endif %#}
+            {% if not ez_is_field_empty( content, 'intro') %}
+                <div>
+                    {{ ez_render_field( content, 'intro' ) }}
                 </div>
             {% endif %}
             {% if search_item.LocalAttributeValueList.score_percent is defined%}

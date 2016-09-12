@@ -51,7 +51,8 @@ class SearchController extends Controller
     {
         // defaults
         $contentOffset = 0;
-        $sortQuery = array('score' => 'desc');
+        //$sortQuery = array('score' => 'desc');
+        //$sortQuery = array('score' => 'desc');
         $searchString = null;
         //$layout = $configResolver->getParameter( 'content_view.viewbase_layout', 'ezpublish' );
 
@@ -63,6 +64,11 @@ class SearchController extends Controller
 
         if ( $configResolver->hasParameter( 'content.limit', 'search' ) )
             $contentLimit = $configResolver->getParameter( 'content.limit', 'search' );
+
+        if ( $configResolver->hasParameter( 'content.faceting', 'search' ) )
+            $faceting = $configResolver->getParameter( 'content.faceting', 'search' );
+        else
+            $faceting = false;
 
         if ( $configResolver->hasParameter( 'content.facets', 'search' ) )
             $validContentFacets = $configResolver->getParameter( 'content.facets', 'search' );
@@ -91,11 +97,17 @@ class SearchController extends Controller
             'search_uri'        => $searchUri,
             'query_string'      => $queryString,
             'query_uri'         => $queryUri,
-            'filterParameters'  => $filterParameters,
-            'activeFacetParameters'      => $activeFacetParameters,
-            'dateFilter'        => $dateFilter,
             'sort'              => $sort
         );
+
+        if ( $faceting )
+            array_merge( $renderArray, 
+                array(
+                    'filterParameters'      => $filterParameters,
+                    'activeFacetParameters' => $activeFacetParameters,
+                    'dateFilter'            => $dateFilter,
+                )
+            );
 
         switch ( $sort ) 
         {
@@ -116,8 +128,8 @@ class SearchController extends Controller
                 break;
 
             default:
-                $sortQuery = array('score' => 'desc');
-                $sort = 'score';
+                $sortQuery = array('published' => 'desc');
+                $sort = 'newest';
                 break;
         }
 
@@ -125,47 +137,72 @@ class SearchController extends Controller
 
         if ( $searchString )
         {
-            // Using ezfind legacy to build filterParameters
-            $filterParameters = $this->getLegacyKernel()->runCallback(
-                function ()
-                {
-                    return \eZFunctionHandler::execute(
-                        'ezfind',
-                        'filterParameters'
-                    );
-                }
-            );
 
-            // Using ezfind legacy to build defaultSearchFacets
-            $defaultSearchFacets = $this->getLegacyKernel()->runCallback(
-                function ()
-                {
-                    return \eZFunctionHandler::execute(
-                        'ezfind',
-                        'getDefaultSearchFacets'
-                    );
-                }
-            );
+            if ( $faceting )
+            {
+                // Using ezfind legacy to build filterParameters
+                $filterParameters = $this->getLegacyKernel()->runCallback(
+                    function ()
+                    {
+                        return \eZFunctionHandler::execute(
+                            'ezfind',
+                            'filterParameters'
+                        );
+                    }
+                );
 
-            $contentResult = $this->getLegacyKernel()->runCallback(
-                function () use ( $searchString, $identifiers, $contentLimit, $contentOffset, $rootLocation, $defaultSearchFacets, $filterParameters, $dateFilter, $sortQuery )
-                {
-                    return \eZFunctionHandler::execute(
-                        'ezfind', 'search',
-                        array(
-                            'query'         => $searchString,
-                            'subtree_array' => array( $rootLocation->id ),
-                            'class_id'      => $identifiers,    
-                            'limit'         => $contentLimit,
-                            'offset'        => $contentOffset,
-                            'sort_by'       => $sortQuery,
-                            'publish_date'  => $dateFilter,
-                            'facet'         => $defaultSearchFacets,
-                            'filter'        => $filterParameters
-                        )
-                    );
-                }
-            );
+                // Using ezfind legacy to build defaultSearchFacets
+                $defaultSearchFacets = $this->getLegacyKernel()->runCallback(
+                    function ()
+                    {
+                        return \eZFunctionHandler::execute(
+                            'ezfind',
+                            'getDefaultSearchFacets'
+                        );
+                    }
+                );
+
+                $contentResult = $this->getLegacyKernel()->runCallback(
+                    function () use ( $searchString, $identifiers, $contentLimit, $contentOffset, $rootLocation, $defaultSearchFacets, $filterParameters, $dateFilter, $sortQuery )
+                    {
+                        return \eZFunctionHandler::execute(
+                            'ezfind', 'search',
+                            array(
+                                'query'         => $searchString,
+                                'subtree_array' => array( $rootLocation->id ),
+                                'class_id'      => $identifiers,    
+                                'limit'         => $contentLimit,
+                                'offset'        => $contentOffset,
+                                'sort_by'       => $sortQuery,
+                                'publish_date'  => $dateFilter,
+                                'facet'         => $defaultSearchFacets,
+                                'filter'        => $filterParameters
+                            )
+                        );
+                    }
+                );
+
+            }
+            else
+            {
+                $contentResult = $this->getLegacyKernel()->runCallback(
+                    function () use ( $searchString, $identifiers, $contentLimit, $contentOffset, $rootLocation, $sortQuery )
+                    {
+                        return \eZFunctionHandler::execute(
+                            'ezfind', 'search',
+                            array(
+                                'query'         => $searchString,
+                                'subtree_array' => array( $rootLocation->id ),
+                                'class_id'      => $identifiers,    
+                                'limit'         => $contentLimit,
+                                'offset'        => $contentOffset,
+                                'sort_by'       => $sortQuery
+                            )
+                        );
+                    }
+                );
+
+            }
 
             $searchExtras = $contentResult['SearchExtras'];
 
@@ -201,99 +238,105 @@ class SearchController extends Controller
                 $sorting[$sortType] = $sortingRemoved.'&sort='.$sortType;
             }
 
-            // removal links
-            foreach ($defaultSearchFacets as $key => $defaultFacet)
-            { 
-                // only use facets which is selected in config
-                if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
-                {
-                    if ( $defaultFacet['field'] and $defaultFacet['name'] )
+
+            if ( $faceting )
+            {
+
+                // removal links
+                foreach ($defaultSearchFacets as $key => $defaultFacet)
+                { 
+                    // only use facets which is selected in config
+                    if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
                     {
-                        if ( array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'] , $activeFacetParameters ) )
+                        if ( $defaultFacet['field'] and $defaultFacet['name'] )
+                        {
+                            if ( array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'] , $activeFacetParameters ) )
+                            {
+                                $facetData = $facet_fields[$key];
+                                foreach ($facetData['nameList'] as $key2 => $facetName)
+                                {
+                                    if ($activeFacetParameters[ $defaultFacet['field'] . ':' . $defaultFacet['name'] ] == $facetName )
+                                    {
+                                        $removalFilter = '&filter[]=' . $facetData['fieldList'][$key2] . ':' . $key2;
+                                        $facetRemovalUrl = str_replace( $removalFilter, '', $searchUri.$uriSuffix);
+                                        $removalFacet = "&activeFacets[" . $defaultFacet['field'] . ":" . $defaultFacet['name'] . "]=" . $facetName;
+                                        $facetRemovalUrl = str_replace( $removalFacet, '', $facetRemovalUrl);
+                                        $activeFacetsArray[] = array(
+                                            'text' => $facetName,
+                                            'url' => $facetRemovalUrl
+                                        );
+                                    }
+                                } 
+                            }
+                        }
+                    }
+                }
+            
+                // possible 
+                foreach ( $defaultSearchFacets as $key => $defaultFacet )
+                { 
+                    // only use facets which is selected
+                    if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
+                    {
+                        if ( !array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'], $activeFacetParameters ) )
                         {
                             $facetData = $facet_fields[$key];
-                            foreach ($facetData['nameList'] as $key2 => $facetName)
+                            $availableFacetsSubArray = array();
+                            foreach ( $facetData['nameList'] as $key2 => $facetName )
                             {
-                                if ($activeFacetParameters[ $defaultFacet['field'] . ':' . $defaultFacet['name'] ] == $facetName )
+                                if ( $key2 != '' )
                                 {
-                                    $removalFilter = '&filter[]=' . $facetData['fieldList'][$key2] . ':' . $key2;
-                                    $facetRemovalUrl = str_replace( $removalFilter, '', $searchUri.$uriSuffix);
-                                    $removalFacet = "&activeFacets[" . $defaultFacet['field'] . ":" . $defaultFacet['name'] . "]=" . $facetName;
-                                    $facetRemovalUrl = str_replace( $removalFacet, '', $facetRemovalUrl);
-                                    $activeFacetsArray[] = array(
-                                        'text' => $facetName,
-                                        'url' => $facetRemovalUrl
+                                    $url = $searchUri . '&filter[]=' . $facetData['fieldList'][$key2]. ':'. $key2 . '&activeFacets['. $defaultFacet['field'] . ':' . rawurlencode($defaultFacet['name']) . ']=' . rawurlencode($facetName) . $uriSuffix;
+                                    $availableFacetsSubArray[] = array(
+                                        'text'  => $facetName,
+                                        'count' => $facetData['countList'][$key2],
+                                        'url'   => $url
                                     );
                                 }
-                            } 
-                        }
-                    }
-                }
-            }
-            
-            // possible 
-            foreach ( $defaultSearchFacets as $key => $defaultFacet )
-            { 
-                // only use facets which is selected
-                if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
-                {
-                    if ( !array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'], $activeFacetParameters ) )
-                    {
-                        $facetData = $facet_fields[$key];
-                        $availableFacetsSubArray = array();
-                        foreach ( $facetData['nameList'] as $key2 => $facetName )
-                        {
-                            if ( $key2 != '' )
+                            }
+                            if ( $facetData['field'] != '' && count($availableFacetsSubArray) > 0 )
                             {
-                                $url = $searchUri . '&filter[]=' . $facetData['fieldList'][$key2]. ':'. $key2 . '&activeFacets['. $defaultFacet['field'] . ':' . rawurlencode($defaultFacet['name']) . ']=' . rawurlencode($facetName) . $uriSuffix;
-                                $availableFacetsSubArray[] = array(
-                                    'text'  => $facetName,
-                                    'count' => $facetData['countList'][$key2],
-                                    'url'   => $url
+                                $heading = $defaultFacet['name'];
+                                switch ($defaultFacet['name']) {
+                                    //case 'Content type':
+                                    //    $heading = 'Innholdstype';
+                                    //    break;
+                                    case 'Kategorier':
+                                        $heading = 'Innholdstype';
+                                        break;
+                                    case 'Author':
+                                        $heading = 'Forfatter';
+                                        break;
+                                    //case 'Keywords':
+                                    //    $heading = 'Nøkkelord';
+                                    //    break;
+                                    case 'Tags':
+                                        $heading = 'Nøkkelord';
+                                        break;
+                                    
+                                }
+                                $availableFacetsArray[] = array( 
+                                    'field' => $defaultFacet['field'], 
+                                    'name' => $defaultFacet['name'],
+                                    'heading' => $heading,
+                                    'fieldSet' => $availableFacetsSubArray
                                 );
-                            }
-                        }
-                        if ( $facetData['field'] != '' && count($availableFacetsSubArray) > 0 )
-                        {
-                            $heading = $defaultFacet['name'];
-                            switch ($defaultFacet['name']) {
-                                //case 'Content type':
-                                //    $heading = 'Innholdstype';
-                                //    break;
-                                case 'Kategorier':
-                                    $heading = 'Innholdstype';
-                                    break;
-                                case 'Author':
-                                    $heading = 'Forfatter';
-                                    break;
-                                //case 'Keywords':
-                                //    $heading = 'Nøkkelord';
-                                //    break;
-                                case 'Tags':
-                                    $heading = 'Nøkkelord';
-                                    break;
-                                
-                            }
-                            $availableFacetsArray[] = array( 
-                                'field' => $defaultFacet['field'], 
-                                'name' => $defaultFacet['name'],
-                                'heading' => $heading,
-                                'fieldSet' => $availableFacetsSubArray
-                            );
 
+                            }
                         }
                     }
                 }
-            }
 
-            // dateFilter labels
-            $dateFilterTexts = array(
-                1 => 'Siste døgn',
-                2 => 'Siste uke',
-                3 => 'Siste måned',
-                4 => 'Siste 3 måneder',
-                5 => 'Siste år'
-            );
+
+                // dateFilter labels
+                $dateFilterTexts = array(
+                    1 => 'Siste døgn',
+                    2 => 'Siste uke',
+                    3 => 'Siste måned',
+                    4 => 'Siste 3 måneder',
+                    5 => 'Siste år'
+                );
+            }
 
             if ( in_array('date', $validContentFacets) )
             {
@@ -357,7 +400,8 @@ class SearchController extends Controller
                 'activeFacetsArray'     => $activeFacetsArray,
                 'availableFacetsArray'  => $availableFacetsArray,
                 'activeDateFilters'     => $activeDateFilters,
-                'availableDateFilters'  => $availableDateFilters
+                'availableDateFilters'  => $availableDateFilters,
+                'faceting'              => $faceting
             );
 
             $renderArray = array_merge( $renderArray, $searchResult);
