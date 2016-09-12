@@ -241,123 +241,131 @@ class SearchController extends Controller
 
             if ( $faceting )
             {
-
-                // removal links
-                foreach ($defaultSearchFacets as $key => $defaultFacet)
-                { 
-                    // only use facets which is selected in config
-                    if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
-                    {
-                        if ( $defaultFacet['field'] and $defaultFacet['name'] )
+                if ( in_array( 'class', $validContentFacets ) )
+                {
+                    // removal links
+                    foreach ($defaultSearchFacets as $key => $defaultFacet)
+                    { 
+                        // only use facets which is selected in config
+                        if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
                         {
-                            if ( array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'] , $activeFacetParameters ) )
+                            if ( $defaultFacet['field'] and $defaultFacet['name'] )
+                            {
+                                if ( array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'] , $activeFacetParameters ) )
+                                {
+                                    $facetData = $facet_fields[$key];
+                                    foreach ($facetData['nameList'] as $key2 => $facetName)
+                                    {
+                                        if ($activeFacetParameters[ $defaultFacet['field'] . ':' . $defaultFacet['name'] ] == $facetName )
+                                        {
+                                            $removalFilter = '&filter[]=' . $facetData['fieldList'][$key2] . ':' . $key2;
+                                            $facetRemovalUrl = str_replace( $removalFilter, '', $searchUri.$uriSuffix);
+                                            $removalFacet = "&activeFacets[" . $defaultFacet['field'] . ":" . $defaultFacet['name'] . "]=" . $facetName;
+                                            $facetRemovalUrl = str_replace( $removalFacet, '', $facetRemovalUrl);
+                                            $activeFacetsArray[] = array(
+                                                'text' => $facetName,
+                                                'url' => $facetRemovalUrl
+                                            );
+                                        }
+                                    } 
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if ( in_array( 'article/tags', $validContentFacets ) )
+                {
+                    // possible 
+                    foreach ( $defaultSearchFacets as $key => $defaultFacet )
+                    { 
+                        // only use facets which is selected
+                        if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
+                        {
+                            if ( !array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'], $activeFacetParameters ) )
                             {
                                 $facetData = $facet_fields[$key];
-                                foreach ($facetData['nameList'] as $key2 => $facetName)
+                                $availableFacetsSubArray = array();
+                                foreach ( $facetData['nameList'] as $key2 => $facetName )
                                 {
-                                    if ($activeFacetParameters[ $defaultFacet['field'] . ':' . $defaultFacet['name'] ] == $facetName )
+                                    if ( $key2 != '' )
                                     {
-                                        $removalFilter = '&filter[]=' . $facetData['fieldList'][$key2] . ':' . $key2;
-                                        $facetRemovalUrl = str_replace( $removalFilter, '', $searchUri.$uriSuffix);
-                                        $removalFacet = "&activeFacets[" . $defaultFacet['field'] . ":" . $defaultFacet['name'] . "]=" . $facetName;
-                                        $facetRemovalUrl = str_replace( $removalFacet, '', $facetRemovalUrl);
-                                        $activeFacetsArray[] = array(
-                                            'text' => $facetName,
-                                            'url' => $facetRemovalUrl
+                                        $url = $searchUri . '&filter[]=' . $facetData['fieldList'][$key2]. ':'. $key2 . '&activeFacets['. $defaultFacet['field'] . ':' . rawurlencode($defaultFacet['name']) . ']=' . rawurlencode($facetName) . $uriSuffix;
+                                        $availableFacetsSubArray[] = array(
+                                            'text'  => $facetName,
+                                            'count' => $facetData['countList'][$key2],
+                                            'url'   => $url
                                         );
                                     }
-                                } 
-                            }
-                        }
-                    }
-                }
-            
-                // possible 
-                foreach ( $defaultSearchFacets as $key => $defaultFacet )
-                { 
-                    // only use facets which is selected
-                    if ( in_array( $defaultFacet['field'], $validContentFacets) || in_array( $key, $validContentFacets) )
-                    {
-                        if ( !array_key_exists( $defaultFacet['field'] . ':' . $defaultFacet['name'], $activeFacetParameters ) )
-                        {
-                            $facetData = $facet_fields[$key];
-                            $availableFacetsSubArray = array();
-                            foreach ( $facetData['nameList'] as $key2 => $facetName )
-                            {
-                                if ( $key2 != '' )
+                                }
+                                if ( $facetData['field'] != '' && count($availableFacetsSubArray) > 0 )
                                 {
-                                    $url = $searchUri . '&filter[]=' . $facetData['fieldList'][$key2]. ':'. $key2 . '&activeFacets['. $defaultFacet['field'] . ':' . rawurlencode($defaultFacet['name']) . ']=' . rawurlencode($facetName) . $uriSuffix;
-                                    $availableFacetsSubArray[] = array(
-                                        'text'  => $facetName,
-                                        'count' => $facetData['countList'][$key2],
-                                        'url'   => $url
+                                    $heading = $defaultFacet['name'];
+                                    switch ($defaultFacet['name']) {
+                                        //case 'Content type':
+                                        //    $heading = 'Innholdstype';
+                                        //    break;
+                                        case 'Kategorier':
+                                            $heading = 'Innholdstype';
+                                            break;
+                                        case 'Author':
+                                            $heading = 'Forfatter';
+                                            break;
+                                        //case 'Keywords':
+                                        //    $heading = 'Nøkkelord';
+                                        //    break;
+                                        case 'Tags':
+                                            $heading = 'Nøkkelord';
+                                            break;
+                                        
+                                    }
+                                    $availableFacetsArray[] = array( 
+                                        'field' => $defaultFacet['field'], 
+                                        'name' => $defaultFacet['name'],
+                                        'heading' => $heading,
+                                        'fieldSet' => $availableFacetsSubArray
                                     );
-                                }
-                            }
-                            if ( $facetData['field'] != '' && count($availableFacetsSubArray) > 0 )
-                            {
-                                $heading = $defaultFacet['name'];
-                                switch ($defaultFacet['name']) {
-                                    //case 'Content type':
-                                    //    $heading = 'Innholdstype';
-                                    //    break;
-                                    case 'Kategorier':
-                                        $heading = 'Innholdstype';
-                                        break;
-                                    case 'Author':
-                                        $heading = 'Forfatter';
-                                        break;
-                                    //case 'Keywords':
-                                    //    $heading = 'Nøkkelord';
-                                    //    break;
-                                    case 'Tags':
-                                        $heading = 'Nøkkelord';
-                                        break;
-                                    
-                                }
-                                $availableFacetsArray[] = array( 
-                                    'field' => $defaultFacet['field'], 
-                                    'name' => $defaultFacet['name'],
-                                    'heading' => $heading,
-                                    'fieldSet' => $availableFacetsSubArray
-                                );
 
+                                }
                             }
                         }
                     }
                 }
 
-
-                // dateFilter labels
-                $dateFilterTexts = array(
-                    1 => 'Siste døgn',
-                    2 => 'Siste uke',
-                    3 => 'Siste måned',
-                    4 => 'Siste 3 måneder',
-                    5 => 'Siste år'
-                );
-            }
-
-            if ( in_array('date', $validContentFacets) )
-            {
-                if ( !$dateFilter )
+                if ( in_array( 'date', $validContentFacets ) )
                 {
-                    $availableDateFilters = array();
-                    foreach ( $dateFilterTexts as $key => $value)
-                        $availableDateFilters[] = array( 'url' => $searchUri.$uriSuffix.'&dateFilter='.$key, 'text' => $value);
-                }
-                else
-                {
-                    $availableDateFilters = false;
-                    $activeDateFilters = array();
-                    $removalFilter = '&dateFilter=' . $dateFilter;
-                    $dateRemovalUrl = str_replace( $removalFilter, '', $searchUri.$uriSuffix);
-                    $activeDateFilters[] = array(
-                        'text' => $dateFilterTexts[$dateFilter],
-                        'url' => $dateRemovalUrl
+                    // dateFilter labels
+                    $dateFilterTexts = array(
+                        1 => 'Siste døgn',
+                        2 => 'Siste uke',
+                        3 => 'Siste måned',
+                        4 => 'Siste 3 måneder',
+                        5 => 'Siste år'
                     );
+
+                    if ( !$dateFilter )
+                    {
+                        $availableDateFilters = array();
+                        foreach ( $dateFilterTexts as $key => $value)
+                            $availableDateFilters[] = array( 'url' => $searchUri.$uriSuffix.'&dateFilter='.$key, 'text' => $value);
+                    }
+                    else
+                    {
+                        $availableDateFilters = false;
+                        $activeDateFilters = array();
+                        $removalFilter = '&dateFilter=' . $dateFilter;
+                        $dateRemovalUrl = str_replace( $removalFilter, '', $searchUri.$uriSuffix);
+                        $activeDateFilters[] = array(
+                            'text' => $dateFilterTexts[$dateFilter],
+                            'url' => $dateRemovalUrl
+                        );
+                    }
+
+
                 }
+
             }
+
 
             // pagination
             $contentPage = $contentOffset / $contentLimit + 1;
