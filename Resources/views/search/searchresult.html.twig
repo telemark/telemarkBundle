@@ -59,10 +59,15 @@
                                     <li>
                                         <span class="label facet-count header-title">Publisert</span>
                                         <ul>
+                                            {% set dateFilterCountSelector = 1 %}
                                             {% for dateFilterItem in availableDateFilters %}
                                                 <li>
                                                     <a href="{{ dateFilterItem.url }}">{{ dateFilterItem.text }}</a>
+                                                    {% if dateFilterCount is defined %}
+                                                        ({{ dateFilterCount[ dateFilterCountSelector] }})
+                                                    {% endif %}
                                                 </li>
+                                                {% set dateFilterCountSelector = dateFilterCountSelector + 1 %}
                                             {% endfor %}
                                         </ul>
                                     </li>

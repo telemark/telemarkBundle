@@ -182,6 +182,31 @@ class SearchController extends Controller
                     }
                 );
 
+                if ( !$dateFilter && $contentResult[ 'SearchCount' ] > 0 )
+                {
+                    for ( $i = 1; $i < 6; $i++ )
+                    {
+                        $dateFilterResult = $this->getLegacyKernel()->runCallback(
+                            function () use ( $searchString, $identifiers, $contentLimit, $contentOffset, $rootLocation, $defaultSearchFacets, $filterParameters, $dateFilter, $sortQuery, $i )
+                            {
+                                return \eZFunctionHandler::execute(
+                                    'ezfind', 'search',
+                                    array(
+                                        'query'         => $searchString,
+                                        'subtree_array' => array( $rootLocation->id ),
+                                        'class_id'      => $identifiers,    
+                                        'limit'         => 0,
+                                        'sort_by'       => $sortQuery,
+                                        'publish_date'  => $i,
+                                        'facet'         => $defaultSearchFacets,
+                                        'filter'        => $filterParameters
+                                    )
+                                );
+                            }
+                        );
+                        $dateFilterCount[ $i ] = $dateFilterResult[ 'SearchCount' ];
+                    }
+                }
             }
             else
             {
@@ -409,6 +434,7 @@ class SearchController extends Controller
                 'availableFacetsArray'  => $availableFacetsArray,
                 'activeDateFilters'     => $activeDateFilters,
                 'availableDateFilters'  => $availableDateFilters,
+                'dateFilterCount'       => $dateFilterCount,
                 'faceting'              => $faceting
             );
 
