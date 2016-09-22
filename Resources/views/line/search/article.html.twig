@@ -26,6 +26,7 @@
             {# <a href="{{ search_item.LocalAttributeValueList.global_url_alias }}">{{ ez_field_value( content, 'title', search_item.CurrentLanguage ) }}</a> #}
         </div>
         <div class="search-result--text">
+
             {#% if search_item.LocalAttributeValueList.highlight is defined%}
                 <div>
                     {{ search_item.LocalAttributeValueList.highlight|raw }}
@@ -38,9 +39,10 @@
             {% endif %}
             {% if search_item.LocalAttributeValueList.score_percent is defined%}
                 <div class="search-result--score">
-                    Relevans: {{ search_item.LocalAttributeValueList.score_percent }}%
+                    Relevans: {{ search_item.LocalAttributeValueList.score_percent }} %
                 </div>
             {% endif %}
+            <p>Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}</p>
         </div>
     </div>
 </div>

@@ -17,10 +17,11 @@
             {% endif %}
             {% if search_item.LocalAttributeValueList.score_percent is defined%}
                 <div class="search-result--score">
-                    Relevans: {{ search_item.LocalAttributeValueList.score_percent }}%
+                    Relevans: {{ search_item.LocalAttributeValueList.score_percent }} %
                 </div>
             {% endif %}
             {#{ ez_render_field(content, 'short_description') }#}
+            <p>Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}</p>
         </div>
     </div>
 </div>

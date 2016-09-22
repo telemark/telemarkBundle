@@ -36,6 +36,7 @@
       {% else %}
         {{ ez_render_field( content, 'short_description' ) }}
       {% endif %}
+         <p>Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}</p>
     </div>
   </div>
 </li>

@@ -16,8 +16,9 @@
             {% endif %}
             {% if search_item.LocalAttributeValueList.score_percent is defined%}
                 <div>
-                    Relevans: {{ search_item.LocalAttributeValueList.score_percent }}%
+                    Relevans: {{ search_item.LocalAttributeValueList.score_percent }} %
                 </div>
             {% endif %}
+            <p>Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}</p>
     </div>
 </div>
