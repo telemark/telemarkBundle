@@ -1,0 +1,5 @@
+filter_sets:
+    search_result:
+        quality: 85
+        filters:
+            centercrop: [180, 120]

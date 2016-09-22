@@ -137,6 +137,23 @@ system:
           template: tfktelemarkBundle:boxline:event.html.twig
           match:
             Identifier\ContentType: [event]
+      search_line:
+        article:
+          template: tfktelemarkBundle:line/search:article.html.twig
+          match:
+            Identifier\ContentType: [article]
+        folder:
+          template: tfktelemarkBundle:line/search:folder.html.twig
+          match:
+            Identifier\ContentType: [folder]
+        event:
+          template: tfktelemarkBundle:line/search:event.html.twig
+          match:
+            Identifier\ContentType: [event]
+        event_calendar:
+          template: tfktelemarkBundle:line/search:event_calendar.html.twig
+          match:
+            Identifier\ContentType: [event_calendar]
     content_view:
       custom:
         image:
@@ -224,3 +241,8 @@ system:
           template: tfktelemarkBundle:ezfind_line:personprofil.html.twig
           match:
             Identifier\ContentType: [personprofil]
+      relation:
+        image:
+          template: tfktelemarkBundle:relation:image.html.twig
+          match:
+            Identifier\ContentType: [image]
