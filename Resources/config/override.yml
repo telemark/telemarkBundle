@@ -154,6 +154,10 @@ system:
           template: tfktelemarkBundle:line/search:event_calendar.html.twig
           match:
             Identifier\ContentType: [event_calendar]
+        personprofil:
+          template: tfktelemarkBundle:line/search:personprofil.html.twig
+          match:
+            Identifier\ContentType: [personprofil]
     content_view:
       custom:
         image:
