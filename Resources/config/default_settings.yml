@@ -48,6 +48,7 @@ parameters:
         - event
         - event_calendar
         - folder
+        - personprofil
         
     search.default.content.faceting: true
     search.default.content.facets:
