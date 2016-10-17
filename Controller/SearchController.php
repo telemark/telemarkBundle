@@ -128,8 +128,8 @@ class SearchController extends Controller
                 break;
 
             default:
-                $sortQuery = array('published' => 'desc');
-                $sort = 'newest';
+                $sort = 'score';
+                $sortQuery = array('score' => 'desc');
                 break;
         }
 
