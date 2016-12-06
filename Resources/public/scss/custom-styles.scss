@@ -100,3 +100,34 @@ $breakpoint-large: $large;
 .figure {
     margin: 0;
 }
+
+
+.constrained-content {
+
+  .form-search {
+    position: relative;
+    display: inline;
+  }
+
+  input[type="submit"] {
+    border: 0;
+    padding: .5em 1em;
+    background-color: #e8f3f0;
+    color: #000;
+    cursor: pointer;
+    font-family: "Telefon","Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+    text-decoration: underline;
+  }
+  input[type="submit"] {
+    display: block;
+    margin: 1em 0;
+      &.icon--search {
+      position: absolute;
+      top: 0;
+      margin: 0;
+      background-color: transparent;
+    }
+  }
+}
+
+
