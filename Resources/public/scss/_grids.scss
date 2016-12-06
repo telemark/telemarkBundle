@@ -35,8 +35,8 @@
   }
 }
 
+@include susy-breakpoint($medium, $susy-large) {
 .gutter-minus {
- @include susy-breakpoint($medium, $susy-large) {
     margin: 0 -#{gutter()};
   }
 }

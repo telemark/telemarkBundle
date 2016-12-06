@@ -1,7 +1,9 @@
+/* line 4, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
 .search-result--item:before, .search-result--item > .article:before, .sidebar-left:before, .sidebar-right:before, .margin-minus:before, .list-items-2:before, .list-items-3:before, .list-items-4:before, .sidebar--list--2:before, .search-result--item:after, .search-result--item > .article:after, .sidebar-left:after, .sidebar-right:after, .margin-minus:after, .list-items-2:after, .list-items-3:after, .list-items-4:after, .sidebar--list--2:after {
   content: " ";
   display: table; }
 
+/* line 10, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
 .search-result--item:after, .search-result--item > .article:after, .sidebar-left:after, .sidebar-right:after, .margin-minus:after, .list-items-2:after, .list-items-3:after, .list-items-4:after, .sidebar--list--2:after {
   clear: both; }
 
@@ -9,14 +11,18 @@
  * Grid settings with SUSY
  * http://susydocs.oddbird.net/en/latest/
  */
+/* line 2, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-field.scss */
 .search-field {
   margin: 1em 0; }
+  /* line 5, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-field.scss */
   .search-field > form {
     position: relative;
     overflow: hidden; }
+  /* line 10, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-field.scss */
   .search-field .search-field-text {
     width: 100%;
     padding-right: 3.5em; }
+  /* line 15, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-field.scss */
   .search-field .search-field-button {
     position: absolute;
     right: 0;
@@ -25,50 +31,62 @@
     border: 1px solid #adadad;
     background-color: white;
     height: 40px; }
+    /* line 24, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-field.scss */
     .search-field .search-field-button::before {
       font-size: 1.5em; }
+    /* line 28, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-field.scss */
     .search-field .search-field-button:active, .search-field .search-field-button:focus, .search-field .search-field-button:hover {
       color: #f9f9f9;
       background-color: #242424;
       border-color: #242424; }
 
+/* line 2, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
 .search-result--item {
   margin-bottom: 1.5em;
   padding-bottom: 1.5em;
   border-bottom: 1px solid #575757; }
+  /* line 8, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
   .search-result--item img {
     display: block;
     margin-bottom: .5em; }
     @media (min-width: 800px) {
+      /* line 8, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
       .search-result--item img {
         margin-bottom: 0; } }
   @media (min-width: 500px) {
+    /* line 2, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search-result--item {
       margin-bottom: 1.5em;
       padding-bottom: 1.5em; } }
   @media (min-width: 800px) {
+    /* line 22, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search-result--item > .article {
-      margin: 0 - 1.38889%; }
+      margin: 0 -1.3888888889%; }
+      /* line 29, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
       .search-result--item > .article .search-result--col-left {
         width: 20.8333333333%;
         float: left;
         margin-left: 2.0833333333%;
         margin-right: 2.0833333333%;
         margin-left: 1.4%; }
+      /* line 34, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
       .search-result--item > .article .search-result--col-right {
         width: 70.8333333333%;
         float: right;
         margin-left: 2.0833333333%;
         margin-right: 2.0833333333%; } }
 
+/* line 49, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
 .search-result--col-right a {
   font-weight: bold; }
 
+/* line 54, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
 .search-result--text {
   font-size: .9em;
   line-height: 1.3;
   margin-top: .3em; }
 
+/* line 60, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
 .search-result--large-icon {
   background-color: #eee;
   display: block;
@@ -78,24 +96,31 @@
   color: #999;
   text-align: center; }
   @media (min-width: 800px) {
+    /* line 60, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search-result--large-icon {
       margin: 0; } }
 
+/* line 74, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
 .search_pagination {
   text-align: center; }
+  /* line 77, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
   .search_pagination a {
     border: 0;
     text-decoration: none; }
+    /* line 81, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search_pagination a.pagination-left {
       float: left; }
+      /* line 84, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
       .search_pagination a.pagination-left::before {
         font-family: hfk;
         font-size: 0.8em;
         color: #000;
         content: "g";
         padding-right: 0.5em; }
+    /* line 93, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search_pagination a.pagination-right {
       float: right; }
+      /* line 96, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
       .search_pagination a.pagination-right::after {
         font-family: hfk;
         font-size: 0.8em;
@@ -103,76 +128,99 @@
         content: "h";
         padding-left: 0.5em; }
 
+/* line 107, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
 .search-sorting {
   font-size: .9em;
   padding-bottom: 2.5em; }
   @media (min-width: 500px) {
+    /* line 107, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search-sorting {
       margin-bottom: 1em;
       border-bottom: 1px solid; } }
   @media (min-width: 800px) {
+    /* line 107, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search-sorting {
       margin-bottom: 1.5em;
       padding-bottom: 0; } }
+  /* line 121, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
   .search-sorting > ul {
     margin: 0;
     padding: 0;
     list-style: none; }
     @media (min-width: 800px) {
+      /* line 121, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
       .search-sorting > ul {
         text-align: right; } }
+    /* line 130, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
     .search-sorting > ul > li {
       display: block; }
+      /* line 133, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
       .search-sorting > ul > li:first-child {
         margin-bottom: .5em; }
         @media (min-width: 500px) {
+          /* line 133, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
           .search-sorting > ul > li:first-child {
             margin-top: 1em; } }
         @media (min-width: 480px) and (max-width: 800px) {
+          /* line 133, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
           .search-sorting > ul > li:first-child {
             border-bottom: 1px solid; } }
         @media (min-width: 800px) {
+          /* line 133, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
           .search-sorting > ul > li:first-child {
             border: 0;
             display: inline-block;
             font-weight: bold;
             margin-bottom: 0; }
+            /* line 151, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
             .search-sorting > ul > li:first-child::before {
               display: none; } }
       @media (min-width: 800px) {
+        /* line 130, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
         .search-sorting > ul > li {
           display: inline-block; }
+          /* line 160, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
           .search-sorting > ul > li::before {
             content: "|";
             display: inline-block;
             margin: 0 .2em; } }
 
+/* line 172, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_search-result.scss */
 .section__employee-searchResults > .employee {
   margin-top: 1em; }
 
+/* line 4, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebars.scss */
 .sidebar-left ul {
   font-size: .9em; }
 
+/* line 9, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebars.scss */
 .sidebar-right {
   margin-top: 3em;
   font-size: .85em; }
   @media (min-width: 800px) {
+    /* line 9, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebars.scss */
     .sidebar-right {
       margin-top: 0; } }
+  /* line 18, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebars.scss */
   .sidebar-right h3 {
     font-size: inherit; }
+  /* line 24, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebars.scss */
   .sidebar-right > .sidebar-info:first-child > h3 {
     margin-top: 0; }
+  /* line 28, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebars.scss */
   .sidebar-right > .sidebar-info .attribute-pdf > a {
     white-space: pre-line;
     word-wrap: break-word; }
 
+/* line 2, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
 .sidebar--list-searchresult {
   margin: 0;
   padding: 0;
   list-style: none; }
+  /* line 7, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
   .sidebar--list-searchresult > .header-title, .search-sorting > ul.sidebar--list-searchresult > li:first-child {
     margin-top: .65em; }
+  /* line 11, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
   .sidebar--list-searchresult ul {
     margin: 0;
     padding: 0;
@@ -180,11 +228,13 @@
     margin-top: 1em;
     margin-bottom: 1.5em; }
 
+/* line 22, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
 #facet-list .header-title, #facet-list .search-sorting > ul > li:first-child {
   display: block;
   border-bottom: 1px solid;
   padding-bottom: .33em; }
 
+/* line 32, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
 ul.list-clean {
   margin: 0;
   padding: 0;
@@ -192,19 +242,25 @@ ul.list-clean {
   font-size: .85em;
   display: none; }
   @media (min-width: 500px) {
+    /* line 32, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
     ul.list-clean {
       display: block !important; } }
+  /* line 43, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
   ul.list-clean li {
     position: relative; }
+    /* line 46, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
     ul.list-clean li > ul {
       margin: 0;
       padding: 0;
       list-style: none; }
+      /* line 51, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
       ul.list-clean li > ul > li {
         margin-left: 1.5em; }
+        /* line 54, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
         ul.list-clean li > ul > li a {
           padding: .2em .4em;
           padding-right: 1.5em; }
+  /* line 62, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
   ul.list-clean a {
     position: relative;
     background-color: #eee;
@@ -212,23 +268,29 @@ ul.list-clean {
     border: 0;
     padding: .33em .5em;
     padding-right: 1.5em; }
+    /* line 70, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
     ul.list-clean a:hover, ul.list-clean a:focus, ul.list-clean a:active, ul.list-clean a.isSelected {
       background-color: #eee;
       color: #242424; }
     @media (min-width: 500px) {
+      /* line 62, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
       ul.list-clean a {
         background-color: transparent; } }
 
+/* line 84, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
 .list-clean--top-level {
   position: relative; }
+  /* line 89, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
   .list-clean--top-level.isActive a {
     background-color: #242424;
     color: #f9f9f9 !important; }
+  /* line 94, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
   .list-clean--top-level.isActive #toggle--left-menu {
     color: #f9f9f9;
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg); }
 
+/* line 102, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
 .list-clean--first {
   margin: 0;
   border: 0;
@@ -243,20 +305,24 @@ ul.list-clean {
   padding-top: .5em;
   padding-right: 1.5em; }
   @media (min-width: 500px) {
+    /* line 102, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
     .list-clean--first {
       padding-left: 0;
       padding-top: 0;
       border-bottom: 1px solid #242424;
       padding-right: 0;
       background-color: transparent; }
+      /* line 123, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
       .list-clean--first:hover, .list-clean--first:focus, .list-clean--first:active {
         background-color: transparent;
         color: #242424;
         border-color: #242424; } }
+  /* line 132, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
   .list-clean--first:hover, .list-clean--first:focus, .list-clean--first:active {
     background-color: #242424;
     color: #f9f9f9; }
 
+/* line 140, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
 #toggle--left-menu {
   height: 40px;
   line-height: 2;
@@ -266,15 +332,19 @@ ul.list-clean {
   top: 0;
   z-index: 9; }
   @media (min-width: 500px) {
+    /* line 140, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_sidebar--list-searchresult.scss */
     #toggle--left-menu {
       display: none; } }
 
+/* line 1, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
 .sidebar-left {
   margin-top: .6em; }
   @media (min-width: 480px) and (max-width: 800px) {
+    /* line 1, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
     .sidebar-left {
       border-bottom: 1px solid; } }
   @media (min-width: 500px) {
+    /* line 1, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
     .sidebar-left {
       width: 30.5555555556%;
       float: left;
@@ -282,6 +352,7 @@ ul.list-clean {
       margin-right: 1.3888888889%;
       margin-left: 0; } }
   @media (min-width: 800px) {
+    /* line 1, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
     .sidebar-left {
       width: 22.2222222222%;
       float: left;
@@ -290,21 +361,25 @@ ul.list-clean {
       margin-left: 0;
       margin-bottom: 2em; } }
 
+/* line 20, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
 .main-content {
   margin-bottom: 2em; }
   @media (min-width: 500px) {
+    /* line 20, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
     .main-content {
       width: 63.8888888889%;
       float: right;
       margin-left: 1.3888888889%;
       margin-right: 1.3888888889%; } }
   @media (min-width: 800px) {
+    /* line 20, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
     .main-content {
       width: 47.2222222222%;
       float: left;
       margin-left: 1.3888888889%;
       margin-right: 1.3888888889%; } }
   @media (min-width: 800px) {
+    /* line 31, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
     .main-content.folder-view {
       width: 72.2222222222%;
       float: right;
@@ -312,10 +387,12 @@ ul.list-clean {
       margin-right: 1.3888888889%; } }
 
 @media (min-width: 500px) {
+  /* line 39, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .gutter-minus, .list-items-2, .list-items-3, .list-items-4, .sidebar--list--2 {
-    margin: 0 - 1.38889%; } }
+    margin: 0 -1.3888888889%; } }
 
 @media (min-width: 500px) {
+  /* line 48, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .col-1 {
     width: 22.2222222222%;
     float: left;
@@ -323,6 +400,7 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 500px) {
+  /* line 55, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .col-2 {
     width: 97.2222222222%;
     float: left;
@@ -330,6 +408,7 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 800px) {
+  /* line 55, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .col-2 {
     width: 47.2222222222%;
     float: left;
@@ -337,6 +416,7 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 500px) {
+  /* line 66, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .col-3 {
     width: 72.2222222222%;
     float: left;
@@ -344,6 +424,7 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 500px) {
+  /* line 72, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .col-3.sidebar-is-right {
     width: 97.2222222222%;
     float: left;
@@ -351,6 +432,7 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 800px) {
+  /* line 72, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .col-3.sidebar-is-right {
     width: 72.2222222222%;
     float: left;
@@ -358,6 +440,7 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 500px) {
+  /* line 83, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .col-4 {
     width: 97.2222222222%;
     float: left;
@@ -365,87 +448,107 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 500px) {
+  /* line 97, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .list-items-2 > div {
     width: 47.2222222222%;
     float: left; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-2 > div:nth-child(2n + 1) {
       margin-left: 1.3888888889%;
       margin-right: -100%;
       clear: both; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-2 > div:nth-child(2n + 2) {
       margin-left: 51.3888888889%;
       margin-right: -100%;
       clear: none; } }
 
 @media (min-width: 500px) {
+  /* line 111, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .list-items-3 > div {
     width: 47.2222222222%;
     float: left; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-3 > div:nth-child(2n + 1) {
       margin-left: 1.3888888889%;
       margin-right: -100%;
       clear: both; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-3 > div:nth-child(2n + 2) {
       margin-left: 51.3888888889%;
       margin-right: -100%;
       clear: none; } }
 
 @media (min-width: 800px) {
+  /* line 111, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .list-items-3 > div {
     width: 30.5555555556%;
     float: left; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-3 > div:nth-child(3n + 1) {
       margin-left: 1.3888888889%;
       margin-right: -100%;
       clear: both; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-3 > div:nth-child(3n + 2) {
       margin-left: 34.7222222222%;
       margin-right: -100%;
       clear: none; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-3 > div:nth-child(3n + 3) {
       margin-left: 68.0555555556%;
       margin-right: -100%;
       clear: none; } }
 
 @media (min-width: 500px) {
+  /* line 129, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .list-items-4 > div {
     width: 47.2222222222%;
     float: left; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-4 > div:nth-child(2n + 1) {
       margin-left: 1.3888888889%;
       margin-right: -100%;
       clear: both; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-4 > div:nth-child(2n + 2) {
       margin-left: 51.3888888889%;
       margin-right: -100%;
       clear: none; } }
 
 @media (min-width: 800px) {
+  /* line 129, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .list-items-4 > div {
     width: 22.2222222222%;
     float: left; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-4 > div:nth-child(4n + 1) {
       margin-left: 1.3888888889%;
       margin-right: -100%;
       clear: both; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-4 > div:nth-child(4n + 2) {
       margin-left: 26.3888888889%;
       margin-right: -100%;
       clear: none; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-4 > div:nth-child(4n + 3) {
       margin-left: 51.3888888889%;
       margin-right: -100%;
       clear: none; }
+    /* line 66, /Applications/CodeKit.app/Contents/Resources/engines/susy/sass/susy/language/susy/_gallery.scss */
     .list-items-4 > div:nth-child(4n + 4) {
       margin-left: 76.3888888889%;
       margin-right: -100%;
       clear: none; } }
 
 @media (min-width: 800px) {
+  /* line 140, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .sidebar--list--2 {
     margin: 0; } }
 
 @media (min-width: 500px) {
+  /* line 152, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .sidebar--list--2 > div {
     width: 47.2222222222%;
     float: left;
@@ -453,6 +556,7 @@ ul.list-clean {
     margin-right: 1.3888888889%; } }
 
 @media (min-width: 800px) {
+  /* line 152, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_grids.scss */
   .sidebar--list--2 > div {
     width: 100%;
     margin: 0; } }
@@ -464,6 +568,7 @@ ul.list-clean {
   font-weight: normal;
   font-style: normal; }
 
+/* line 15, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 [data-icon]:before {
   font-family: "hfk" !important;
   content: attr(data-icon);
@@ -486,6 +591,7 @@ ul.list-clean {
   font-stretch: normal;
   font-synthesis: weight style; }
 
+/* line 36, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
   font-family: "hfk" !important;
@@ -508,144 +614,216 @@ ul.list-clean {
   font-stretch: normal;
   font-synthesis: weight style; }
 
+/* line 57, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-hamburger:before {
   content: "\69"; }
 
+/* line 60, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-clock-1:before {
   content: "\6c"; }
 
+/* line 63, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-facebook:before {
   content: "\6e"; }
 
+/* line 66, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-twitter-alt:before {
   content: "\6f"; }
 
+/* line 69, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-linkedin:before {
   content: "\70"; }
 
+/* line 72, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-printer:before {
   content: "\71"; }
 
+/* line 75, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-printer-1:before {
   content: "\73"; }
 
+/* line 78, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-mail-1:before {
   content: "\74"; }
 
+/* line 81, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-scale-tool-1:before {
   content: "\76"; }
 
+/* line 84, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-magnifier-1:before {
   content: "\6d"; }
 
+/* line 87, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-delete-3-1:before {
   content: "\61"; }
 
+/* line 90, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-download-13:before {
   content: "\78"; }
 
+/* line 93, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-document-1:before {
   content: "\79"; }
 
+/* line 96, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-document-2:before {
   content: "\7a"; }
 
+/* line 99, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-rss-1:before {
   content: "\41"; }
 
+/* line 102, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-calendar-2:before {
   content: "\42"; }
 
+/* line 105, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-delete-2:before {
   content: "\43"; }
 
+/* line 108, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-delete-1:before {
   content: "\44"; }
 
+/* line 111, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-clip-1:before {
   content: "\46"; }
 
+/* line 114, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-preview-1-1:before {
   content: "\48"; }
 
+/* line 117, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-camera-symbol-3:before {
   content: "\75"; }
 
+/* line 120, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-add-1:before {
   content: "\47"; }
 
+/* line 123, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-information:before {
   content: "\62"; }
 
+/* line 126, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-check-circle-2-1:before {
   content: "\6b"; }
 
+/* line 129, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-question-mark-1:before {
   content: "\64"; }
 
+/* line 132, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-alert:before {
   content: "\63"; }
 
+/* line 135, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-link-3-1:before {
   content: "\6a"; }
 
+/* line 138, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-mail-2-1:before {
   content: "\72"; }
 
+/* line 141, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-hfk-arrow-down:before {
   content: "\65"; }
 
+/* line 144, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-hfk-arrow-left:before {
   content: "\67"; }
 
+/* line 147, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-hfk-arrow-right:before {
   content: "\68"; }
 
+/* line 150, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-hfk-arrow-up:before {
   content: "\66"; }
 
+/* line 153, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-sync-2-1:before {
   content: "\77"; }
 
+/* line 156, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-folder-1:before {
   content: "\45"; }
 
+/* line 159, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-hfk-document-pdf:before {
   content: "\49"; }
 
+/* line 162, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-filetype-doc:before {
   content: "\4a"; }
 
+/* line 165, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-filetype-docx:before {
   content: "\4b"; }
 
+/* line 168, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-filetype-ppt:before {
   content: "\4c"; }
 
+/* line 171, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-filetype-pptx:before {
   content: "\4d"; }
 
+/* line 174, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-filetype-txt:before {
   content: "\4e"; }
 
+/* line 177, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-filetype-xls:before {
   content: "\4f"; }
 
+/* line 180, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-filetype-xlsx:before {
   content: "\50"; }
 
+/* line 183, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-document-1-1:before {
   content: "\51"; }
 
+/* line 186, /Users/sten/Synk/telemarkbundle/Resources/public/scss/_fonts.scss */
 .icon-arrow-38:before {
   content: "\52"; }
 
+/* line 93, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
 *,
 * > *,
 *:before,
 *:after {
   box-sizing: border-box; }
 
+/* line 100, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
 .figure {
   margin: 0; }
+
+/* line 107, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
+.constrained-content .form-search {
+  position: relative;
+  display: inline; }
+
+/* line 112, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
+.constrained-content input[type="submit"] {
+  border: 0;
+  padding: .5em 1em;
+  background-color: #e8f3f0;
+  color: #000;
+  cursor: pointer;
+  font-family: "Telefon","Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
+  text-decoration: underline; }
+
+/* line 121, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
+.constrained-content input[type="submit"] {
+  display: block;
+  margin: 1em 0; }
+  /* line 124, /Users/sten/Synk/telemarkbundle/Resources/public/scss/custom-styles.scss */
+  .constrained-content input[type="submit"].icon--search {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    background-color: transparent; }
 /*# sourceMappingURL=custom-styles.css.map */
