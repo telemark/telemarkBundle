@@ -1,4 +1,4 @@
-{% set imageId = ez_field_value( content, 'image' ) %}
+
 
 <div class="article">
     <div class="search-result">
@@ -15,25 +15,6 @@
                 Publisert: {{ location.contentInfo.publishedDate|date("d.m.Y") }}
             {% endif %}
             -</span>
-          {% if not ez_is_field_empty( content, 'image') %}
-            {% set imageId = ez_field_value( content, 'image' ) %}
-            {{ render(
-                controller( 
-                    "ez_content:viewContent", 
-                    {
-                        "contentId": imageId.destinationContentId,
-                        "viewType": "relation",
-                        "params": { 
-                            "image_type": "search_result"
-                        }
-                    }
-                )
-            ) }}
-        {% else %}
-            <figure class="ezimage-field">
-                <img src="{{ asset('bundles/tfktelemark/images/bildetmangler.jpg') }}" alt="Bilde ikke tilgjengelig" />
-            </figure>
-        {% endif %}
             <p>
         {% if not ez_is_field_empty( content, 'jobtitle' ) %}
           <em>{{ ez_render_field( content, 'jobtitle' ) }}</em>

@@ -12,89 +12,14 @@
      <input type="submit" value="Søk" autofocus>
 </form>
 <div class="margin-minus">
-
-                  
-                        <div class="sidebar-left">
-                            <ul id="facet-list" class="sidebar--list-searchresult">
-                                {% if activeFacetsArray is defined or activeDateFilters is defined %}
-                                    {% if activeFacetsArray is defined %}
-                                        {% for item in activeFacetsArray %}
-                                            <li>
-                                                <a href="{{ item.url }}">{{ item.text }} x</a>
-                                            </li>                        
-                                        {% endfor %}
-                                    {% endif %}
-
-                                    {% if activeDateFilters is defined %}
-                                        {% for item in activeDateFilters %}
-                                            <li>
-                                                <a href="{{ item.url }}">{{ item.text }} x</a>
-                                            </li>                        
-                                        {% endfor %}
-                                    {% endif %}
-                                {% endif %}
-                            </ul>
-
-                            {% if activeFacetsArray is defined or activeDateFilters is defined %}
-                                {% if activeFacetsArray|length > 1 or ( activeDateFilters|length > 0 and activeFacetsArray|length > 0 ) %}
-                                    <li><a href="{{ search_uri }}">Nullstill fasettering</a></li>
-                                {% endif %}
-                            {% endif %}
-
-
-                            <ul id="facet-list" class="sidebar--list-searchresult">
-                                {% if availableFacetsArray is defined %}
-                                    {% for group in availableFacetsArray %}
-                                        <li>
-                                            <span class="label facet-count header-title">{{ group.heading }}</span>
-                                            <ul>
-                                                {% for item in group.fieldSet %}
-                                                    <li>
-                                                        <a href="{{ item.url }}">{{ item.text }}</a> ({{ item.count }})
-                                                    </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </li>
-                                    {% endfor %}
-                                {% endif %}
-                                {% if availableDateFilters is defined and availableDateFilters|length > 0 and contentCount > 0 %}
-                                    <li>
-                                        <span class="label facet-count header-title">Publisert</span>
-                                        <ul>
-                                            {% set dateFilterCountSelector = 1 %}
-                                            {% for dateFilterItem in availableDateFilters %}
-                                                <li>
-                                                    <a href="{{ dateFilterItem.url }}">{{ dateFilterItem.text }}</a>
-                                                    {% if dateFilterCount is defined %}
-                                                        ({{ dateFilterCount[ dateFilterCountSelector] }})
-                                                    {% endif %}
-                                                </li>
-                                                {% set dateFilterCountSelector = dateFilterCountSelector + 1 %}
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    
-
                     {% if contentCount is defined and contentCount == 0 %}
                     
                         {{ searchString }} ga ingen treff...
                     
                     {% else %}
 
-
-                    
-
                         {% if contentResult is defined %}
-                            {% if faceting %}
-                                {% set class = 'main-content folder-view' %}
-                            {% else %}
-                                {% set class = 'folder-view' %}
-                            {% endif %}
-                            <div class="{{ class }}">
-
+                     
                                 {% if sorting is defined %}
                                     <div class="search-sorting clearfix left" >
                                         <ul>
@@ -149,7 +74,7 @@
                                     <p>Tom søkestring</p>
                                 {% endif %}
 
-                            </div>
+                        
 
 
                     {% endif %}
