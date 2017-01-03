@@ -4,14 +4,16 @@
 
     <div class="content">
         <div class="constrained-content">
+<form role="search" action="/search" method="get" class="well form-search">
+    <input id="basicsearch_term" name="SearchText" required="required" placeholder="{% if searchString is defined %}{{ searchString }}{% endif %}" type="search">
+    <label for="basicsearch_term" class="visuallyhidden">Søk</label>
+    <label class="visuallyhidden">Søk</label>
+    <input class="btn btn-primary clear search__btn icon--search " value="Søk" type="submit">
+     <input type="submit" value="Søk" autofocus>
+</form>
+<div class="margin-minus">
 
-                <div class="folder-view">
-                    <h2>Søket etter «{% if searchString is defined %}{{ searchString }}{% endif %}» gav {% if contentCount is defined %} {{ contentCount }} treff{% endif %}</h2>
-                </div>
-
-                <div class="margin-minus">
-
-                    {% if faceting %}
+                  
                         <div class="sidebar-left">
                             <ul id="facet-list" class="sidebar--list-searchresult">
                                 {% if activeFacetsArray is defined or activeDateFilters is defined %}
@@ -74,7 +76,7 @@
                                 {% endif %}
                             </ul>
                         </div>
-                    {% endif %}
+                    
 
                     {% if contentCount is defined and contentCount == 0 %}
                     
@@ -94,16 +96,8 @@
                             <div class="{{ class }}">
 
                                 {% if sorting is defined %}
-                                    <div class="search-sorting clearfix" >
+                                    <div class="search-sorting clearfix left" >
                                         <ul>
-                                            <li>Sorter visning på:</li>
-                                            <li>
-                                                {% if sort != 'alpha' %}
-                                                    <a href="{{ sorting.alpha }}">Alfabetisk</a>
-                                                {% else %}
-                                                    Alfabetisk
-                                                {% endif %}
-                                            </li>
                                             <li>
                                                 {% if sort != 'score' %}
                                                     <a href="{{ sorting.score }}">Relevans</a>
