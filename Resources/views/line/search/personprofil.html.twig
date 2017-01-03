@@ -1,12 +1,21 @@
-{#
-    Personprofil - ezfind_line view
-#}
-
 {% set imageId = ez_field_value( content, 'image' ) %}
 
 <div class="article">
-    <div class="search-result--col-left">
-        {% if not ez_is_field_empty( content, 'image') %}
+    <div class="search-result">
+         <div class="search-result-header">
+          <h2>
+            {{ ez_render_field( content, 'firstname' ) }} {{ ez_render_field( content, 'lastname' ) }}
+            </h2>
+          </div>
+    <div class="search-result--text">
+            <span class="search-result-date">
+            {% if location.contentInfo.publishedDate|date("d.m.Y") !=  location.contentInfo.modificationDate|date("d.m.Y") %}
+                 Oppdatert: {{ location.contentInfo.modificationDate|date("d.m.Y") }} / Publisert: {{ location.contentInfo.publishedDate|date("d.m.Y") }}
+            {% else %}
+                Publisert: {{ location.contentInfo.publishedDate|date("d.m.Y") }}
+            {% endif %}
+            -</span>
+          {% if not ez_is_field_empty( content, 'image') %}
             {% set imageId = ez_field_value( content, 'image' ) %}
             {{ render(
                 controller( 
@@ -25,16 +34,7 @@
                 <img src="{{ asset('bundles/tfktelemark/images/bildetmangler.jpg') }}" alt="Bilde ikke tilgjengelig" />
             </figure>
         {% endif %}
-    </div>
-
-    <div class="search-result--col-right">
-        <div>  
-        <h2 class="search-result__item__header">
-            {{ ez_render_field( content, 'firstname' ) }} {{ ez_render_field( content, 'lastname' ) }}
-        </h2>
-    </div>
-    <div class="search-result--text">
-      <p>
+            <p>
         {% if not ez_is_field_empty( content, 'jobtitle' ) %}
           <em>{{ ez_render_field( content, 'jobtitle' ) }}</em>
         {% endif %}
@@ -61,8 +61,7 @@
         <div>
           {{ ez_render_field( content, 'description' ) }}
         </div>
-      {% endif %}
-      <p>Publisert {{ content.contentInfo.publishedDate|date("d.m.Y") }}</p>
+      {% endif %}  
         </div>
     </div>
 </div>
