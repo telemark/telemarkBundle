@@ -8,18 +8,17 @@
     <input id="basicsearch_term" name="SearchText" required="required" placeholder="{% if searchString is defined %}{{ searchString }}{% endif %}" type="search">
     <label for="basicsearch_term" class="visuallyhidden">Søk</label>
     <label class="visuallyhidden">Søk</label>
-    <input class="btn btn-primary clear search__btn icon--search " value="Søk" type="submit">
-     <input type="submit" value="Søk" autofocus>
+    <input class="btn btn-primary clear" value="Søk" type="submit">
 </form>
 <div class="margin-minus">
                     {% if contentCount is defined and contentCount == 0 %}
-                    
+
                         {{ searchString }} ga ingen treff...
-                    
+
                     {% else %}
 
                         {% if contentResult is defined %}
-                     
+
                                 {% if sorting is defined %}
                                     <div class="search-sorting clearfix left" >
                                         <ul>
@@ -74,7 +73,7 @@
                                     <p>Tom søkestring</p>
                                 {% endif %}
 
-                        
+
 
 
                     {% endif %}
