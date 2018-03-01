@@ -87,6 +87,7 @@ $breakpoint-large: $large;
 @import "sidebars";
 @import "sidebar--list-searchresult";
 @import "grids";
+@import "grid-item";
 @import "fonts";
 @import "typography";
 
@@ -101,3 +102,4 @@ $breakpoint-large: $large;
 .figure {
     margin: 0;
 }
+
