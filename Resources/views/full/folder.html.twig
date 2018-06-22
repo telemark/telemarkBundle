@@ -1,5 +1,17 @@
+{% if not ez_is_field_empty( content, 'is_redirect_folder' ) %}
+
+{% block meta %}
+
+<meta http-equiv="refresh" content="0;URL='{{ ez_field_value(content, 'redirect_url') }}'" />  
+
+{% endblock %}
+
+{% else %}
+
 {% if not ez_is_field_empty( content, 'is_landingpage' ) %}
   {% include "tfktelemarkBundle:full:folder_landingpage.html.twig" %}
 {% else %}
   {% include "tfktelemarkBundle:full:folder_normal.html.twig" %}
+{% endif %}
+
 {% endif %}
